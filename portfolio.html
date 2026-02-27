@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sagheer Portfolio | Projects</title>
+    <title>Sagheer Portfolio | Works</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,57 +21,124 @@
     </nav>
 
     <main>
-        <section class="section-header reveal">
-            <h1>Selected Works</h1>
-            <p>A collection of my recent developments, ranging from open-source tools to aesthetic experiments.</p>
+        <!-- Photography Section -->
+        <section class="section-header reveal" style="padding-bottom: 2rem;">
+            <h1>Photography</h1>
+            <p>Capturing the ephemeral through a digital lens. Cinematic moments and street stories.</p>
         </section>
 
-        <section class="bento-grid">
-            <!-- Figma Work -->
-            <div class="bento-item large reveal" style="background: url('images/figma_thumb.png') center/cover;">
-                <div
-                    style="background: rgba(0,0,0,0.6); padding: 1rem; border-radius: 12px; backdrop-filter: blur(5px);">
-                    <h3>UI Design Hub</h3>
-                    <p>Modern fintech dashboard concepts crafted in Figma.</p>
+        <section class="photography-grid reveal">
+            <div class="photo-item">
+                <img src="images/photography_1.png" alt="Cinematic Street Scene">
+                <div class="photo-overlay">
+                    <h3>Night Echoes</h3>
+                    <p>Urban study in high contrast.</p>
+                </div>
+            </div>
+            <!-- Future photos will go here -->
+            <div class="photo-item"
+                style="background: var(--bg-secondary); border: 2px dashed var(--card-border); display: flex; align-items: center; justify-content: center; opacity: 0.3;">
+                <span style="font-weight: 700;">+ ADDING SHOTS</span>
+            </div>
+        </section>
+
+        <!-- UI/UX Showcase -->
+        <section class="section-header reveal" style="padding-top: 8rem; padding-bottom: 2rem;">
+            <h1>UI / UX Design</h1>
+            <p>Crafting functional beauty. High-end interface concepts that solve problems.</p>
+        </section>
+
+        <section class="uiux-showcase reveal">
+            <div class="uiux-card">
+                <div class="uiux-image">
+                    <img src="images/uiux_1.png" alt="SaaS Dashboard Concept">
+                </div>
+                <div class="uiux-content">
+                    <h2 style="color: var(--accent-purple); margin-bottom: 1rem;">Lumina Hub</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">A futuristic analytics dashboard focusing
+                        on glassmorphism and data density. Designed to make complex insights feel breathable.</p>
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                        <span
+                            style="background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 700;">Figma</span>
+                        <span
+                            style="background: rgba(255, 255, 255, 0.05); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 700;">UIUX</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- OmniShell -->
+            <div class="uiux-card" style="grid-template-columns: 1fr 1.2fr;">
+                <div class="uiux-content">
+                    <h2 style="color: var(--accent-blue); margin-bottom: 1rem;">Fintech Pro</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">Streamlined mobile payment experience
+                        with focus on accessibility and rapid interaction cycles.</p>
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                        <span
+                            style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 700;">Mobile</span>
+                        <span
+                            style="background: rgba(255, 255, 255, 0.05); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 700;">UX
+                            Research</span>
+                    </div>
+                </div>
+                <div class="uiux-image"
+                    style="background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; opacity: 0.2;">
+                    <span style="font-weight: 900; font-size: 3rem;">COMING<br>SOON</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Projects -->
+        <section class="section-header reveal" style="padding-top: 8rem; padding-bottom: 2rem;">
+            <h1>Development</h1>
+            <p>From CLI utilities to full-stack pipelines. The code behind the craft.</p>
+        </section>
+
+        <section class="bento-grid reveal">
+            <!-- Existing projects -->
             <div class="bento-item reveal">
                 <h3>OmniShell</h3>
                 <p>Secure CLI messaging.</p>
                 <a href="https://github.com/SagheerAkram/OmniShell" target="_blank"
-                    style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem; margin-top: 0.5rem;">View
-                    Source →</a>
+                    style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem; margin-top: 0.5rem; font-weight: 700;">SOURCE
+                    →</a>
             </div>
 
-            <!-- AuraSync -->
             <div class="bento-item reveal">
                 <h3>AuraSync</h3>
                 <p>Spotify mirror suite.</p>
                 <a href="https://github.com/SagheerAkram/AuraSync" target="_blank"
-                    style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem; margin-top: 0.5rem;">View
-                    Source →</a>
+                    style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem; margin-top: 0.5rem; font-weight: 700;">SOURCE
+                    →</a>
             </div>
 
-            <!-- ATLAS -->
-            <div class="bento-item wide reveal" style="background: url('images/atlas.png') center/cover;">
+            <div class="bento-item wide reveal"
+                style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent), url('images/atlas.png') center/cover;">
                 <div
-                    style="background: rgba(0,0,0,0.6); padding: 1rem; border-radius: 12px; backdrop-filter: blur(5px);">
+                    style="background: rgba(0,0,0,0.6); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
                     <h3>ATLAS</h3>
-                    <p>Live spatial codebase visualization.</p>
+                    <p>Live spatial codebase visualization for deep architectural insights.</p>
                     <a href="https://github.com/SagheerAkram/ATLAS" target="_blank"
-                        style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem;">GitHub →</a>
+                        style="color: var(--accent-blue); text-decoration: none; font-weight: 700;">GITHUB →</a>
                 </div>
             </div>
 
-            <!-- NBTHotbar -->
             <div class="bento-item reveal">
                 <h3>NBT Hotbar</h3>
-                <p>Educational Minecraft tools.</p>
+                <p>Minecraft educational tools.</p>
                 <a href="https://github.com/SagheerAkram/NBTHotbar" target="_blank"
-                    style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem; margin-top: 0.5rem;">Source
+                    style="color: var(--accent-blue); text-decoration: none; font-size: 0.8rem; margin-top: 0.5rem; font-weight: 700;">SOURCE
                     →</a>
+            </div>
+        </section>
+
+        <!-- Final Social Call to Action -->
+        <section class="social-hub reveal">
+            <h2>Let's Connect</h2>
+            <p>Ready to build something legendary? Find me everywhere.</p>
+            <div class="social-links">
+                <a href="https://x.com" class="social-link" style="color: #1DA1F2;">X (Twitter)</a>
+                <a href="https://linkedin.com" class="social-link" style="color: #0077B5;">LinkedIn</a>
+                <a href="https://instagram.com" class="social-link" style="color: #E1306C;">Instagram</a>
+                <a href="https://discord.com" class="social-link" style="color: #5865F2;">Discord</a>
             </div>
         </section>
     </main>

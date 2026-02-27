@@ -56,6 +56,7 @@ h1 {
   font-size: clamp(3rem, 12vw, 10rem);
   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -314,4 +315,151 @@ a:hover~.custom-cursor,
 .bento-item:hover~.custom-cursor {
   width: 60px;
   height: 60px;
+}
+
+/* --- Website Transformation Styles --- */
+
+/* Photography Section */
+.photography-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  padding: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.photo-item {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  cursor: pointer;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-item:hover img {
+  transform: scale(1.1);
+}
+
+.photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.photo-item:hover .photo-overlay {
+  opacity: 1;
+}
+
+/* UI/UX Showcase */
+.uiux-showcase {
+  padding: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.uiux-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 32px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 500px;
+}
+
+.uiux-image {
+  overflow: hidden;
+}
+
+.uiux-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uiux-content {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Social Hub */
+.social-hub {
+  padding: 8rem 4rem;
+  text-align: center;
+  border-top: 1px solid var(--card-border);
+  background: radial-gradient(circle at bottom, rgba(59, 130, 246, 0.05), transparent);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+}
+
+.social-link {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.social-link:hover {
+  color: var(--text-primary);
+  transform: translateY(-5px);
+}
+
+.social-link::after {
+  content: "↗";
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  opacity: 0.5;
+}
+
+/* Close Person (The Tribe) */
+.tribe-section {
+  padding: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tribe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .uiux-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .photography-grid,
+  .uiux-showcase,
+  .social-hub {
+    padding: 2rem;
+  }
 }
