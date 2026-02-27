@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
+
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -30,7 +32,7 @@ export default function RootLayout({
         <div className="fixed inset-0 bg-[#050505] -z-20" />
         {/* Subtle noise/grain overlay for premium texture */}
         <div className="fixed inset-0 opacity-[0.03] pointer-events-none -z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
+        <CustomCursor />
         <main className="relative min-h-screen">
           {children}
         </main>
