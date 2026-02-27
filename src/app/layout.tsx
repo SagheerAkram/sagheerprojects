@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
+import { Analytics } from "@vercel/analytics/next";
 
 
 const outfit = Outfit({
@@ -36,6 +37,7 @@ export default function RootLayout({
         <main className="relative min-h-screen">
           {children}
         </main>
+        <Analytics />
       </body>
     </html>
   );
