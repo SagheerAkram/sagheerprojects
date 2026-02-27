@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagheer Portfolio | The Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Sagheer.</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="lab.html" class="active">Lab</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section-header reveal">
+            <h1>The Lab</h1>
+            <p>A digital staging ground for experiments in 3D, physics, and interaction design.</p>
+        </section>
+
+        <section class="bento-grid">
+            <!-- Glass Card Experiment -->
+            <div class="bento-item wide large reveal"
+                style="padding: 0; min-height: 500px; overflow: hidden; position: relative; background: #0a0a0a;">
+                <div class="lab-card-overlay">
+                    <h3>Glass UI Experiment</h3>
+                    <p>Testing real-time glassmorphism and light refraction.</p>
+                </div>
+                <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"></script>
+                <spline-viewer
+                    url="https://prod.spline.design/9487f386-df2b-4605-a599-f03b7af3ae48/scene.splinecode"></spline-viewer>
+            </div>
+
+            <!-- Interaction Toy 1 -->
+            <div class="bento-item reveal lab-toy" id="physics-toy">
+                <h3>Magnetic Pulse</h3>
+                <p>Click to trigger a repulsion field across all cards.</p>
+                <button class="btn primary lab-toy-btn" onclick="triggerPulse()">Pulse ⚡</button>
+            </div>
+
+            <!-- Interaction Toy 2 -->
+            <div class="bento-item reveal lab-toy" id="glow-toy">
+                <h3>Electric Glow</h3>
+                <p>Hover to see high-precision shadow tracking.</p>
+                <div class="glow-target"></div>
+            </div>
+
+            <!-- Interaction Toy 3 -->
+            <div class="bento-item reveal lab-toy">
+                <h3>Noise & Grain</h3>
+                <p>Testing cinematic texture overlays for OLED screens.</p>
+                <button class="btn secondary lab-toy-btn" onclick="toggleNoise()">Toggle Grain</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="noise-overlay" id="noiseLayer"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Lab Specific Logic
+        function triggerPulse() {
+            const cards = document.querySelectorAll('.bento-item');
+            cards.forEach(card => {
+                card.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                card.style.transform = 'scale(0.95) translateY(10px)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 500);
+            });
+            const btn = document.querySelector('#physics-toy .btn');
+            btn.style.transform = 'scale(1.2)';
+            setTimeout(() => btn.style.transform = '', 200);
+        }
+
+        function toggleNoise() {
+            const noise = document.getElementById('noiseLayer');
+            noise.classList.toggle('active');
+        }
+
+        // Glow Tracking
+        const glowToy = document.getElementById('glow-toy');
+        const glowTarget = glowToy.querySelector('.glow-target');
+
+        glowToy.addEventListener('mousemove', (e) => {
+            const rect = glowToy.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            glowTarget.style.left = x + 'px';
+            glowTarget.style.top = y + 'px';
+            glowTarget.style.opacity = '1';
+        });
+
+        glowToy.addEventListener('mouseleave', () => {
+            glowTarget.style.opacity = '0';
+        });
+    </script>
+</body>
+
+</html>
