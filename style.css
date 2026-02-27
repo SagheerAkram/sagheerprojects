@@ -34,12 +34,29 @@
 }
 
 body {
-  background-color: var(--bg-main);
+  background: #050505;
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Premium Mesh Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(5, 5, 5, 1) 0%, transparent 100%);
+  z-index: -1;
 }
 
 /* Typography Remix */
@@ -48,16 +65,18 @@ h2,
 h3 {
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
+  letter-spacing: -0.05em;
+  line-height: 1;
 }
 
 h1 {
-  font-size: clamp(3rem, 12vw, 10rem);
-  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
+  font-size: clamp(3rem, 10vw, 8rem);
+  /* Slightly reduced size */
+  background: linear-gradient(180deg, #fff 30%, rgba(255, 255, 255, 0.2) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
 }
 
 h2 {
@@ -116,22 +135,30 @@ nav {
   top: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1.5rem 4rem;
-  /* Increased side padding */
+  padding: 1.2rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(5, 5, 5, 0.85);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--card-border);
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+main {
+  padding-top: 100px;
+  /* Essential fix for fixed nav overlap */
 }
 
 .logo {
   font-family: 'Outfit', sans-serif;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 1.5rem;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.06em;
+  background: linear-gradient(to right, #fff, #888);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .nav-links {
