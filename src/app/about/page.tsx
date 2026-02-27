@@ -42,7 +42,7 @@ export default function About() {
                     >
                         WHO IS <br />
                         <span className="text-gradient">SAGHEER?</span>
-                    </h2>
+                    </motion.h2>
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}

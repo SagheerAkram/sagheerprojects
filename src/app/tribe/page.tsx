@@ -4,27 +4,22 @@ import { motion } from "framer-motion";
 import Logo from "@/components/Logo";
 import { ArrowLeft, Users } from "lucide-react";
 
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+
 export default function Tribe() {
-    const tribe = [
-        {
-            name: "SAMEER",
-            role: "The Brother",
-            image: "/images/sameer_profile.png",
-            desc: "Architect of Zer0bit.",
-        },
-        {
-            name: "ADIL",
-            role: "The Homie",
-            image: "/images/adil_profile.png",
-            desc: "Creative Soul.",
-        },
-        {
-            name: "AAYUSH",
-            role: "The Partner",
-            image: "/images/aayush_profile.png",
-            desc: "Digital Strategist.",
-        },
-    ];
+    const [tribe, setTribe] = useState<any[]>([]);
+
+    useEffect(() => {
+        async function fetchTribe() {
+            const { data } = await supabase
+                .from('tribe')
+                .select('*')
+                .order('display_order', { ascending: true });
+            if (data) setTribe(data);
+        }
+        fetchTribe();
+    }, []);
 
     return (
         <div className="relative min-h-screen bg-[#050505] p-8 md:p-16">
@@ -53,14 +48,14 @@ export default function Tribe() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {tribe.map((member, i) => (
                         <motion.div
-                            key={member.name}
+                            key={member.id}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.2 }}
                             className="group relative h-[500px] rounded-[3rem] overflow-hidden glass border-white/5"
                         >
                             <img
-                                src={member.image}
+                                src={member.image_url}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 alt={member.name}
                             />
@@ -68,7 +63,7 @@ export default function Tribe() {
                             <div className="absolute inset-x-8 bottom-10 z-20 space-y-2">
                                 <span className="text-[10px] font-black tracking-[0.3em] text-cyan-400 uppercase">{member.role}</span>
                                 <h3 className="text-4xl font-black text-white">{member.name}</h3>
-                                <p className="text-white/50 text-sm font-medium">{member.desc}</p>
+                                <p className="text-white/50 text-sm font-medium">{member.role === 'The Brother' ? 'Architect of Zer0bit.' : 'Creative Soul.'}</p>
                             </div>
                         </motion.div>
                     ))}

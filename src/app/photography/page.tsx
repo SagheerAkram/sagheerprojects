@@ -4,13 +4,22 @@ import { motion } from "framer-motion";
 import Logo from "@/components/Logo";
 import { ArrowLeft, Camera } from "lucide-react";
 
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+
 export default function Photography() {
-    const photos = [
-        { title: "Horizon", src: "/images/photography_1.png", span: "row-span-2 col-span-2" },
-        { title: "Detail", src: "/images/design_1.svg", span: "row-span-1 col-span-1" },
-        { title: "Focus", src: "/images/design_2.svg", span: "row-span-1 col-span-1" },
-        { title: "Atmosphere", src: "/images/dev_1.svg", span: "row-span-1 col-span-2" },
-    ];
+    const [photos, setPhotos] = useState<any[]>([]);
+
+    useEffect(() => {
+        async function fetchPhotos() {
+            const { data } = await supabase
+                .from('photography')
+                .select('*')
+                .order('display_order', { ascending: true });
+            if (data) setPhotos(data);
+        }
+        fetchPhotos();
+    }, []);
 
     return (
         <div className="relative min-h-screen bg-[#050505] p-8 md:p-16 overflow-hidden">
@@ -37,19 +46,19 @@ export default function Photography() {
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[250px]">
                     {photos.map((photo, i) => (
                         <motion.div
-                            key={i}
+                            key={photo.id}
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.1 }}
-                            className={`group relative rounded-[2rem] overflow-hidden glass border-white/5 ${photo.span}`}
+                            className={`group relative rounded-[2rem] overflow-hidden glass border-white/5 ${photo.category === 'Wide' ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`}
                         >
                             <img
-                                src={photo.src}
+                                src={photo.image_url}
                                 className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
-                                alt={photo.title}
+                                alt={photo.caption}
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span className="text-white font-black tracking-widest uppercase text-xs">{photo.title}</span>
+                                <span className="text-white font-black tracking-widest uppercase text-xs">{photo.caption}</span>
                             </div>
                         </motion.div>
                     ))}

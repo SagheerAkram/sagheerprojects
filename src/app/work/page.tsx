@@ -4,27 +4,22 @@ import { motion } from "framer-motion";
 import Logo from "@/components/Logo";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+
 export default function Work() {
-    const projects = [
-        {
-            title: "OmniShell",
-            category: "CLI TOOL",
-            image: "/images/omnishell.png",
-            color: "from-cyan-500/20 to-transparent",
-        },
-        {
-            title: "AuraSync",
-            category: "PLATFORM",
-            image: "/images/aurasync.png",
-            color: "from-purple-500/20 to-transparent",
-        },
-        {
-            title: "UI Showcase",
-            category: "DESIGN",
-            image: "/images/uiux_1.png",
-            color: "from-pink-500/20 to-transparent",
-        },
-    ];
+    const [projects, setProjects] = useState<any[]>([]);
+
+    useEffect(() => {
+        async function fetchProjects() {
+            const { data } = await supabase
+                .from('projects')
+                .select('*')
+                .order('display_order', { ascending: true });
+            if (data) setProjects(data);
+        }
+        fetchProjects();
+    }, []);
 
     return (
         <div className="relative min-h-screen bg-[#050505] p-8 md:p-16">
@@ -53,9 +48,9 @@ export default function Work() {
                             transition={{ delay: i * 0.1 }}
                             className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden glass border-white/5"
                         >
-                            <div className={`absolute inset-0 bg-gradient-to-br ${project.color} z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                            <div className={`absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                             <img
-                                src={project.image}
+                                src={project.image_url}
                                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                                 alt={project.title}
                             />
@@ -63,9 +58,14 @@ export default function Work() {
                                 <span className="text-[10px] font-black tracking-widest text-cyan-400 uppercase">{project.category}</span>
                                 <div className="flex justify-between items-center">
                                     <h3 className="text-3xl font-black text-white">{project.title}</h3>
-                                    <div className="w-12 h-12 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all">
+                                    <a
+                                        href={project.project_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-12 h-12 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all"
+                                    >
                                         <ExternalLink className="w-5 h-5 text-white" />
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </motion.div>

@@ -23,17 +23,23 @@ export default function Home() {
       {/* Header / Logo */}
       <nav className="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50">
         <Logo />
-        <div className="hidden md:flex gap-8">
-          {navItems.map((item) => (
-            <motion.a
-              key={item.href}
-              href={item.href}
-              whileHover={{ scale: 1.05, color: "#00f2ff" }}
-              className="text-xs font-bold tracking-[0.2em] text-white/50 hover:text-white transition-colors"
-            >
-              {item.name}
-            </motion.a>
-          ))}
+        <div className="flex gap-8">
+          <div className="hidden md:flex gap-8">
+            {navItems.map((item) => (
+              <motion.a
+                key={item.href}
+                href={item.href}
+                whileHover={{ scale: 1.05, color: "#00f2ff" }}
+                className="text-xs font-bold tracking-[0.2em] text-white/50 hover:text-white transition-colors"
+              >
+                {item.name}
+              </motion.a>
+            ))}
+          </div>
+          <div className="flex gap-8">
+            <a href="/login" className="text-[10px] font-black tracking-widest text-white/10 hover:text-cyan-400 transition-colors">ADMIN</a>
+            <a href="mailto:contact@sagheer.com" className="text-xs font-bold tracking-tighter hover:text-cyan-400 transition-colors font-outfit">EMAIL</a>
+          </div>
         </div>
       </nav>
 
