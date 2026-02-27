@@ -1,44 +1,52 @@
-// Intersection Observer for scroll animations
-document.addEventListener('DOMContentLoaded', () => {
-    
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
+// Magnetic Interaction Utility
+const magneticElements = document.querySelectorAll('.bento-item, .btn, a');
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, observerOptions);
+magneticElements.forEach((el) => {
+    el.addEventListener('mousemove', function (e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
 
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
-    revealElements.forEach(el => observer.observe(el));
+        this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.02)`;
+    });
 
-    // Navbar scroll effect
-    let lastScroll = 0;
-    const navbar = document.querySelector('.navbar');
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        // Add shadow when scrolled
-        if (currentScroll > 50) {
-            navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
-        } else {
-            navbar.style.boxShadow = 'none';
-        }
-
-        // Hide on scroll down, show on scroll up
-        if (currentScroll > lastScroll && currentScroll > 100) {
-            navbar.classList.add('hidden');
-        } else {
-            navbar.classList.remove('hidden');
-        }
-        
-        lastScroll = currentScroll;
+    el.addEventListener('mouseleave', function () {
+        this.style.transform = '';
     });
 });
+
+// Intersection Observer for Reveal Animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Once visible, stop observing to keep it there
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Page Load Smoothness
+window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+});
+
+// Custom Cursor (Optional Premium Touch)
+const cursor = document.createElement('div');
+cursor.className = 'custom-cursor';
+document.body.appendChild(cursor);
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+
+document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
+document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
