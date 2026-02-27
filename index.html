@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,15 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap"
+        rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Spline 3D Viewer -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
 </head>
+
 <body>
     <nav class="navbar">
         <a href="#hero" class="logo">Sagheer.</a>
@@ -43,7 +49,9 @@
                 <h2>About Me</h2>
                 <div class="about-card">
                     <p class="about-text">
-                        Hello, I'm Sagheer. I am a passionate designer and developer exploring the intersection of AI, user interfaces, and modern web experiences. I love crafting pixel-perfect designs in Figma and bringing them to life with clean, efficient code.
+                        Hello, I'm Sagheer. I am a passionate designer and developer exploring the intersection of AI,
+                        user interfaces, and modern web experiences. I love crafting pixel-perfect designs in Figma and
+                        bringing them to life with clean, efficient code.
                     </p>
                 </div>
             </div>
@@ -53,7 +61,7 @@
     <section id="projects" class="section projects-section">
         <div class="container">
             <h2 class="reveal-on-scroll">Projects</h2>
-            
+
             <h3 class="category-title reveal-on-scroll">Design Projects</h3>
             <div class="projects-grid">
                 <!-- Design Project 1 -->
@@ -66,7 +74,8 @@
                     </div>
                     <div class="project-info">
                         <h4>Fintech Dashboard UI</h4>
-                        <p>A sleek, dark-mode financial dashboard designed in Figma with a focus on data visualization and clean UX.</p>
+                        <p>A sleek, dark-mode financial dashboard designed in Figma with a focus on data visualization
+                            and clean UX.</p>
                     </div>
                 </div>
                 <!-- Design Project 2 -->
@@ -92,12 +101,14 @@
                         <img src="images/dev_1.svg" alt="AI Chat Interface">
                         <div class="project-overlay">
                             <a href="#" class="btn btn-primary">Live Demo</a>
-                            <a href="https://github.com/sagheerprojects" class="btn btn-secondary" target="_blank" rel="noopener">View GitHub</a>
+                            <a href="https://github.com/sagheerprojects" class="btn btn-secondary" target="_blank"
+                                rel="noopener">View GitHub</a>
                         </div>
                     </div>
                     <div class="project-info">
                         <h4>AI Chat Interface</h4>
-                        <p>A fully responsive, animated chat interface built using modern CSS, designed to connect to LLM APIs.</p>
+                        <p>A fully responsive, animated chat interface built using modern CSS, designed to connect to
+                            LLM APIs.</p>
                     </div>
                 </div>
                 <!-- Dev Project 2 -->
@@ -106,12 +117,14 @@
                         <img src="images/dev_2.svg" alt="Portfolio Framework">
                         <div class="project-overlay">
                             <a href="#" class="btn btn-primary">Live Demo</a>
-                            <a href="https://github.com/sagheerprojects" class="btn btn-secondary" target="_blank" rel="noopener">View GitHub</a>
+                            <a href="https://github.com/sagheerprojects" class="btn btn-secondary" target="_blank"
+                                rel="noopener">View GitHub</a>
                         </div>
                     </div>
                     <div class="project-info">
                         <h4>Portfolio Framework</h4>
-                        <p>An open-source static portfolio generator built with semantic HTML and vanilla JavaScript.</p>
+                        <p>An open-source static portfolio generator built with semantic HTML and vanilla JavaScript.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -123,13 +136,13 @@
             <h2 class="reveal-on-scroll">Lab &amp; Experiments</h2>
             <div class="lab-grid">
                 <div class="lab-card reveal-on-scroll">
-                    <div class="lab-visual animation-1">
-                        <div class="ring"></div>
-                        <div class="ring"></div>
+                    <div class="lab-visual spline-container">
+                        <spline-viewer
+                            url="https://prod.spline.design/6Wq1Q7YGyH-i66Wv/scene.splinecode"></spline-viewer>
                     </div>
                     <div class="lab-info">
-                        <h4>CSS Micro-interactions</h4>
-                        <p>Experimenting with buttery smooth CSS transforms and keyframes.</p>
+                        <h4>Interactive 3D Objects</h4>
+                        <p>Integrating real-time 3D scenes into the browser using Spline.</p>
                     </div>
                 </div>
                 <div class="lab-card reveal-on-scroll">
@@ -156,7 +169,8 @@
         <div class="container">
             <div class="contact-box reveal-on-scroll">
                 <h2>Let's build something amazing.</h2>
-                <p>Feel free to reach out if you're looking for a developer, have a question, or simply want to connect.</p>
+                <p>Feel free to reach out if you're looking for a developer, have a question, or simply want to connect.
+                </p>
                 <a href="mailto:hello@example.com" class="btn btn-large btn-neon">hello@example.com</a>
             </div>
         </div>
@@ -176,4 +190,5 @@
     <!-- Scripts -->
     <script src="script.js"></script>
 </body>
+
 </html>
