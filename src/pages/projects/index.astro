@@ -1,0 +1,140 @@
+---
+// src/pages/projects/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects.js';
+
+// Derive categories from the data — no hardcoded list needed
+const categories = ['All', ...new Set(projects.map((p) => p.category))];
+---
+
+<BaseLayout
+  title="Projects — Sagheer"
+  description="UI/UX, code, and AI projects built by Sagheer."
+>
+  <!-- Gradient blobs -->
+  <div class="blob w-72 h-72 bg-violet-glow top-32 -right-20 opacity-10"></div>
+  <div class="blob w-56 h-56 bg-electric-blue bottom-64 left-0 opacity-10"></div>
+
+  <section class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-24">
+    <!-- Header -->
+    <div class="mb-14 page-enter">
+      <span class="tag mb-4 inline-block">All Work</span>
+      <h1 class="section-heading text-white mb-4">Projects</h1>
+      <p class="text-slate-400 max-w-xl leading-relaxed">
+        A collection of things I've built, designed, and experimented with. Each one taught me something different.
+      </p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="flex gap-3 mb-10 flex-wrap" id="filter-bar">
+      {categories.map((cat) => (
+        <button
+          data-filter={cat}
+          class={`filter-btn px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${cat === 'All' ? 'active-filter' : 'inactive-filter'}`}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Projects grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+      {projects.map((project) => (
+        <a
+          href={`/projects/${project.slug}`}
+          data-category={project.category}
+          class="project-card glass rounded-2xl overflow-hidden group"
+        >
+          <!-- 16:9 Banner -->
+          <div class={`w-full aspect-video bg-gradient-to-br ${project.bannerGradient} relative overflow-hidden`}>
+            <div class="absolute inset-0 opacity-30" style="background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.12) 0%, transparent 60%)"></div>
+            <div class="absolute bottom-3 left-3">
+              <span class="tag text-[10px]">{project.category}</span>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+          </div>
+
+          <!-- Card body -->
+          <div class="p-5">
+            <h2 class="text-white font-bold text-lg mb-1 group-hover:text-electric-blue transition-colors duration-200">
+              {project.title}
+            </h2>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">{project.summary}</p>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2">
+              {project.tags.slice(0, 3).map((tag) => (
+                <span class="px-2 py-0.5 rounded text-xs bg-white/5 text-slate-400 border border-white/5">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div class="mt-4 flex items-center gap-1 text-electric-blue text-xs font-semibold group-hover:gap-2 transition-all">
+              <span>View Case Study</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Empty state (shown if filter matches nothing) -->
+    <div id="empty-state" class="hidden text-center py-20 text-slate-500">
+      No projects in this category yet.
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .active-filter {
+    background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15));
+    border-color: rgba(0,212,255,0.5);
+    color: #00d4ff;
+    box-shadow: 0 0 16px rgba(0,212,255,0.15);
+  }
+
+  .inactive-filter {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.08);
+    color: #94a3b8;
+  }
+
+  .inactive-filter:hover {
+    border-color: rgba(0,212,255,0.3);
+    color: #cbd5e1;
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('[data-category]');
+  const emptyState = document.getElementById('empty-state');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter') ?? 'All';
+
+      // Update active state
+      filterBtns.forEach((b) => {
+        b.classList.remove('active-filter');
+        b.classList.add('inactive-filter');
+      });
+      btn.classList.add('active-filter');
+      btn.classList.remove('inactive-filter');
+
+      // Filter cards
+      let visible = 0;
+      cards.forEach((card) => {
+        const cat = card.getAttribute('data-category');
+        const show = filter === 'All' || cat === filter;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      emptyState?.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>

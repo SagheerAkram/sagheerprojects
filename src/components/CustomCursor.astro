@@ -1,0 +1,137 @@
+---
+// src/components/CustomCursor.astro
+// Hides the default cursor and replaces it with a custom dot and trailing ring.
+---
+
+<div id="custom-cursor-dot" class="custom-cursor dot"></div>
+<div id="custom-cursor-ring" class="custom-cursor ring"></div>
+
+<style>
+  /* Hide the default cursor globally */
+  :global(body), :global(a), :global(button), :global(input), :global(textarea), :global(select) {
+    cursor: none !important;
+  }
+
+  /* When hovering over interactable elements, we'll scale the ring down slightly and make it brighter */
+  :global(.cursor-hover) #custom-cursor-ring {
+    transform: translate(-50%, -50%) scale(1.5);
+    border-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+    transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s, transform 0.2s;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ring {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Fallback for devices without hover (e.g., touchscreens) */
+  @media (hover: none) and (pointer: coarse) {
+    .custom-cursor {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    // Respect reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Skip on touch devices
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    const dot = document.getElementById('custom-cursor-dot');
+    const ring = document.getElementById('custom-cursor-ring');
+    
+    if (!dot || !ring) return;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    
+    let ringX = mouseX;
+    let ringY = mouseY;
+    
+    let raf: number;
+
+    // Listen for mouse movement
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // Update dot immediately
+      dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+    }, { passive: true });
+
+    // Handle hover states on interactable elements
+    const interactables = document.querySelectorAll('a, button, input, textarea, select, [role="button"]');
+    
+    interactables.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-hover');
+      });
+      el.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-hover');
+      });
+    });
+
+    // Use IntersectionObserver or MutationObserver if we were modifying DOM frequently
+    // For simplicity, we just attach to existing interactive elements on load.
+
+    function lerp(a: number, b: number, t: number) {
+      return a + (b - a) * t;
+    }
+
+    // Animation loop for the trailing ring
+    function tick() {
+      ringX = lerp(ringX, mouseX, 0.15);
+      ringY = lerp(ringY, mouseY, 0.15);
+      
+      ring.style.left = `${ringX}px`;
+      ring.style.top = `${ringY}px`;
+      
+      raf = requestAnimationFrame(tick);
+    }
+
+    tick();
+
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', () => {
+      dot.style.opacity = '0';
+      ring.style.opacity = '0';
+    });
+    
+    document.addEventListener('mouseenter', () => {
+      dot.style.opacity = '1';
+      ring.style.opacity = '1';
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        tick();
+      }
+    });
+
+  })();
+</script>

@@ -1,0 +1,283 @@
+---
+// src/pages/projects/[slug].astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects.js';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout
+  title={`${project.title} — Sagheer`}
+  description={project.summary}
+>
+  <!-- Reading progress bar — the micro-animation -->
+  <div
+    id="read-progress"
+    aria-hidden="true"
+    class="fixed top-0 left-0 z-[60] h-[2px] w-full pointer-events-none"
+    style="background: linear-gradient(to right, #00d4ff, #7c3aed); transform-origin: left; transform: scaleX(0); transition: transform 0.1s linear;"
+  ></div>
+
+  <!-- Back link -->
+  <div class="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-4">
+    <a href="/projects" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-electric-blue transition-colors group">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:-translate-x-1 transition-transform duration-200">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      All Projects
+    </a>
+  </div>
+
+  <!-- Hero banner — unique gradient per project, grid overlay for texture -->
+  <div class="relative z-10 max-w-6xl mx-auto px-6 pb-14">
+    <div class={`w-full aspect-video md:aspect-[21/7] rounded-2xl bg-gradient-to-br ${project.bannerGradient} relative overflow-hidden`}>
+      <!-- Noise texture overlay -->
+      <div class="absolute inset-0 opacity-25" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/><feColorMatrix type=%22saturate%22 values=%220%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.15%22/></svg>');"></div>
+      <!-- Grid overlay -->
+      <div class="absolute inset-0 grid-bg opacity-30"></div>
+      <!-- Radial highlight -->
+      <div class="absolute inset-0" style={`background: radial-gradient(ellipse at 25% 50%, ${project.bannerAccent}22 0%, transparent 65%);`}></div>
+      <!-- Title overlay -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+        <span class="tag mb-4">{project.category}</span>
+        <h1 class="text-3xl md:text-5xl font-black text-white drop-shadow-lg">{project.title}</h1>
+        <p class="text-white/60 mt-3 max-w-xl text-base leading-relaxed">{project.summary}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <article class="relative z-10 max-w-4xl mx-auto px-6 pb-28 page-enter">
+
+    <!-- Tags + links row -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-14">
+      <div class="flex flex-wrap gap-2">
+        {project.tags.map((tag: string) => (
+          <span class="px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-slate-300">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div class="flex items-center gap-3">
+        {project.github && (
+          <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn-outline text-sm py-2 px-4">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            GitHub
+          </a>
+        )}
+        {project.live && (
+          <a href={project.live} target="_blank" rel="noopener noreferrer" class="btn-glow text-sm py-2 px-4">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            Live Demo
+          </a>
+        )}
+      </div>
+    </div>
+
+    {project.designs ? (
+      /* ── UI/UX DESIGN GALLERY LAYOUT ── */
+      <div class="space-y-14">
+
+        <section class="reveal">
+          <h2 class="section-label">Overview</h2>
+          <div class="glass rounded-2xl p-6">
+            <p class="text-slate-300 leading-relaxed">{project.overview}</p>
+          </div>
+        </section>
+
+        <div class="glow-divider reveal"></div>
+
+        <!-- Day-by-day design gallery -->
+        <section class="reveal">
+          <h2 class="section-label">Design Sessions</h2>
+          <div class="space-y-10">
+            {project.designs.map((day: any) => (
+              <div class="glass rounded-2xl overflow-hidden">
+                <!-- Day label bar -->
+                <div class="px-6 py-4 border-b border-white/5 flex items-center gap-3">
+                  <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold" style={`background: ${day.accent}22; color: ${day.accent}; border: 1px solid ${day.accent}44;`}>{day.day}</span>
+                  <div>
+                    <p class="text-white font-semibold text-sm">{day.label}</p>
+                    <p class="text-slate-500 text-xs mt-0.5">{day.date}</p>
+                  </div>
+                </div>
+                <!-- Screenshot -->
+                <div class="relative w-full aspect-video overflow-hidden bg-slate-900">
+                  <img
+                    src={day.image}
+                    alt={day.label}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <!-- Notes -->
+                <div class="px-6 py-5">
+                  <p class="text-slate-400 text-sm leading-relaxed">{day.notes}</p>
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    {day.tools.map((tool: string) => (
+                      <span class="px-2 py-0.5 rounded text-xs bg-white/5 text-slate-400 border border-white/5">{tool}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div class="glow-divider reveal"></div>
+
+        <!-- What I Learned -->
+        <section class="reveal">
+          <h2 class="section-label">What I Learned</h2>
+          <div class="glass rounded-2xl p-6">
+            <p class="text-slate-300 leading-relaxed">{project.learned}</p>
+          </div>
+        </section>
+
+      </div>
+    ) : (
+      /* ── CODE PROJECT LAYOUT (existing) ── */
+      <div class="space-y-14">
+
+        <!-- Overview -->
+        <section class="reveal">
+          <h2 class="section-label">Overview</h2>
+          <div class="glass rounded-2xl p-6">
+            <p class="text-slate-300 leading-relaxed">{project.overview}</p>
+          </div>
+        </section>
+
+        <div class="glow-divider reveal"></div>
+
+        <!-- Problem + Solution -->
+        <div class="grid md:grid-cols-2 gap-5 reveal">
+          <section>
+            <h2 class="section-label purple">Problem</h2>
+            <div class="glass rounded-2xl p-6 h-full">
+              <p class="text-slate-300 leading-relaxed">{project.problem}</p>
+            </div>
+          </section>
+          <section>
+            <h2 class="section-label">Solution</h2>
+            <div class="glass rounded-2xl p-6 h-full">
+              <p class="text-slate-300 leading-relaxed">{project.solution}</p>
+            </div>
+          </section>
+        </div>
+
+        <div class="glow-divider reveal"></div>
+
+        <!-- Tech Stack -->
+        <section class="reveal">
+          <h2 class="section-label">Tech Stack</h2>
+          <div class="flex flex-wrap gap-3">
+            {project.techStack.map((tech: string) => (
+              <div class="glass px-4 py-2 rounded-xl text-sm font-medium text-slate-300 border border-white/5 hover:border-electric-blue/25 hover:text-electric-blue transition-all duration-200">
+                {tech}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div class="glow-divider reveal"></div>
+
+        <!-- Key Decisions + Trade-offs -->
+        <div class="grid md:grid-cols-2 gap-5 reveal">
+          <section>
+            <h2 class="section-label">Key Decisions</h2>
+            <div class="glass rounded-2xl p-6 h-full border-l-2 border-electric-blue/40">
+              <p class="text-slate-300 leading-relaxed">{project.keyDecisions}</p>
+            </div>
+          </section>
+          <section>
+            <h2 class="section-label purple">Trade-offs</h2>
+            <div class="glass rounded-2xl p-6 h-full border-l-2 border-violet-glow/40">
+              <p class="text-slate-300 leading-relaxed">{project.tradeoffs}</p>
+            </div>
+          </section>
+        </div>
+
+        <!-- What I Learned -->
+        <section class="reveal">
+          <h2 class="section-label">What I Learned</h2>
+          <div class="glass rounded-2xl p-6">
+            <p class="text-slate-300 leading-relaxed">{project.learned}</p>
+          </div>
+        </section>
+
+        <!-- Future Improvements -->
+        <section class="reveal">
+          <h2 class="section-label purple">Future Improvements</h2>
+          <div class="glass rounded-2xl p-6 border border-violet-glow/15">
+            <p class="text-slate-300 leading-relaxed">{project.futureImprovements}</p>
+          </div>
+        </section>
+
+      </div>
+    )}
+
+    <!-- Bottom nav -->
+    <div class="mt-16 pt-8 glow-divider"></div>
+    <div class="mt-8 flex items-center justify-between">
+      <a href="/projects" class="btn-outline text-sm py-2 px-5">← All Projects</a>
+      <a href="/contact" class="btn-glow text-sm py-2 px-5">Let's Build Something</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #00d4ff;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-label.purple {
+    color: #a855f7;
+  }
+</style>
+
+<script>
+  // Reading progress bar
+  const bar = document.getElementById('read-progress');
+  if (bar && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      bar.style.transform = `scaleX(${progress})`;
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // Staggered scroll reveal
+  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          setTimeout(() => el.classList.add('revealed'), i * 60);
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+  reveals.forEach((el) => observer.observe(el));
+</script>

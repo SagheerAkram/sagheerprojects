@@ -1,0 +1,200 @@
+---
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ParticleBackground from '../components/ParticleBackground.astro';
+import Preloader from '../components/Preloader.astro';
+import { photos } from '../data/photography.js';
+
+const previewPhotos = photos.slice(0, 6);
+---
+
+<BaseLayout
+  title="Sagheer — Designing Interfaces. Exploring AI. Building Ideas."
+  description="Portfolio of Sagheer — UI/UX learner, AI experimenter, and frontend builder."
+>
+  <Preloader />
+  <ParticleBackground />
+
+  <!-- Hero blobs -->
+  <div class="blob blob-hero w-96 h-96 bg-electric-blue top-20 -left-32" style="animation-delay: 0s;"></div>
+  <div class="blob blob-hero w-80 h-80 bg-violet-glow top-64 right-0" style="animation-delay: -3s;"></div>
+
+  <!-- HERO -->
+  <section data-glow-accent="blue" class="relative min-h-screen flex items-center px-8 md:px-16 pt-28 pb-16 overflow-hidden">
+    <div class="relative z-10 max-w-5xl" id="hero-content">
+
+      <!-- Eyebrow -->
+      <span class="hero-eyebrow">EST. 2025 // PAKISTAN</span>
+
+      <!-- Main heading -->
+      <h1 class="hero-title-cinematic" id="hero-name">
+        Sagheer
+        <span class="accent-stroke">Creative Technologist</span>
+      </h1>
+
+      <!-- Description -->
+      <p class="text-slate-400 text-base md:text-lg leading-[1.85] mb-10 max-w-lg mt-8" id="hero-desc">
+        Exploring the intersection of visual narratives and digital artifacts.
+        Building interfaces that think, systems that breathe, experiments that teach.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 items-start" id="hero-cta">
+        <a href="/projects" class="btn-glow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          View Projects
+        </a>
+        <a href="/photography" class="btn-outline">
+          Visual Narratives →
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
+      <span class="text-xs text-slate-500 tracking-widest uppercase font-mono">scroll</span>
+      <div class="w-px h-10 bg-gradient-to-b from-slate-500 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-divider max-w-6xl mx-auto px-6"></div>
+
+  <!-- FEATURED WORK -->
+  <section data-glow-accent="violet" class="relative z-10 max-w-6xl mx-auto px-6 py-20">
+    <div class="flex items-start justify-between mb-12">
+      <div>
+        <p class="text-xs font-bold tracking-widest uppercase text-electric-blue mb-2">Selected Work</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight leading-tight">
+          Things I've built.
+        </h2>
+        <p class="text-slate-500 text-sm mt-2">Each one taught me something different.</p>
+      </div>
+      <a href="/projects" class="btn-outline hidden sm:inline-flex text-sm py-2 px-5 shrink-0 mt-1">View All →</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {[
+        { title: 'AuraSync',  desc: 'Silent daemon that archives your Spotify library locally and syncs a live Discord presence. No UI needed.', tag: 'Code', gradient: 'from-[#0d1f35] via-[#0a2a4a] to-[#071b30]', slug: 'aurasync' },
+        { title: 'OmniShell', desc: 'Encrypted terminal messaging over 7 protocols — Tor, Bluetooth, LoRa and more. Written in Rust.',          tag: 'Code', gradient: 'from-[#0f0a1e] via-[#1a0e36] to-[#0c0718]', slug: 'omnishell' },
+        { title: 'ATLAS',     desc: 'Point it at a codebase. Watch the architecture emerge as a live 3D force-directed graph.',                tag: 'Code', gradient: 'from-[#00101a] via-[#001e30] to-[#001525]', slug: 'atlas' },
+      ].map((item) => (
+        <a href={`/projects/${item.slug}`} class="project-card glass rounded-2xl overflow-hidden group reveal">
+          <div class={`w-full aspect-video bg-gradient-to-br ${item.gradient} relative overflow-hidden`}>
+            <div class="absolute inset-0 grid-bg opacity-20"></div>
+            <div class="absolute bottom-3 left-3">
+              <span class="tag text-[10px]">{item.tag}</span>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/4 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-white font-semibold text-base mb-1.5 group-hover:text-electric-blue transition-colors duration-200 tracking-tight">{item.title}</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+            <div class="mt-4 flex items-center gap-1 text-electric-blue/70 text-xs font-semibold group-hover:text-electric-blue group-hover:gap-2 transition-all duration-200">
+              <span>Case Study</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-6 text-center sm:hidden">
+      <a href="/projects" class="btn-outline text-sm py-2 px-5">View All Projects →</a>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-divider max-w-6xl mx-auto px-6"></div>
+
+  <!-- NUMBERS STRIP -->
+  <section data-glow-accent="blue" class="relative z-10 py-14">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {[
+        { num: '3+',             label: 'Projects Built' },
+        { num: '100%',           label: 'CS Exam Score' },
+        { num: '<60s',           label: "Rubik's Cube" },
+        { num: 'Java · C · Python', label: 'Languages' },
+      ].map((stat) => (
+        <div class="reveal">
+          <p class="text-2xl md:text-3xl font-black gradient-text mb-1 tracking-tight">{stat.num}</p>
+          <p class="text-secondary text-xs font-medium tracking-widest uppercase">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Contact button -->
+    <div class="text-center mt-12 reveal">
+      <a href="/contact" class="btn-outline">Get in Touch →</a>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-divider max-w-6xl mx-auto px-6"></div>
+
+  <!-- PHOTOGRAPHY TEASER -->
+  <section data-glow-accent="violet" class="relative z-10 max-w-6xl mx-auto px-6 py-20">
+    <div class="flex items-start justify-between mb-12">
+      <div>
+        <span class="hero-eyebrow" style="font-size:10px; margin-bottom:10px;">Visual Narratives</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight leading-tight">
+          Moments I've captured.
+        </h2>
+        <p class="text-slate-500 text-sm mt-2">Nature, light, and the quiet in between.</p>
+      </div>
+      <a href="/photography" class="btn-outline hidden sm:inline-flex text-sm py-2 px-5 shrink-0 mt-1">View All →</a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+      {previewPhotos.map((photo) => (
+        <a href="/photography" class="gallery-item group reveal">
+          <img src={photo.src} alt={photo.title} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+          <div class="gallery-overlay">
+            <div class="gallery-category">{photo.category}</div>
+            <div class="gallery-title">{photo.title}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-6 text-center sm:hidden">
+      <a href="/photography" class="btn-outline text-sm py-2 px-5">View All Photos →</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // Entrance animation
+  const elements = ['#hero-content'];
+  elements.forEach(sel => {
+    const el = document.querySelector(sel) as HTMLElement;
+    if (el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 1900); // after preloader fades
+    }
+  });
+
+  // Scroll reveals
+  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => (entry.target as HTMLElement).classList.add('revealed'), i * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+  reveals.forEach((el) => observer.observe(el));
+</script>

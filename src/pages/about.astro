@@ -1,0 +1,107 @@
+---
+// src/pages/about.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — Sagheer"
+  description="UI/UX learner and AI experimenter. Works in Java, C, Python. Strong problem solver. 100% CS exam score."
+>
+  <!-- Blobs -->
+  <div class="blob w-80 h-80 bg-violet-glow top-32 -left-20" style="opacity:0.08;"></div>
+  <div class="blob w-56 h-56 bg-electric-blue bottom-32 right-0" style="opacity:0.08;"></div>
+
+  <section data-glow-accent="violet" class="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24">
+
+    <!-- Header -->
+    <div class="mb-16 page-enter">
+      <span class="hero-eyebrow">About</span>
+      <h1 class="section-heading text-white mb-6">Who I am.</h1>
+      <p class="text-slate-400 max-w-2xl leading-relaxed text-lg">
+        Not the kind of person who plans five years out. I get interested in things, go deep, and build to understand.
+        That's led me into UI/UX, AI systems, and a few programming languages I've grown comfortable with.
+      </p>
+    </div>
+
+    <!-- Bio cards -->
+    <div class="grid md:grid-cols-3 gap-5 mb-16">
+      <div class="glass rounded-2xl p-7 reveal">
+        <h2 class="text-white font-semibold text-sm mb-3 tracking-tight">Design Side</h2>
+        <p class="text-slate-400 leading-relaxed text-sm">
+          I'm drawn to interfaces that don't make you think — the kind where everything is in the right place before you realize it should be.
+          I study how information is organized, how spacing creates rhythm, and why some designs feel calm while others feel chaotic.
+        </p>
+      </div>
+
+      <div class="glass rounded-2xl p-7 reveal">
+        <h2 class="text-white font-semibold text-sm mb-3 tracking-tight">AI Side</h2>
+        <p class="text-slate-400 leading-relaxed text-sm">
+          I run language models locally, try different prompting strategies, and work to understand what's actually happening under the hood.
+          Less "using AI" and more "trying to understand AI" — there's a meaningful difference between the two.
+        </p>
+      </div>
+
+      <div class="glass rounded-2xl p-7 reveal">
+        <h2 class="text-white font-semibold text-sm mb-3 tracking-tight">Quick Facts</h2>
+        <ul class="space-y-2.5 text-slate-400 text-sm">
+          {[
+            'Logical problem solver — numbers and systems make sense to me',
+            'Comfortable switching between design thinking and code',
+            'Perfect score in computer science annual exam',
+            "Solves 3×3 Rubik's cube under a minute",
+            'Consistent — shows up and does the work',
+          ].map((text) => (
+            <li class="flex items-start gap-2.5">
+              <span class="text-[#00f3ff] shrink-0 mt-0.5">→</span>
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Glow divider -->
+    <div class="glow-divider mb-12 reveal"></div>
+
+    <!-- Currently Exploring -->
+    <div class="reveal" data-glow-accent="teal">
+      <span class="hero-eyebrow" style="font-size:10px; margin-bottom:20px;">Currently Exploring</span>
+      <div class="grid md:grid-cols-3 gap-4">
+        {[
+          { title: 'Motion Systems',  desc: 'How animation can carry meaning rather than just decoration. The difference between motion that guides and motion that distracts.', icon: '◈', color: 'text-electric-blue' },
+          { title: 'Model Behavior',  desc: 'How LLMs respond to different context structures, temperature settings, and system prompt framing. Less about outputs, more about patterns.', icon: '◉', color: 'text-neon-purple' },
+          { title: 'Design at Scale', desc: 'What breaks when a design system grows. Token governance, component versioning, and why consistent spacing is deceptively hard.', icon: '◎', color: 'text-[#00c9a7]' },
+        ].map((item) => (
+          <div class="glass rounded-2xl p-6 border border-white/5 hover:border-white/10 transition-colors duration-300">
+            <span class={`text-base ${item.color} block mb-3 opacity-50`}>{item.icon}</span>
+            <h3 class="text-white font-semibold text-sm mb-2 tracking-tight">{item.title}</h3>
+            <p class="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Contact button -->
+    <div class="mt-16 text-center reveal">
+      <a href="/contact" class="btn-glow">Contact Me →</a>
+    </div>
+
+  </section>
+</BaseLayout>
+
+<script>
+  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          setTimeout(() => el.classList.add('revealed'), i * 50);
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+  reveals.forEach((el) => observer.observe(el));
+</script>

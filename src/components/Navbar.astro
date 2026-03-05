@@ -1,0 +1,153 @@
+---
+// src/components/Navbar.astro
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/photography', label: 'Photography' },
+  { href: '/about', label: 'About' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Brand -->
+    <a href="/" class="flex items-center gap-2 group nav-brand">
+      <span class="nav-sigil">◈</span>
+      <span class="nav-name">SAGHEER</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-1">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`nav-link nav-link-mono ${currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) ? 'active' : ''}`}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA -->
+    <a href="/contact" class="hidden md:inline-flex btn-glow text-sm py-2 px-5">
+      Get in Touch
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden flex flex-col gap-1.5 p-2"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line w-6 h-0.5 bg-slate-300 transition-all duration-300 origin-center"></span>
+      <span class="hamburger-line w-6 h-0.5 bg-slate-300 transition-all duration-300"></span>
+      <span class="hamburger-line w-6 h-0.5 bg-slate-300 transition-all duration-300 origin-center"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden glass mx-4 mb-4 rounded-2xl overflow-hidden">
+    <ul class="flex flex-col py-4">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`block px-6 py-3 text-xs font-medium tracking-widest uppercase transition-colors duration-200 hover:text-[#00f3ff] hover:bg-white/5 ${currentPath === link.href ? 'text-[#00f3ff]' : 'text-slate-400'}`}
+            style="font-family: 'Space Mono', monospace;"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li class="px-6 pt-3">
+        <a href="/contact" class="btn-glow text-sm py-2 w-full text-center">Get in Touch</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  .nav-brand {
+    text-decoration: none;
+  }
+  .nav-sigil {
+    color: #00f3ff;
+    font-size: 18px;
+    line-height: 1;
+    transition: text-shadow 0.3s ease;
+  }
+  .nav-brand:hover .nav-sigil {
+    text-shadow: 0 0 12px #00f3ff;
+  }
+  .nav-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    transition: color 0.2s ease;
+  }
+  .nav-brand:hover .nav-name {
+    color: #00f3ff;
+  }
+
+  /* Mono-style nav links */
+  .nav-link-mono {
+    font-family: 'Space Mono', monospace !important;
+    font-size: 10px !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: #555 !important;
+    padding: 8px 14px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease !important;
+  }
+  .nav-link-mono:hover,
+  .nav-link-mono.active {
+    color: #ffffff !important;
+  }
+  .nav-link-mono.active {
+    color: #00f3ff !important;
+    border-bottom-color: #00f3ff;
+  }
+  .nav-link-mono::after {
+    display: none !important; /* override global nav-link underline */
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const scrollHandler = () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add('glass', 'shadow-lg');
+    } else {
+      navbar?.classList.remove('glass', 'shadow-lg');
+    }
+  };
+  window.addEventListener('scroll', scrollHandler, { passive: true });
+  scrollHandler();
+
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const lines = btn?.querySelectorAll('.hamburger-line');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    if (!isOpen && lines) {
+      (lines[0] as HTMLElement).style.transform = 'translateY(8px) rotate(45deg)';
+      (lines[1] as HTMLElement).style.opacity = '0';
+      (lines[2] as HTMLElement).style.transform = 'translateY(-8px) rotate(-45deg)';
+    } else if (lines) {
+      (lines[0] as HTMLElement).style.transform = '';
+      (lines[1] as HTMLElement).style.opacity = '';
+      (lines[2] as HTMLElement).style.transform = '';
+    }
+  });
+</script>

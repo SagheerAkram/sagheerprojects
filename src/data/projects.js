@@ -1,99 +1,150 @@
-// Sagheer's project archive — each entry represents one digital artifact
-export const PROJECTS = [
+// src/data/projects.js
+// Real projects — sourced from actual GitHub repositories by SagheerAkram.
+// No fabricated metrics. No invented functionality.
+
+export const projects = [
     {
-        id: 'neural-lattice',
-        index: '001',
-        title: 'Neural Lattice',
-        shortDesc: 'A structured reasoning framework for language model chain orchestration.',
-        overview: 'Neural Lattice is an experimental framework that imposes formal graph structure on LLM reasoning chains. Rather than prompting models in linear sequences, it routes inference through a directed acyclic graph of sub-reasoners, allowing parallel hypothesis resolution and structured contradiction detection.',
-        tags: ['AI', 'Python', 'Graph Theory'],
-        github: 'https://github.com/SagheerAbbas',
-        color: '#4af0c4',
-        blueprint: {
-            nodes: ['Input Query', 'Graph Router', 'Sub-Reasoner A', 'Sub-Reasoner B', 'Contradiction Resolver', 'Output Synthesis'],
-            edges: [
-                [0, 1], [1, 2], [1, 3], [2, 4], [3, 4], [4, 5]
-            ]
-        }
+        slug: 'aurasync',
+        title: 'AuraSync',
+        summary: 'A background daemon that automates your local music library and syncs a live Discord presence. Runs silent, no UI.',
+        category: 'Code',
+        tags: ['TypeScript', 'Python', 'Spotify', 'Discord', 'Automation', 'Daemon'],
+        techStack: ['TypeScript', 'Python', 'Windows Batch', 'Discord RPC', 'Spotify Web API'],
+        bannerGradient: 'from-[#0d1f35] via-[#0a2a4a] to-[#071b30]',
+        bannerAccent: '#00d4ff',
+        github: 'https://github.com/SagheerAkram/AuraSync',
+        live: null,
+        overview: 'AuraSync is a silent background process that handles two things: archiving music from Spotify to a local library organized by artist and album, and keeping your Discord presence in sync with whatever is currently playing. There is no interface. You run it, and it runs. The design philosophy was that the tool itself should be invisible — you should only notice it when you look at your Discord status or your music folder.',
+        problem: 'Spotify Free has restrictions that interrupt listening — ads, skip limits, a seek bar that does not work. Separately, Discord\'s Spotify integration only works while Spotify Premium is active. The goal was to remove both friction points without paying for a subscription, by building something that works around the limitations at the process level.',
+        solution: 'A .bat launcher activates a TypeScript daemon that intercepts Spotify\'s audio stream and routes it through local filters. Each song is archived into a structured folder system under library/Artist/Album/. The Discord presence is updated via Discord\'s RPC protocol with the current track, artist, and playback position. Everything runs in the background with a single right-click launch.',
+        keyDecisions: 'The decision to use .bat as the entry point was deliberate — not elegant, but practical for a Windows-first tool. Most users running this aren\'t developers. They want one click. TypeScript for the daemon logic made sense because of the ecosystem around audio processing and the Discord RPC library. The library folder structure (Artist/Album/Song) follows what music players like MusicBee and foobar2000 expect, so the archive is immediately usable without reorganization.',
+        tradeoffs: 'The tool only works on Windows — the .bat launchers and file path logic are not portable. A cross-platform version would need a proper install process, which adds friction that defeats the "one-click" goal. The Spotify ad-bypass approach uses network-level filtering, which is fragile — Spotify has historically patched these methods. The archive feature also raises copyright questions that the project acknowledges in its disclaimer.',
+        learned: 'Working with Discord\'s RPC protocol taught me how presence data flows — it\'s more of a structured socket connection than an API call. The Spotify audio interception side involved understanding how the client communicates with its CDN, which was more complex than expected. The main thing I took away: silent tools need more careful error handling than UI tools, because there\'s no visible feedback when something breaks.',
+        futureImprovements: 'A cross-platform rewrite in Go or Rust would remove the Windows dependency. Better session management so the daemon recovers gracefully when Spotify restarts or the account switches. The Discord presence sync could also be extended to show album art, which the RPC protocol supports but this version does not implement.',
     },
+
     {
-        id: 'echo-field',
-        index: '002',
-        title: 'Echo Field',
-        shortDesc: 'Recursive self-evaluation loop for detecting hallucination patterns in AI output.',
-        overview: 'Echo Field implements a recursive verification architecture where an AI system evaluates its own outputs against a structured set of semantic anchors. The system identifies confidence degradation zones — regions in generated text where factual grounding weakens — and flags them for human review.',
-        tags: ['AI', 'Python', 'Verification'],
-        github: 'https://github.com/SagheerAbbas',
-        color: '#7af068',
-        blueprint: {
-            nodes: ['Prompt', 'Primary Model', 'Output Buffer', 'Semantic Anchors', 'Echo Evaluator', 'Confidence Map', 'Flagged Regions'],
-            edges: [
-                [0, 1], [1, 2], [2, 4], [3, 4], [4, 5], [5, 6]
-            ]
-        }
+        slug: 'omnishell',
+        title: 'OmniShell',
+        summary: 'A terminal messaging client written in Rust. Sends encrypted messages across 7 network protocols — including Tor, Bluetooth, and LoRa — depending on what\'s available.',
+        category: 'Code',
+        tags: ['Rust', 'Cryptography', 'P2P', 'Tor', 'CLI', 'Security', 'Encryption'],
+        techStack: ['Rust', 'Tor (Onion Routing)', 'I2P', 'Bluetooth RFCOMM', 'LoRa', 'AES-256-GCM', 'Diffie-Hellman PFS'],
+        bannerGradient: 'from-[#0f0a1e] via-[#1a0e36] to-[#0c0718]',
+        bannerAccent: '#a855f7',
+        github: 'https://github.com/SagheerAkram/OmniShell',
+        live: null,
+        overview: 'OmniShell is a CLI messaging tool that supports 7 different transport layers: standard P2P, Tor, I2P, LoRa, Bluetooth, SMS, and satellite. The idea is that it adapts to whatever network infrastructure is available. If there is no internet, it falls back to Bluetooth or LoRa. All messages use end-to-end encryption with Perfect Forward Secrecy, meaning past messages stay protected even if a session key is compromised later.',
+        problem: 'Most secure messaging tools assume you have a stable internet connection and a central server to route through. That assumption breaks in low-connectivity environments — hiking, travel, protests, power outages. The question was whether you could build something that treats network access as a variable, not a constant.',
+        solution: 'OmniShell abstracts the network layer so the same interface works regardless of which protocol is active. The user runs the same 120+ commands whether they\'re on Tor or Bluetooth — the protocol selection happens automatically based on availability, or manually via a flag. Rust was chosen for the implementation because the cryptographic guarantees needed to be correct at a low level, and Rust\'s memory safety made the encryption logic easier to audit.',
+        keyDecisions: 'Choosing Rust was the most consequential decision. It meant a steeper implementation curve, but the type system and ownership model made it much harder to introduce security bugs by accident. The 7-protocol design came from mapping out scenarios where each one would be the only viable option — LoRa for remote areas, Bluetooth for transit, Tor for anonymity. Each protocol needed to be a first-class citizen, not an afterthought.',
+        tradeoffs: 'Supporting 7 protocols adds significant complexity to the codebase and the install process. Some protocols (LoRa, satellite) require hardware that most users don\'t have. The README acknowledges this — it\'s a serious tool for specific contexts, not a general-purpose messenger. The 1 star and 1 fork suggest the scope is right but the audience is narrow.',
+        learned: 'Implementing Perfect Forward Secrecy properly required understanding the Diffie-Hellman key exchange at a deeper level than just using a library. Rust\'s ownership model was frustrating at first but ended up being useful for reasoning about who holds a given encryption key at any point in the session lifecycle. I also learned that documentation for CLI tools matters more than for GUI tools — there is nothing to fall back on when the command errors out.',
+        futureImprovements: 'A proper GUI wrapper would make OmniShell accessible to non-technical users who need the privacy guarantees but cannot work with a terminal. Better automated protocol fallback — currently the selection logic is simple priority ordering, but it could detect signal quality and switch dynamically. Hardware support documentation for LoRa modules would also help.',
     },
+
     {
-        id: 'signal-drift',
-        index: '003',
-        title: 'Signal Drift',
-        shortDesc: 'Temporal analysis tool measuring semantic drift in language model embeddings over context.',
-        overview: 'Signal Drift tracks how the semantic meaning of key terms shifts as conversation context expands. By comparing embedding vectors at different context depths, it produces a drift topology — a structural map of how an LLM\'s internal representation of concepts evolves, degrades, or stabilizes across a session.',
-        tags: ['NLP', 'Embeddings', 'Analysis'],
-        github: 'https://github.com/SagheerAbbas',
-        color: '#f0a44a',
-        blueprint: {
-            nodes: ['Input Session', 'Tokenizer', 'Embedding Engine', 'Temporal Sampler', 'Drift Calculator', 'Topology Renderer'],
-            edges: [
-                [0, 1], [1, 2], [2, 3], [3, 4], [4, 5]
-            ]
-        }
+        slug: 'nbthotbar',
+        title: 'NBTHotbar',
+        summary: 'A collection of Minecraft NBT exploit files for testing server behavior. Documented, educational, comes with warnings.',
+        category: 'Code',
+        tags: ['Minecraft', 'NBT', 'Java Edition', 'Server Testing', 'Exploit Research'],
+        techStack: ['Minecraft NBT Format', 'Java Edition Data Layer', 'NBT Editor', 'SNBT'],
+        bannerGradient: 'from-[#0a1a0a] via-[#122212] to-[#0d1f0d]',
+        bannerAccent: '#22c55e',
+        github: 'https://github.com/SagheerAkram/NBTHotbar',
+        live: null,
+        overview: 'NBTHotbar is a reference collection of NBT (Named Binary Tag) exploit configurations for Minecraft Java Edition. NBT data controls item properties — damage values, enchantments, custom names, potion effects, and more. By crafting items with unusual or extreme NBT values, you can expose server-side validation gaps, crash unprotected clients, or test how plugins handle edge cases. The repo documents how to install these files and what each one does.',
+        problem: 'Minecraft server administrators often do not know their servers are vulnerable to NBT-based exploits until someone hits them. Plugin developers writing item logic rarely test with malformed or extreme NBT inputs. Having a documented set of test cases makes it easier to find and patch these gaps before they become problems in production.',
+        solution: 'A curated set of NBT files, organized by exploit type, with installation instructions for Windows, Mac, and Linux. Each file is documented with what it does and what a server needs in place to handle it safely. The repo doubles as a learning resource for people who want to understand how Minecraft\'s data layer actually works.',
+        keyDecisions: 'The decision to make this educational rather than just functional meant writing disclaimers that are honest, not just legal cover. The README acknowledges that misuse is possible and is explicit that this is for personal or private server testing. The Discord server linked in the README is for people learning, not for coordinating attacks.',
+        tradeoffs: 'A collection like this will always be dual-use. The same files that help a server admin test their defenses could be used to grief a server. The project accepts that trade-off and relies on honest documentation rather than restriction. That said, the repo has no CI, no structured test framework — it is just files and a README. Which is fine for what it is.',
+        learned: 'Reading the Minecraft NBT specification for the first time revealed how much of the game\'s item system is just serialized data with almost no server-side validation in vanilla. Plugins that do validate NBT are doing work the base game does not. Understanding this changed how I think about game security generally — the attack surface is often the data format itself.',
+        futureImprovements: 'A structured index of what each NBT file tests and what plugin/version it was tested against would make the repo more useful as a reference. Adding Bedrock Edition equivalents would also extend the usefulness, since Bedrock has its own variant of NBT.',
     },
+
     {
-        id: 'cage-protocol',
-        index: '004',
-        title: 'Cage Protocol',
-        shortDesc: 'Containment specification language for defining bounded AI agent behavior.',
-        overview: 'Cage Protocol is a domain-specific language and runtime for defining hard behavioral constraints on AI agents. Operators specify action boundaries, resource caps, and permissible state transitions in a formal constraint grammar. The runtime monitors agent behavior and enforces containment — terminating or redirecting execution when boundaries are violated.',
-        tags: ['AI Safety', 'DSL', 'Agents'],
-        github: 'https://github.com/SagheerAbbas',
-        color: '#f0504a',
-        blueprint: {
-            nodes: ['Constraint Grammar', 'Parser', 'Runtime Monitor', 'Agent', 'State Observer', 'Containment Engine', 'Violation Handler'],
-            edges: [
-                [0, 1], [1, 2], [2, 3], [3, 4], [4, 2], [2, 6], [5, 6]
-            ]
-        }
+        slug: 'quickcmd',
+        title: 'QuickCmd',
+        summary: 'Type what you want to do in plain English. QuickCmd translates it to a shell command, shows you what it\'ll run, and asks before executing.',
+        category: 'AI',
+        tags: ['Go', 'AI', 'CLI', 'Natural Language', 'Shell', 'Security', 'Docker'],
+        techStack: ['Go 1.21+', 'Docker (sandbox)', 'LLM API', 'RBAC', 'Prometheus', 'Plugin System'],
+        bannerGradient: 'from-[#1a1200] via-[#2a1e00] to-[#1a1500]',
+        bannerAccent: '#f59e0b',
+        github: 'https://github.com/SagheerAkram/QuickCmd',
+        live: null,
+        overview: 'QuickCmd is a Go CLI that takes natural language input and translates it into shell commands using an LLM. What makes it different from just asking ChatGPT is the execution layer: the command runs inside a Docker sandbox by default, there\'s an approval step before anything executes, and an audit log keeps a record of what ran and when. It also has a plugin system for Git, Kubernetes, and AWS operations, and a remote agent mode for running commands across multiple machines.',
+        problem: 'Shell commands are precise but not learnable by reading documentation alone — you learn them by doing, and doing wrong commands on a production system is costly. Natural language interfaces to the shell exist, but most of them just generate the command and hand it to you. The "generate, verify, then execute in a controlled environment" loop was missing.',
+        solution: 'QuickCmd puts a safety layer between the LLM output and the actual system. The flow: you type what you want → an LLM generates the command → you see it and approve → it runs in a Docker sandbox → the result is shown and logged. The plugin system extends this to domain-specific workflows (Git branching, Kubernetes rollouts, AWS resource management) with the same safety guarantees. RBAC determines what each user role is allowed to execute.',
+        keyDecisions: 'Go was the right choice for this — static binary, fast startup, good concurrency for the remote agent mode. The decision to sandbox in Docker rather than something lighter (like a restricted shell) was about auditability: Docker gives you a clear boundary, a defined image, and exit codes that are easy to capture in logs. The approval step is opt-out, not opt-in — you have to explicitly bypass it, which reverses the usual default.',
+        tradeoffs: 'Docker as a dependency adds friction — you need Docker running to use the sandbox mode. The LLM translation is only as good as the model and the prompt; complex multi-step operations sometimes produce commands that are syntactically correct but logically wrong. The audit log is local by default, which limits usefulness in team settings unless you configure remote storage.',
+        learned: 'Building the approval workflow taught me how important default behavior is in security tools. Making the safe option the default (approval required, sandboxed) versus making the fast option the default changes how people use it. I also learned that parsing LLM output reliably is harder than it looks — the model sometimes wraps the command in markdown fences, sometimes adds explanation, sometimes does both.',
+        futureImprovements: 'A cloud-synced audit log would make the team features actually useful. Better LLM output parsing with a structured output format (JSON schema) would reduce the edge cases in command extraction. A web UI for the approval workflow would help teams where not everyone is comfortable in the terminal.',
     },
+
     {
-        id: 'strata',
-        index: '005',
-        title: 'Strata',
-        shortDesc: 'Layered prompt architecture system for managing complexity in multi-agent pipelines.',
-        overview: 'Strata introduces a hierarchical abstraction layer for prompt engineering at scale. It separates system identity, role constraints, task logic, and output format into discrete layers — each independently versioned and composable. This enforces separation of concerns in complex multi-agent orchestration systems.',
-        tags: ['Prompt Engineering', 'Architecture', 'Python'],
-        github: 'https://github.com/SagheerAbbas',
-        color: '#a44af0',
-        blueprint: {
-            nodes: ['Identity Layer', 'Constraint Layer', 'Task Layer', 'Format Layer', 'Composer', 'Agent Pipeline', 'Output'],
-            edges: [
-                [0, 4], [1, 4], [2, 4], [3, 4], [4, 5], [5, 6]
-            ]
-        }
+        slug: 'atlas',
+        title: 'ATLAS',
+        summary: 'Point it at a codebase and watch the architecture appear. A live force-directed graph that shows how your files connect to each other.',
+        category: 'Code',
+        tags: ['JavaScript', 'Visualization', 'Graph', 'Force-Directed', 'Codebase', 'CLI'],
+        techStack: ['JavaScript', 'd3-force', 'Node.js', 'PageRank', 'WebSockets', 'Three.js'],
+        bannerGradient: 'from-[#00101a] via-[#001e30] to-[#001525]',
+        bannerAccent: '#0ea5e9',
+        github: 'https://github.com/SagheerAkram/ATLAS',
+        live: null,
+        overview: 'ATLAS analyzes a codebase incrementally and renders it as a 3D force-directed graph in the browser. Each file becomes a node. Import and dependency relationships become edges. The graph assembles in real-time as ATLAS reads the project — you watch the structure emerge rather than seeing a finished diagram. Node size is determined by PageRank centrality, not lines of code, so what appears visually prominent is what is architecturally important.',
+        problem: 'Reading a large unfamiliar codebase is slow. You either read files one by one trying to build a mental model, or you look at a static dependency diagram that was probably generated months ago and may not reflect reality. Neither gives you a live, spatial sense of how the project is actually organized.',
+        solution: 'ATLAS reads the project directory incrementally — as each file is parsed, the node appears in the graph and edges form to files it imports. The force-directed physics engine arranges nodes based on connection strength, so tightly coupled modules cluster together naturally. Three visual modes reveal different aspects: default structure mode, change gravity mode, and coupling mode. The browser opens in under a second and the graph settles as you watch.',
+        keyDecisions: 'The decision to use PageRank for node sizing was the most interesting design call. Most codebase visualizers size nodes by file size or line count, which makes large utility files look important when they\'re actually peripheral. PageRank reflects influence — a small but heavily imported file will appear larger than a big file nobody imports. "Truth before spectacle" is explicitly in the README, and that principle shows in the visual design — no decorative elements, just structure.',
+        tradeoffs: 'Force-directed layouts are non-deterministic — run it twice on the same codebase and the graph will settle differently each time. That\'s fine for exploration but not for documentation. The tool currently supports a limited set of languages for import parsing. Very large codebases (thousands of files) can make the physics simulation slow as the number of edges grows.',
+        learned: 'Implementing PageRank from scratch in JavaScript to understand why it gives different results than raw metrics was the most educational part of the project. The force-directed layout algorithm (based on d3-force) required more tuning than expected to produce stable, readable graphs — the repulsion and link strength parameters interact in non-obvious ways. I also confirmed something I suspected: watching structure emerge is more informative than seeing it all at once.',
+        futureImprovements: 'Support for more languages (currently JavaScript-focused). A diff mode that shows what changed between commits. A way to save and compare snapshots so you can track architectural drift over time. Better performance for large codebases using WebWorkers for the physics simulation.',
     },
+
     {
-        id: 'null-point',
-        index: '006',
-        title: 'Null Point',
-        shortDesc: 'Experimental study of what happens when AI models are given systematically incomplete information.',
-        overview: 'Null Point is an adversarial research instrument. It constructs deliberately incomplete information environments and observes how language models fill gaps — cataloguing patterns of assumption, confabulation, and logical extrapolation. The project produces a taxonomy of AI inference strategies under epistemic deficit.',
-        tags: ['Research', 'Adversarial AI', 'Analysis'],
-        github: 'https://github.com/SagheerAbbas',
-        color: '#4aaff0',
-        blueprint: {
-            nodes: ['Incomplete Dataset', 'Gap Constructor', 'Model Interface', 'Response Collector', 'Gap Analysis Engine', 'Taxonomy Builder'],
-            edges: [
-                [0, 1], [1, 2], [2, 3], [3, 4], [4, 5]
-            ]
-        }
-    }
+        slug: 'figma-learning',
+        title: 'Figma Learning Journal',
+        summary: 'Three early design sessions — learning Figma from scratch. A hero section, a product card, and a dark landing page.',
+        category: 'UI/UX',
+        tags: ['Figma', 'UI Design', 'Learning', 'Beginner'],
+        techStack: ['Figma'],
+        bannerGradient: 'from-[#1a0a2e] via-[#2a1245] to-[#120820]',
+        bannerAccent: '#e879f9',
+        github: null,
+        live: null,
+        overview: 'These are my first three days using Figma. No tutorials followed start-to-finish — just picking a concept, building it out, and seeing what sticks. Each session was about a different type of screen: a "why us" marketing hero, a product showcase card for a shoe, and a dark SaaS landing page. They are rough in places. That is the point.',
+        learned: 'Day 1 showed me that blue gradient backgrounds are forgiving — they make composition feel cohesive even when the layout is not tight. Day 2 was harder. Getting a product image to look like it is floating requires the shadow to do real work. Day 3 was where I first started thinking about hierarchy — the headline, subtext, and CTA each need to sit at clearly different visual weights or the whole thing reads flat.',
+        designs: [
+            {
+                day: '01',
+                label: 'Why US? — Marketing Hero',
+                date: 'Day 1 of learning Figma',
+                accent: '#38bdf8',
+                image: '/designs/figma-day1.png',
+                notes: 'A simple hero section for a service-based company. I was trying to learn how Figma handles shapes, blending, and text layers. The "Get Started" button was my first attempt at making a CTA feel intentional rather than just placed.',
+                tools: ['Figma', 'Auto Layout', 'Fill & Gradients', 'Components'],
+            },
+            {
+                day: '02',
+                label: 'Arishi V4 — Product Showcase Card',
+                date: 'Day 2 of learning Figma',
+                accent: '#f472b6',
+                image: '/designs/figma-day2.png',
+                notes: 'Product card for the New Balance Arishi V4 shoe. I wanted the shoe to look like it was floating. The shadow ellipse underneath was the part I spent the most time on. The thumbnail cards on the right were a last-minute addition that ended up making the layout feel less empty.',
+                tools: ['Figma', 'Image Masking', 'Drop Shadow', 'Rounded Corners'],
+            },
+            {
+                day: '03',
+                label: 'Xer0bit — Dark SaaS Landing Page',
+                date: 'Day 3 of learning Figma',
+                accent: '#818cf8',
+                image: '/designs/figma-day3.png',
+                notes: 'A dark landing page for an AI/dev services company. This one had three distinct sections: a hero with a CTA, a features block, and a trust/proof section with a photo. I started thinking more about visual flow here — how the eye moves from the headline to the CTA to the proof points.',
+                tools: ['Figma', 'Dark Theme', 'Grid Layout', 'Section Design'],
+            },
+        ],
+    },
 ];
+

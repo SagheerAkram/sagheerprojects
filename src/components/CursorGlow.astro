@@ -1,0 +1,87 @@
+---
+// src/components/CursorGlow.astro
+// The one signature interaction — a soft cursor radial that shifts color per section.
+// Client-only. No deps. ~30 lines of JS.
+---
+
+<div
+  id="cursor-glow"
+  aria-hidden="true"
+  class="pointer-events-none fixed z-50 rounded-full"
+  style="
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    top: -300px;
+    left: -300px;
+    transition: background 0.8s ease;
+    will-change: transform;
+  "
+></div>
+
+<script>
+  (function () {
+    // Respect reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Skip on touch devices — no cursor
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    const glow = document.getElementById('cursor-glow');
+    if (!glow) return;
+
+    let mouseX = -999;
+    let mouseY = -999;
+    let currentX = -999;
+    let currentY = -999;
+    let raf: number;
+
+    // Section color map: data-glow-accent attribute on <section> elements
+    const sectionAccents: Record<string, string> = {
+      blue:   'rgba(0, 212, 255, 0.065)',
+      violet: 'rgba(124, 58, 237, 0.07)',
+      teal:   'rgba(0, 201, 167, 0.06)',
+    };
+
+    let currentAccent = sectionAccents.blue;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      // Detect which section the cursor is in
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const section = el?.closest('[data-glow-accent]');
+      const accent = section?.getAttribute('data-glow-accent') ?? 'blue';
+      const nextAccent = sectionAccents[accent] ?? sectionAccents.blue;
+
+      if (nextAccent !== currentAccent) {
+        currentAccent = nextAccent;
+        glow.style.background = `radial-gradient(circle, ${currentAccent} 0%, transparent 70%)`;
+      }
+    }, { passive: true });
+
+    function lerp(a: number, b: number, t: number) {
+      return a + (b - a) * t;
+    }
+
+    function tick() {
+      currentX = lerp(currentX, mouseX, 0.1);
+      currentY = lerp(currentY, mouseY, 0.1);
+      glow.style.left = currentX + 'px';
+      glow.style.top = currentY + 'px';
+      raf = requestAnimationFrame(tick);
+    }
+
+    tick();
+
+    // Pause when not visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        tick();
+      }
+    });
+  })();
+</script>

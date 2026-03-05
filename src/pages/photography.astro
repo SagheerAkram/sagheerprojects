@@ -1,0 +1,118 @@
+---
+// src/pages/photography.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { photos, categories } from '../data/photography.js';
+---
+
+<BaseLayout
+  title="Photography — Sagheer"
+  description="Visual narratives — nature, light, and the quiet in between. A personal photography archive by Sagheer."
+>
+  <!-- Blobs -->
+  <div class="blob w-80 h-80 bg-electric-blue top-32 -right-20" style="opacity:0.07;"></div>
+  <div class="blob w-64 h-64 bg-violet-glow bottom-64 -left-16" style="opacity:0.07;"></div>
+
+  <section class="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-24">
+
+    <!-- Header -->
+    <div class="mb-14 page-enter">
+      <span class="hero-eyebrow">Visual Narratives</span>
+      <h1 class="section-heading text-white mb-4">Moments I've captured.</h1>
+      <p class="text-slate-400 max-w-xl leading-relaxed">
+        Nature, golden light, foggy mornings, and everything in between.
+        Shot on a phone. No filters. Just being there.
+      </p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs mb-10" id="filter-tabs">
+      {categories.map((cat) => (
+        <button
+          class={`filter-btn ${cat === 'All' ? 'active' : ''}`}
+          data-filter={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="gallery-grid" id="gallery">
+      {photos.map((photo) => (
+        <div
+          class="gallery-item"
+          data-category={photo.category}
+          data-id={photo.id}
+        >
+          <img
+            src={photo.src}
+            alt={photo.title}
+            loading="lazy"
+          />
+          <div class="gallery-overlay">
+            <div class="gallery-category">{photo.category}</div>
+            <div class="gallery-title">{photo.title}</div>
+            <div class="gallery-desc">{photo.description}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </section>
+</BaseLayout>
+
+<script>
+  // Filter logic
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const items = document.querySelectorAll<HTMLElement>('.gallery-item');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.dataset.filter || 'All';
+
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show/hide items
+      items.forEach(item => {
+        const cat = item.dataset.category || '';
+        const show = filter === 'All' || cat === filter;
+        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        if (show) {
+          item.style.opacity = '1';
+          item.style.transform = 'scale(1)';
+          item.style.display = '';
+        } else {
+          item.style.opacity = '0';
+          item.style.transform = 'scale(0.96)';
+          setTimeout(() => {
+            if (item.style.opacity === '0') item.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+
+  // Entrance animation
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          el.style.transition = `opacity 0.6s ease ${i * 0.04}s, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${i * 0.04}s`;
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  items.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(24px)';
+    observer.observe(item);
+  });
+</script>
