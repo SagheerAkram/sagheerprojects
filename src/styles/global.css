@@ -7,21 +7,30 @@
 
 @layer base {
     :root {
-        /* Premium Futurism Palette */
-        --bg-dark: #050505;
-        --bg-obsidian: #0a0a0c;
-        --accent-ice: #a5f3fc;
-        --accent-ice-glow: rgba(165, 243, 252, 0.4);
-        --text-primary: #f8fafc;
+        /* Nature-Glow Palette: Organic, Deep, Atmospheric */
+        --bg-dark: #050b0a;
+        /* Deep Forest Floor */
+        --bg-obsidian: #0a1211;
+        /* Undergrowth */
+        --accent-ice: #14b8a6;
+        /* Northern Lights Teal */
+        --accent-ice-glow: rgba(20, 184, 166, 0.4);
+        --accent-aurora: #a855f7;
+        /* High-Altitude Glow */
+        --accent-moss: #2d5a27;
+        /* Lush Green */
+        --text-primary: #e2e8f0;
+        /* Soft Moonlit Grey */
         --text-secondary: #94a3b8;
-        --glass-bg: rgba(10, 10, 12, 0.7);
-        --glass-border: rgba(148, 163, 184, 0.1);
-        --glass-border-bright: rgba(165, 243, 252, 0.2);
+        /* Shadows */
+        --glass-bg: rgba(10, 18, 17, 0.7);
+        --glass-border: rgba(20, 184, 166, 0.1);
+        --glass-border-bright: rgba(20, 184, 166, 0.2);
         --font-mono: 'Space Mono', monospace;
         --font-heading: 'Space Grotesk', sans-serif;
         --font-body: 'Inter', sans-serif;
 
-        --accent-glow: 0 0 20px rgba(0, 243, 255, 0.3);
+        --accent-glow: 0 0 20px rgba(20, 184, 166, 0.3);
     }
 
     * {
@@ -40,6 +49,11 @@
         font-family: 'Inter', system-ui, -apple-system, sans-serif;
         overflow-x: hidden;
         line-height: 1.6;
+        /* Organic background mesh */
+        background-image:
+            radial-gradient(circle at 0% 0%, rgba(20, 184, 166, 0.05) 0%, transparent 40%),
+            radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.05) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(45, 90, 39, 0.03) 0%, transparent 60%);
     }
 
     /* Atmospheric Background */

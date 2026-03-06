@@ -11,32 +11,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Header -->
     <div class="mb-20">
-      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60">RESEARCHER // STUDENT</span>
+      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60">CS STUDENT // NIGHT OWL // LATE NIGHT BUILDER</span>
       <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mt-6 mb-10">
-        Obsessed with the<br/>"How" and "Why".
+        I break things just to see<br/>how they fit back together.
       </h1>
       <p class="text-slate-400 max-w-2xl leading-relaxed text-lg md:text-xl">
-        I spend a lot of time thinking about how things work. Not just the code, but the intention behind it. 
-        I’m a student, a researcher, and someone who probably drinks too much coffee while chasing a bug at 4 AM.
+        I'm Sagheer. Most of my day is spent staring at a terminal, trying to convince a machine to see the world the way I do. I'm not here to change the world—I'm here to understand it, one line of code at a time.
       </p>
     </div>
 
     <!-- Philosophy -->
     <div class="grid md:grid-cols-2 gap-12 mb-24">
       <div class="reveal">
-        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">The Human Element</h2>
+        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">The 3 AM Curiosity</h2>
         <p class="text-slate-400 leading-relaxed">
-          I believe technology should feel human. It shouldn't just be about efficiency—it should be about curiosity. 
-          I like building things that have a bit of mystery to them, tools that reveal their value over time rather 
-          than screaming for attention.
+          There’s a specific kind of quiet that only happens late at night. That’s when I do my best work. It’s not about being "productive"—it’s about following a thread of curiosity until it leads somewhere interesting. Whether it's AI logic or a simple automation script, I love the raw honesty of a working system.
         </p>
       </div>
       <div class="reveal">
-        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">Beyond the Screen</h2>
+        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">Nature & Logic</h2>
         <p class="text-slate-400 leading-relaxed">
-          When I’m not at a keyboard, I’m usually out with a camera or somewhere quiet, trying to disconnect. 
-          The best ideas usually come when you aren't looking for them. Photography is how I slow down 
-          the world enough to actually see it.
+          I've always found it weird how similar tree roots look to network diagrams. Nature is just a massive, complex system that doesn't need a manual. I try to bring that same organic feeling to the code I write. It should feel intentional, quiet, and reliable.
         </p>
       </div>
     </div>
@@ -45,10 +40,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="mb-24 py-12 border-y border-white/[0.05] reveal">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         {[
-          { label: 'Status', value: 'Student' },
-          { label: 'Obsession', value: 'AI Tools' },
-          { label: 'Score', value: '100% CS' },
-          { label: 'Focus', value: 'Systems' },
+          { label: 'Currently', value: 'Learning CS' },
+          { label: 'Tools', value: 'AI / Python / Web' },
+          { label: 'Motto', value: 'Stay Curious' },
+          { label: 'Energy', value: 'Strong Coffee' },
         ].map((stat) => (
           <div>
             <p class="text-xs uppercase tracking-widest text-slate-500 mb-2">{stat.label}</p>
@@ -60,12 +55,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Exploring -->
     <div class="reveal">
-      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight">Current Trajectories</h2>
+      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight">What I'm Messing With</h2>
       <div class="space-y-6">
         {[
-          { title: 'AI Logic & Reasoning', desc: 'Understanding how large models process information and building safe, vetted interfaces for terminal execution.' },
-          { title: 'Architectural Gravity', desc: 'Visualizing how files and dependencies interact to create the "gravity" of a massive codebase.' },
-          { title: 'Visual Artifacts', desc: 'Experimenting with minimal design systems that prioritize focus and emotional resonance over loud neons.' },
+          { title: 'AI Automation', desc: 'Making tools that actually help. Not just chatbots, but systems that can handle the boring stuff so I can focus on building.' },
+          { title: 'Terminal Experiments', desc: 'I love the command line. Building things like OmniShell—secure, fast, and minimal communication tools.' },
+          { title: 'Visual Systems', desc: 'Trying to make data look as beautiful as it is complex. Dark modes, subtle glows, and clean typography.' },
         ].map((item) => (
           <div class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-accent-ice/20 transition-all duration-500">
             <h3 class="text-white font-bold mb-2 group-hover:text-accent-ice transition-colors">{item.title}</h3>
