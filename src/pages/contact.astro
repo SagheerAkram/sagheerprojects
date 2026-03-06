@@ -1,115 +1,59 @@
 ---
 // src/pages/contact.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const socials = [
-  {
-    name: 'Email',
-    handle: 'contact@sagheerprojects.fun',
-    href: 'mailto:contact@sagheerprojects.fun',
-    color: '#00d4ff',
-    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
-  },
-  {
-    name: 'Instagram',
-    handle: '@rizzsagheer',
-    href: 'https://instagram.com/rizzsagheer',
-    color: '#e1306c',
-    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
-  },
-  {
-    name: 'Threads',
-    handle: '@rizzsagheer',
-    href: 'https://threads.net/@rizzsagheer',
-    color: '#a855f7',
-    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.06c0-3.507.85-6.379 2.527-8.528C5.874 1.196 8.638.01 12.193.01c3.554 0 6.317 1.186 7.773 3.334 1.338 1.973 1.972 4.734 1.885 8.21l-.007.294H9.157c.074 2.217.87 3.43 2.415 3.43.777 0 1.409-.364 1.891-1.083l.083-.133h4.32l-.076.27c-.652 2.308-2.547 3.663-5.604 3.663zM12.186 2.01c-2.93 0-5.092 1-6.626 3.053C4.084 7.173 3.5 9.674 3.5 12.06c0 3.077.718 5.572 2.075 7.215 1.476 1.785 3.718 2.71 6.597 2.726 2.297-.012 3.63-.715 4.245-2.195H9.96c-2.71 0-4.303-1.99-4.303-5.323v-.38h13.183c0-.025.003-.05.003-.076.043-2.948-.415-5.222-1.366-6.639-1.06-1.566-2.851-2.378-5.291-2.378z"/></svg>`,
-  },
-  {
-    name: 'X / Twitter',
-    handle: '@flokii9990',
-    href: 'https://x.com/flokii9990',
-    color: '#ffffff',
-    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
-  },
-  {
-    name: 'Discord',
-    handle: 'flokii9990',
-    href: 'https://discord.com/users/flokii9990',
-    color: '#5865f2',
-    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.175 13.175 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg>`,
-  },
-];
 ---
 
 <BaseLayout
-  title="Contact — Sagheer"
-  description="Get in touch with Sagheer. Email, Instagram, Threads, X, Discord."
+  title="Get in touch — Sagheer Akram"
+  description="I'm always looking for interesting conversations. Reach out via email or social media."
 >
-  <!-- Blobs -->
-  <div class="blob w-80 h-80 bg-electric-blue top-20 left-0 opacity-10"></div>
-  <div class="blob w-72 h-72 bg-violet-glow bottom-32 right-0 opacity-10"></div>
-
-  <section class="relative z-10 min-h-screen flex items-center justify-center px-6 py-32">
-    <div class="w-full max-w-2xl page-enter">
+  <section class="relative z-10 min-h-[80vh] flex items-center justify-center px-6 py-32">
+    <div class="max-w-2xl w-full">
+      
       <!-- Header -->
-      <div class="text-center mb-12">
-        <span class="tag mb-4 inline-block">Contact</span>
-        <h1 class="section-heading text-white mb-4">Let's Talk</h1>
-        <p class="text-slate-400 leading-relaxed">
-          Whether you have an idea, a project, or just want to say hi — I'm always open.
+      <div class="mb-16">
+        <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60 uppercase">SIGNAL // CONTACT</span>
+        <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mt-6 mb-8">
+          Get in touch.
+        </h1>
+        <p class="text-slate-400 text-lg md:text-xl leading-relaxed">
+          I'm always looking for interesting conversations, whether it's about AI, systems, or just how the world works. 
         </p>
       </div>
 
-      <!-- Glass card -->
-      <div class="glass rounded-3xl p-8 md:p-10 relative overflow-hidden">
-        <!-- Subtle inner glow -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-electric-blue to-transparent opacity-50 rounded-full"></div>
-
-        <div class="space-y-4">
-          {socials.map((social) => (
-            <a
-              href={social.href}
-              target={social.href.startsWith('mailto') ? '_self' : '_blank'}
-              rel="noopener noreferrer"
-              class="social-row group flex items-center gap-4 p-4 rounded-2xl border border-white/5 bg-white/3 hover:bg-white/6 transition-all duration-300"
-              style={`--accent: ${social.color}`}
-            >
-              <div
-                class="social-icon w-11 h-11 rounded-xl flex items-center justify-center text-slate-400 transition-all duration-300 shrink-0"
-                style={`color: ${social.color}; background: ${social.color}18;`}
-              >
-                <Fragment set:html={social.icon} />
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-xs text-slate-500 font-semibold tracking-widest uppercase mb-0.5">{social.name}</p>
-                <p class="text-white font-medium truncate group-hover:text-white transition-colors">{social.handle}</p>
-              </div>
-              <svg
-                width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                class="text-slate-600 group-hover:text-slate-300 group-hover:translate-x-1 transition-all duration-300 shrink-0"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          ))}
+      <!-- Contact Cluster -->
+      <div class="space-y-12">
+        <div>
+          <p class="text-[10px] uppercase tracking-[0.4em] text-slate-600 font-bold mb-4">PRIMARY BROADCAST</p>
+          <a 
+            href="mailto:sagheer.akram.dev@gmail.com" 
+            class="text-2xl md:text-3xl font-bold text-white hover:text-accent-ice transition-colors break-all underline decoration-white/10 underline-offset-8 decoration-2 hover:decoration-accent-ice"
+          >
+            sagheer.akram.dev@gmail.com
+          </a>
         </div>
 
-        <!-- Bottom note -->
-        <p class="text-center text-slate-600 text-xs mt-8">
-          Usually respond within 24–48 hours. No spam, ever.
-        </p>
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.4em] text-slate-600 font-bold mb-4">SOCIAL // X</p>
+            <a href="https://x.com/flokii9990" target="_blank" class="text-xl font-bold text-white hover:text-accent-ice transition-colors">
+              @flokii9990
+            </a>
+          </div>
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.4em] text-slate-600 font-bold mb-4">SOCIAL // INSTA</p>
+            <a href="https://instagram.com/rizzsagheer" target="_blank" class="text-xl font-bold text-white hover:text-accent-ice transition-colors">
+              @rizzsagheer
+            </a>
+          </div>
+        </div>
       </div>
+
+      <!-- Closing -->
+      <p class="mt-24 text-slate-600 italic text-sm">
+        "Expect a response when the sun is down or the coffee is fresh."
+      </p>
+
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .social-row:hover {
-    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 10%, transparent);
-  }
-
-  .social-row:hover .social-icon {
-    box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 40%, transparent);
-  }
-</style>

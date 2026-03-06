@@ -4,104 +4,96 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="About — Sagheer"
-  description="UI/UX learner and AI experimenter. Works in Java, C, Python. Strong problem solver. 100% CS exam score."
+  title="About — Sagheer Akram"
+  description="Student, researcher, and observer of digital patterns. Exploring AI, code, and the moments in between."
 >
-  <!-- Blobs -->
-  <div class="blob w-80 h-80 bg-violet-glow top-32 -left-20" style="opacity:0.08;"></div>
-  <div class="blob w-56 h-56 bg-electric-blue bottom-32 right-0" style="opacity:0.08;"></div>
-
-  <section data-glow-accent="violet" class="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24">
+  <section class="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24">
 
     <!-- Header -->
-    <div class="mb-16 page-enter">
-      <span class="hero-eyebrow">About</span>
-      <h1 class="section-heading text-white mb-6">Who I am.</h1>
-      <p class="text-slate-400 max-w-2xl leading-relaxed text-lg">
-        Not the kind of person who plans five years out. I get interested in things, go deep, and build to understand.
-        That's led me into UI/UX, AI systems, and a few programming languages I've grown comfortable with.
+    <div class="mb-20">
+      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60">RESEARCHER // STUDENT</span>
+      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mt-6 mb-10">
+        Obsessed with the<br/>"How" and "Why".
+      </h1>
+      <p class="text-slate-400 max-w-2xl leading-relaxed text-lg md:text-xl">
+        I spend a lot of time thinking about how things work. Not just the code, but the intention behind it. 
+        I’m a student, a researcher, and someone who probably drinks too much coffee while chasing a bug at 4 AM.
       </p>
     </div>
 
-    <!-- Bio cards -->
-    <div class="grid md:grid-cols-3 gap-5 mb-16">
-      <div class="glass rounded-2xl p-7 reveal">
-        <h2 class="text-white font-semibold text-sm mb-3 tracking-tight">Design Side</h2>
-        <p class="text-slate-400 leading-relaxed text-sm">
-          I'm drawn to interfaces that don't make you think — the kind where everything is in the right place before you realize it should be.
-          I study how information is organized, how spacing creates rhythm, and why some designs feel calm while others feel chaotic.
+    <!-- Philosophy -->
+    <div class="grid md:grid-cols-2 gap-12 mb-24">
+      <div class="reveal">
+        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">The Human Element</h2>
+        <p class="text-slate-400 leading-relaxed">
+          I believe technology should feel human. It shouldn't just be about efficiency—it should be about curiosity. 
+          I like building things that have a bit of mystery to them, tools that reveal their value over time rather 
+          than screaming for attention.
         </p>
       </div>
-
-      <div class="glass rounded-2xl p-7 reveal">
-        <h2 class="text-white font-semibold text-sm mb-3 tracking-tight">AI Side</h2>
-        <p class="text-slate-400 leading-relaxed text-sm">
-          I run language models locally, try different prompting strategies, and work to understand what's actually happening under the hood.
-          Less "using AI" and more "trying to understand AI" — there's a meaningful difference between the two.
+      <div class="reveal">
+        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">Beyond the Screen</h2>
+        <p class="text-slate-400 leading-relaxed">
+          When I’m not at a keyboard, I’m usually out with a camera or somewhere quiet, trying to disconnect. 
+          The best ideas usually come when you aren't looking for them. Photography is how I slow down 
+          the world enough to actually see it.
         </p>
-      </div>
-
-      <div class="glass rounded-2xl p-7 reveal">
-        <h2 class="text-white font-semibold text-sm mb-3 tracking-tight">Quick Facts</h2>
-        <ul class="space-y-2.5 text-slate-400 text-sm">
-          {[
-            'Logical problem solver — numbers and systems make sense to me',
-            'Comfortable switching between design thinking and code',
-            'Perfect score in computer science annual exam',
-            "Solves 3×3 Rubik's cube under a minute",
-            'Consistent — shows up and does the work',
-          ].map((text) => (
-            <li class="flex items-start gap-2.5">
-              <span class="text-[#00f3ff] shrink-0 mt-0.5">→</span>
-              <span>{text}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
 
-    <!-- Glow divider -->
-    <div class="glow-divider mb-12 reveal"></div>
-
-    <!-- Currently Exploring -->
-    <div class="reveal" data-glow-accent="teal">
-      <span class="hero-eyebrow" style="font-size:10px; margin-bottom:20px;">Currently Exploring</span>
-      <div class="grid md:grid-cols-3 gap-4">
+    <!-- Stats/Quick Facts - Refined -->
+    <div class="mb-24 py-12 border-y border-white/[0.05] reveal">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         {[
-          { title: 'Motion Systems',  desc: 'How animation can carry meaning rather than just decoration. The difference between motion that guides and motion that distracts.', icon: '◈', color: 'text-electric-blue' },
-          { title: 'Model Behavior',  desc: 'How LLMs respond to different context structures, temperature settings, and system prompt framing. Less about outputs, more about patterns.', icon: '◉', color: 'text-neon-purple' },
-          { title: 'Design at Scale', desc: 'What breaks when a design system grows. Token governance, component versioning, and why consistent spacing is deceptively hard.', icon: '◎', color: 'text-[#00c9a7]' },
-        ].map((item) => (
-          <div class="glass rounded-2xl p-6 border border-white/5 hover:border-white/10 transition-colors duration-300">
-            <span class={`text-base ${item.color} block mb-3 opacity-50`}>{item.icon}</span>
-            <h3 class="text-white font-semibold text-sm mb-2 tracking-tight">{item.title}</h3>
-            <p class="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+          { label: 'Status', value: 'Student' },
+          { label: 'Obsession', value: 'AI Tools' },
+          { label: 'Score', value: '100% CS' },
+          { label: 'Focus', value: 'Systems' },
+        ].map((stat) => (
+          <div>
+            <p class="text-xs uppercase tracking-widest text-slate-500 mb-2">{stat.label}</p>
+            <p class="text-lg font-bold text-accent-ice tracking-tight">{stat.value}</p>
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Contact button -->
-    <div class="mt-16 text-center reveal">
-      <a href="/contact" class="btn-glow">Contact Me →</a>
+    <!-- Exploring -->
+    <div class="reveal">
+      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight">Current Trajectories</h2>
+      <div class="space-y-6">
+        {[
+          { title: 'AI Logic & Reasoning', desc: 'Understanding how large models process information and building safe, vetted interfaces for terminal execution.' },
+          { title: 'Architectural Gravity', desc: 'Visualizing how files and dependencies interact to create the "gravity" of a massive codebase.' },
+          { title: 'Visual Artifacts', desc: 'Experimenting with minimal design systems that prioritize focus and emotional resonance over loud neons.' },
+        ].map((item) => (
+          <div class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-accent-ice/20 transition-all duration-500">
+            <h3 class="text-white font-bold mb-2 group-hover:text-accent-ice transition-colors">{item.title}</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
 
   </section>
 </BaseLayout>
 
 <script>
-  const reveals = document.querySelectorAll<HTMLElement>('.reveal');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          setTimeout(() => el.classList.add('revealed'), i * 50);
-          observer.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.08 }
-  );
-  reveals.forEach((el) => observer.observe(el));
+  // Simple scroll reveals
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        (entry.target as HTMLElement).style.opacity = '1';
+        (entry.target as HTMLElement).style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealElements.forEach((el) => {
+    (el as HTMLElement).style.opacity = '0';
+    (el as HTMLElement).style.transform = 'translateY(20px)';
+    (el as HTMLElement).style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+    observer.observe(el);
+  });
 </script>

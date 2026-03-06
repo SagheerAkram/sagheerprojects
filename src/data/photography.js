@@ -1,243 +1,243 @@
-// Auto-generated photography data
-export const categories = ["All", "Nature", "Landscape", "Flora", "Urban", "Macro", "Cyber-Nature"];
+// src/data/photography.js
+export const categories = ["All", "Late Night", "Nature", "Abstract", "Urban", "Stillness"];
 
 export const photos = [
     {
         "id": 1,
-        "title": "Cyber Sky",
-        "category": "Landscape",
+        "title": "3 AM Light",
+        "category": "Late Night",
         "src": "/photography/photo_1.jpg",
-        "description": "19 20 ka farq ha..."
+        "description": "Caught the way the streetlights hit the fog at 3 AM. No one else was out."
     },
     {
         "id": 2,
         "title": "Digital Bloom",
-        "category": "Flora",
+        "category": "Nature",
         "src": "/photography/photo_2.jpg",
-        "description": "19 20 ka farq ha..."
+        "description": "Nature doesn't need tutorials. It just grows."
     },
     {
         "id": 3,
-        "title": "Prism Mist",
-        "category": "Urban",
+        "title": "Sunday Silence",
+        "category": "Stillness",
         "src": "/photography/photo_3.jpg",
-        "description": "How beautiful the Sundays feel"
+        "description": "How beautiful the Sundays feel when the phone is off."
     },
     {
         "id": 4,
         "title": "Vibrant Growth",
-        "category": "Macro",
+        "category": "Nature",
         "src": "/photography/photo_4.jpg",
-        "description": "How beautiful the Sundays feel"
+        "description": "Slowing down to watch things exist."
     },
     {
         "id": 5,
-        "title": "Spectrum Silence",
-        "category": "Cyber-Nature",
+        "title": "Abstract Void",
+        "category": "Abstract",
         "src": "/photography/photo_5.jpg",
-        "description": "How beautiful the Sundays feel"
+        "description": "Finding shapes in the shadows."
     },
     {
         "id": 6,
-        "title": "Quantum Horizon",
-        "category": "Nature",
+        "title": "Quiet Horizon",
+        "category": "Urban",
         "src": "/photography/photo_6.jpg",
-        "description": "Peace is All I Crave."
+        "description": "Peace is all I crave when the city is loud."
     },
     {
         "id": 7,
-        "title": "Aura Detail",
-        "category": "Landscape",
+        "title": "Texture",
+        "category": "Abstract",
         "src": "/photography/photo_7.jpg",
-        "description": "Peace is All I Crave."
+        "description": "The details we usually walk past."
     },
     {
         "id": 8,
-        "title": "Hyper Energy",
-        "category": "Flora",
+        "title": "Filtered Sun",
+        "category": "Nature",
         "src": "/photography/photo_8.jpg",
-        "description": "Peace is All I Crave."
+        "description": "The light was just right for ten seconds."
     },
     {
         "id": 9,
-        "title": "Synth Void",
+        "title": "The Archive",
         "category": "Urban",
         "src": "/photography/photo_9.jpg",
         "description": "Listening to the things that matter most."
     },
     {
         "id": 10,
-        "title": "Neon Forest",
-        "category": "Macro",
+        "title": "Forest Floor",
+        "category": "Nature",
         "src": "/photography/photo_10.jpg",
-        "description": "Listening to the things that matter most."
+        "description": "A quiet experiment in macro photography."
     },
     {
         "id": 11,
         "title": "Cyber Sky",
-        "category": "Cyber-Nature",
+        "category": "Late Night",
         "src": "/photography/photo_11.jpg",
-        "description": "Listening to the things that matter most."
+        "description": "Looking up when everyone else is looking down."
     },
     {
         "id": 12,
-        "title": "Digital Bloom",
+        "title": "Bloom",
         "category": "Nature",
         "src": "/photography/photo_12.jpg",
-        "description": "I love capturing nature's beauty"
+        "description": "I love capturing nature's quiet persistence."
     },
     {
         "id": 13,
-        "title": "Prism Mist",
-        "category": "Landscape",
+        "title": "Mist",
+        "category": "Stillness",
         "src": "/photography/photo_13.jpg",
-        "description": "I love capturing nature's beauty"
+        "description": "The world feels different when you can't see the end of the road."
     },
     {
         "id": 14,
-        "title": "Vibrant Growth",
-        "category": "Flora",
+        "title": "Growth",
+        "category": "Nature",
         "src": "/photography/photo_14.jpg",
-        "description": "I love capturing nature's beauty"
+        "description": "Nature's own architecture."
     },
     {
         "id": 15,
-        "title": "Spectrum Silence",
-        "category": "Urban",
+        "title": "Midnight Run",
+        "category": "Late Night",
         "src": "/photography/photo_15.jpg",
-        "description": "Welcomed the New Year with Crazy Beats"
+        "description": "Welcomed the New Year with a long walk and a camera."
     },
     {
         "id": 16,
-        "title": "Quantum Horizon",
-        "category": "Macro",
+        "title": "Macro",
+        "category": "Abstract",
         "src": "/photography/photo_16.jpg",
-        "description": "Welcomed the New Year with Crazy Beats"
+        "description": "A closer look at the ordinary."
     },
     {
         "id": 17,
-        "title": "Aura Detail",
-        "category": "Cyber-Nature",
+        "title": "Detail",
+        "category": "Stillness",
         "src": "/photography/photo_17.jpg",
-        "description": "Welcomed the New Year with Crazy Beats"
+        "description": "Finding focus in the chaos."
     },
     {
         "id": 18,
-        "title": "Hyper Energy",
-        "category": "Nature",
+        "title": "Shadows",
+        "category": "Abstract",
         "src": "/photography/photo_18.jpg",
-        "description": "huh"
+        "description": "Sometimes the lack of light tells the story."
     },
     {
         "id": 19,
-        "title": "Synth Void",
-        "category": "Landscape",
+        "title": "Void",
+        "category": "Abstract",
         "src": "/photography/photo_19.jpg",
-        "description": "huh"
+        "description": "A moment of stillness."
     },
     {
         "id": 20,
-        "title": "Neon Forest",
-        "category": "Flora",
+        "title": "Heartbeat",
+        "category": "Nature",
         "src": "/photography/photo_20.jpg",
-        "description": "My Heart Can't Handle It Anymoreeee"
+        "description": "My heart can't handle how beautiful this was."
     },
     {
         "id": 21,
-        "title": "Cyber Sky",
+        "title": "Urban Blur",
         "category": "Urban",
         "src": "/photography/photo_21.jpg",
-        "description": "My Heart Can't Handle It Anymoreeee"
+        "description": "The city moving faster than I am."
     },
     {
         "id": 22,
-        "title": "Digital Bloom",
-        "category": "Macro",
+        "title": "Nature's Palette",
+        "category": "Nature",
         "src": "/photography/photo_22.jpg",
-        "description": "My Heart Can't Handle It Anymoreeee"
+        "description": "Colors I couldn't invent if I tried."
     },
     {
         "id": 23,
-        "title": "Prism Mist",
-        "category": "Cyber-Nature",
+        "title": "Disconnected",
+        "category": "Stillness",
         "src": "/photography/photo_23.jpg",
-        "description": "I don't mind."
+        "description": "I don't mind being lost for a while."
     },
     {
         "id": 24,
-        "title": "Vibrant Growth",
+        "title": "Greenery",
         "category": "Nature",
         "src": "/photography/photo_24.jpg",
-        "description": "I don't mind."
+        "description": "Life finds a way, always."
     },
     {
         "id": 25,
-        "title": "Spectrum Silence",
-        "category": "Landscape",
+        "title": "Silence",
+        "category": "Stillness",
         "src": "/photography/photo_25.jpg",
-        "description": "I don't mind."
+        "description": "The sounds you only hear when you stop talking."
     },
     {
         "id": 26,
-        "title": "Quantum Horizon",
-        "category": "Flora",
+        "title": "The Spot",
+        "category": "Stillness",
         "src": "/photography/photo_26.jpg",
-        "description": "Got a Spot to disconnect."
+        "description": "Found a spot to disconnect from the noise."
     },
     {
         "id": 27,
-        "title": "Aura Detail",
+        "title": "City Lights",
         "category": "Urban",
         "src": "/photography/photo_27.jpg",
-        "description": "Got a Spot to disconnect."
+        "description": "Artificial suns."
     },
     {
         "id": 28,
-        "title": "Hyper Energy",
-        "category": "Macro",
+        "title": "Macro Lens",
+        "category": "Abstract",
         "src": "/photography/photo_28.jpg",
-        "description": "Got a Spot to disconnect."
+        "description": "Small things made large."
     },
     {
         "id": 29,
-        "title": "Synth Void",
-        "category": "Cyber-Nature",
+        "title": "The Escape",
+        "category": "Stillness",
         "src": "/photography/photo_29.jpg",
-        "description": "Lend me a second, I really wanna go there"
+        "description": "I really want to go back there."
     },
     {
         "id": 30,
-        "title": "Neon Forest",
+        "title": "Forest Walk",
         "category": "Nature",
         "src": "/photography/photo_30.jpg",
-        "description": "Lend me a second, I really wanna go there"
+        "description": "Walking until the city noise fades."
     },
     {
         "id": 31,
-        "title": "Cyber Sky",
-        "category": "Landscape",
+        "title": "Night Sky",
+        "category": "Late Night",
         "src": "/photography/photo_31.jpg",
-        "description": "Lend me a second, I really wanna go there"
+        "description": "The stars are always there, we just forget to look."
     },
     {
         "id": 32,
-        "title": "Digital Bloom",
-        "category": "Flora",
+        "title": "No Words",
+        "category": "Abstract",
         "src": "/photography/photo_32.jpg",
         "description": "No explanation necessary."
     },
     {
         "id": 33,
-        "title": "Prism Mist",
+        "title": "Urban Grid",
         "category": "Urban",
         "src": "/photography/photo_33.jpg",
-        "description": "No explanation necessary."
+        "description": "The geometry of where we live."
     },
     {
         "id": 34,
-        "title": "Vibrant Growth",
-        "category": "Macro",
+        "title": "Final Frame",
+        "category": "Stillness",
         "src": "/photography/photo_34.jpg",
-        "description": "No explanation necessary."
+        "description": "Ending the roll with the best shot."
     }
 ];

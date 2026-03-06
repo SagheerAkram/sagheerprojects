@@ -13,8 +13,8 @@ export interface Props {
 }
 
 const {
-  title = 'Sagheer — Designing Interfaces. Exploring AI.',
-  description = 'Portfolio of Sagheer — UI/UX learner, AI experimenter, and builder of digital ideas.',
+  title = 'Sagheer Akram — Researcher. Builder. Artist.',
+  description = 'Personal creative lab of Sagheer Akram — exploring the intersection of AI, code, and visual narratives.',
   image = '/og-image.jpg',
 } = Astro.props;
 
@@ -54,8 +54,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
   </head>
-  <body class="bg-space-dark text-slate-300 antialiased">
-    <!-- One signature interaction — cursor glow -->
+  <body class="antialiased">
+    <!-- Premium Futurism Background System -->
+    <div class="bg-mesh"></div>
+    <div class="subgrid"></div>
+
+    <!-- Signature character — subtle cursor glow -->
     <CursorGlow />
     <CustomCursor />
     <Navbar />

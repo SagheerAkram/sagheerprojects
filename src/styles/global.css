@@ -7,17 +7,16 @@
 
 @layer base {
     :root {
-        /* Vibrant Futurism Palette */
-        --neon-pink: #ff007f;
-        --cyber-blue: #00f3ff;
-        --electric-purple: #8b5cf6;
-        --ice-silver: #e2e8f0;
-
-        --bg: #010103;
-        /* OLED Black */
-        --surface: rgba(10, 10, 15, 0.7);
-        --glass-border: rgba(255, 255, 255, 0.1);
-
+        /* Premium Futurism Palette */
+        --bg-dark: #050505;
+        --bg-obsidian: #0a0a0c;
+        --accent-ice: #a5f3fc;
+        --accent-ice-glow: rgba(165, 243, 252, 0.4);
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --glass-bg: rgba(10, 10, 12, 0.7);
+        --glass-border: rgba(148, 163, 184, 0.1);
+        --glass-border-bright: rgba(165, 243, 252, 0.2);
         --font-mono: 'Space Mono', monospace;
         --font-heading: 'Space Grotesk', sans-serif;
         --font-body: 'Inter', sans-serif;
@@ -36,15 +35,32 @@
     }
 
     body {
-        background-color: var(--bg);
-        color: var(--ice-silver);
-        font-family: var(--font-body);
-        min-height: 100vh;
+        background-color: var(--bg-dark);
+        color: var(--text-primary);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
         overflow-x: hidden;
-        /* Technical subgrid background */
+        line-height: 1.6;
+    }
+
+    /* Atmospheric Background */
+    .bg-mesh {
+        position: fixed;
+        inset: 0;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(165, 243, 252, 0.03) 0%, transparent 40%),
+            radial-gradient(circle at 80% 70%, rgba(148, 163, 184, 0.03) 0%, transparent 40%);
+        z-index: -1;
+    }
+
+    .subgrid {
+        position: fixed;
+        inset: 0;
         background-image:
-            radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
-        background-size: 40px 40px;
+            linear-gradient(rgba(148, 163, 184, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(148, 163, 184, 0.02) 1px, transparent 1px);
+        background-size: 60px 60px;
+        z-index: -2;
+        opacity: 0.5;
     }
 
     /* Animated data line decoration */
@@ -244,16 +260,14 @@
         color: #00d4ff;
     }
 
-    /* Section heading — tight tracking reads as intentional, not heavy */
+    /* Section headings - Premium */
     .section-heading {
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 900;
-        line-height: 0.95;
-        letter-spacing: -0.05em;
-        background: linear-gradient(to right, #fff, var(--cyber-blue), var(--neon-pink));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 2rem;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        color: var(--text-primary);
+        margin-bottom: 1.5rem;
     }
 
     /* Prose body — generous line height, 90% white (not pure) */
