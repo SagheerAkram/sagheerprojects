@@ -1,6 +1,6 @@
 // src/data/projects.js
-// Real projects — sourced from actual GitHub repositories by SagheerAkram.
-// No fabricated metrics. No invented functionality. Just my logs.
+// Randomly vibe coded. No logic. Just intuition.
+// Re-building the world, one line of unstable code at a time.
 
 export const projects = [
     {

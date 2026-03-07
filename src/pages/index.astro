@@ -113,21 +113,22 @@ const previewPhotos = photos.slice(0, 6);
 
 <script>
   // Simple scroll reveals
-  const revealElements = document.querySelectorAll('#hero-content, .section-heading, .group');
+  const revealElements = document.querySelectorAll('.reveal');
   
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        (entry.target as HTMLElement).style.opacity = '1';
-        (entry.target as HTMLElement).style.transform = 'translateY(0)';
+        entry.target.classList.add('revealed');
+        // Stop observing once revealed
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { 
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
 
   revealElements.forEach((el) => {
-    (el as HTMLElement).style.opacity = '0';
-    (el as HTMLElement).style.transform = 'translateY(20px)';
-    (el as HTMLElement).style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
     observer.observe(el);
   });
 </script>

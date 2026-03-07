@@ -1,0 +1,52 @@
+---
+// src/components/VibeUI.astro
+---
+<div id="vibe-control" class="fixed bottom-8 left-8 z-[100] transition-opacity duration-500 opacity-60 hover:opacity-100 flex items-center gap-3">
+    <div class="flex flex-col items-start">
+        <span class="text-[9px] font-mono text-cyan-400 tracking-widest uppercase mb-1">System State</span>
+        <button id="vibe-toggle" class="px-3 py-1 bg-black/40 border border-cyan-500/30 rounded text-[10px] font-mono text-white hover:border-cyan-400 transition-all flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" id="vibe-indicator"></span>
+            <span id="vibe-label">STABLE</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    const modes = [
+        { label: 'STABLE', class: 'mode-stable' },
+        { label: 'CHAOTIC', class: 'mode-chaotic' },
+        { label: 'GLITCHED', class: 'mode-glitch' }
+    ];
+    let currentModeIndex = 0;
+
+    const btn = document.getElementById('vibe-toggle');
+    const label = document.getElementById('vibe-label');
+    const indicator = document.getElementById('vibe-indicator');
+
+    btn?.addEventListener('click', () => {
+        // Remove current class
+        document.body.classList.remove(modes[currentModeIndex].class);
+        
+        // Cycle
+        currentModeIndex = (currentModeIndex + 1) % modes.length;
+        
+        // Add new class
+        const newMode = modes[currentModeIndex];
+        if (newMode.class !== 'mode-stable') {
+            document.body.classList.add(newMode.class);
+        }
+        
+        // Update UI
+        if (label) label.textContent = newMode.label;
+        if (indicator) {
+            indicator.className = `w-1.5 h-1.5 rounded-full animate-pulse ${
+                newMode.label === 'STABLE' ? 'bg-cyan-400' :
+                newMode.label === 'CHAOTIC' ? 'bg-amber-400' : 'bg-rose-500'
+            }`;
+        }
+
+        // Trigger a tiny "system sound" or haptic feedback feeling via animation
+        btn.classList.add('scale-95');
+        setTimeout(() => btn.classList.remove('scale-95'), 100);
+    });
+</script>

@@ -117,19 +117,20 @@ import { photos, categories } from '../data/photography.js';
     (entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.1 }
+    { 
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px' 
+    }
   );
 
   items.forEach((item, i) => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(30px)';
-    item.style.transition = `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i % 3 * 0.1}s`;
+    item.classList.add('reveal');
+    (item as HTMLElement).style.transitionDelay = `${i % 3 * 0.1}s`;
     observer.observe(item);
   });
 </script>
