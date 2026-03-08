@@ -66,7 +66,7 @@ def generate_with_openrouter(prompt):
         "X-Title": "SagheerProjects NBT Tool" # Optional
     }
     data = {
-        "model": "google/gemini-pro", # Or another available model
+        "model": "google/gemini-2.5-pro", # Using 2.5-pro via OpenRouter for better capabilities and permissiveness
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt}
@@ -93,28 +93,31 @@ def generate_nbt():
     if uploaded_nbt:
         prompt = f"Modify this existing SNBT based on the request.\nExisting SNBT:\n{uploaded_nbt}\n\nRequest: {prompt}"
 
-    # 1. Try Gemini Keys randomly to distribute load
-    random.shuffle(GEMINI_KEYS)
+    # 1. Try OpenRouter First (More Permissive for Fun/Educational Generation)
     snbt_result = None
-    
-    for key in GEMINI_KEYS:
-        try:
-            snbt_result = generate_with_gemini(prompt, key)
-            if snbt_result:
-                print("Successfully generated using a Gemini key.")
-                break
-        except Exception as e:
-            print(f"Gemini Key failed: {e}")
-            continue
-            
-    # 2. Fallback to OpenRouter if all Gemini keys fail
+    try:
+        snbt_result = generate_with_openrouter(prompt)
+        if snbt_result:
+            print("Successfully generated using OpenRouter.")
+    except Exception as e:
+        print(f"OpenRouter failed: {e}")
+
+    # 2. Fallback to direct Gemini Keys if OpenRouter fails
     if not snbt_result:
-        print("All Gemini keys failed. Falling back to OpenRouter...")
-        try:
-            snbt_result = generate_with_openrouter(prompt)
-        except Exception as e:
-            print(f"OpenRouter failed: {e}")
-            return jsonify({"error": "All AI generation services failed. Please try again later."}), 500
+        print("OpenRouter failed, falling back to direct Gemini keys...")
+        random.shuffle(GEMINI_KEYS)
+        for key in GEMINI_KEYS:
+            try:
+                snbt_result = generate_with_gemini(prompt, key)
+                if snbt_result:
+                    print("Successfully generated using a fallback Gemini key.")
+                    break
+            except Exception as e:
+                print(f"Gemini Key failed: {e}")
+                continue
+
+    if not snbt_result:
+        return jsonify({"error": "All AI generation services failed. Please try again later."}), 500
 
     # Clean up common AI markdown formatting if it ignored rule 1
     if snbt_result.startswith("```json"):
