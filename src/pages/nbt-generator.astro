@@ -1,0 +1,324 @@
+---
+// src/pages/nbt-generator.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="NBT Generator | Sagheer Akram"
+  description="An AI-powered Minecraft NBT Generator and Editor for creating custom items, maps, and tools."
+>
+  <main class="relative min-h-screen pt-32 pb-24 px-6 md:px-12 max-w-5xl mx-auto z-10">
+    
+    <header class="mb-16 reveal">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-px bg-accent-teal/50"></span>
+        <span class="text-[10px] font-bold tracking-[0.3em] text-accent-teal uppercase">LAB EXPERIMENT 04</span>
+      </div>
+      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter italic mb-4">
+        NBT Forge.
+      </h1>
+      <p class="text-slate-400 text-lg max-w-2xl font-light">
+        Generate custom Minecraft items using AI. Describe the item you want, or upload an existing <code>.nbt</code> file to modify it. Perfect for map-makers, data-pack developers, and testing.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      <!-- Input Section -->
+      <section class="lg:col-span-5 flex flex-col gap-8 reveal" style="transition-delay: 100ms;">
+        
+        <!-- Describe the Item -->
+        <div class="bg-white/[0.02] border border-white/5 rounded-3xl p-6">
+          <label for="nbtPrompt" class="block text-sm font-bold tracking-widest text-slate-300 uppercase mb-4">
+            1. Describe Your Item
+          </label>
+          <textarea 
+            id="nbtPrompt" 
+            rows="4" 
+            class="w-full bg-black/40 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-accent-teal/50 transition-colors placeholder:text-slate-600 resize-none"
+            placeholder="e.g., A diamond sword named 'Soul Eater' with Sharpness 255 and Unbreaking 255."
+          ></textarea>
+        </div>
+
+        <!-- Or Upload File -->
+        <div class="bg-white/[0.02] border border-white/5 rounded-3xl p-6">
+          <label class="block text-sm font-bold tracking-widest text-slate-300 uppercase mb-4">
+            2. Or Modify Existing (Optional)
+          </label>
+          <div class="flex items-center justify-center w-full">
+            <label for="nbtUpload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-white/10 border-dashed rounded-xl cursor-pointer hover:bg-white/[0.02] hover:border-accent-teal/30 transition-all">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg class="w-8 h-8 mb-3 text-slate-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                    </svg>
+                    <p class="mb-2 text-sm text-slate-400" id="uploadText"><span class="font-semibold text-accent-teal">Click to upload</span> or drag and drop</p>
+                    <p class="text-xs text-slate-500">.NBT files only</p>
+                </div>
+                <input id="nbtUpload" type="file" class="hidden" accept=".nbt" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <button id="generateBtn" class="w-full py-4 bg-accent-teal text-black font-black tracking-widest uppercase rounded-xl hover:bg-white transition-colors flex justify-center items-center gap-2 group">
+          <span>Forge Item</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <!-- Status Message -->
+        <div id="statusMessage" class="text-sm font-mono text-slate-400 hidden">
+          Status: <span id="statusText" class="text-accent-teal">Ready.</span>
+        </div>
+      </section>
+
+      <!-- Visualization Section -->
+      <section class="lg:col-span-7 reveal" style="transition-delay: 200ms;">
+        <div class="bg-[#1D1D1D] rounded-3xl p-8 border-4 border-[#3A3A3A] min-h-[500px] flex flex-col items-center relative shadow-2xl">
+          
+          <h2 class="text-[#AFAFAF] font-minecraft text-xl tracking-wider mb-12 uppercase w-full text-left">Generated Output</h2>
+
+          <!-- Minecraft Hotbar UI -->
+          <div class="flex bg-[#8B8B8B] p-2 rounded-sm shadow-inner border-[3px] border-[#373737] relative h-20 items-center">
+            <!-- 9 Slots -->
+            {Array.from({ length: 9 }).map((_, i) => (
+              <div class="w-16 h-16 bg-[#8B8B8B] border-t-4 border-l-4 border-b-4 border-r-4 border-t-[#373737] border-l-[#373737] border-b-white border-r-white relative group cursor-pointer hover:bg-[#AFAFAF] transition-colors flex items-center justify-center">
+                {/* Simulated Item */}
+                {i === 0 ? (
+                   <div class="w-12 h-12 bg-transparent relative nbt-item-target hidden" id="itemSlot0">
+                     {/* Placeholder for item visual */}
+                   </div>
+                ) : null}
+                
+                {/* Minecraft Tooltip Container */}
+                {i === 0 ? (
+                    <div id={`tooltip-${i}`} class="absolute bottom-20 left-1/2 -translate-x-1/2 bg-[#110111EB] border-2 border-[#1B053A] border-t-[#360980] border-l-[#360980] p-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity z-50 min-w-[250px]">
+                      <h4 id={`item-title-${i}`} class="text-[#55FFFF] font-minecraft text-base mb-2 item-name break-words">Empty Item</h4>
+                      <ul id={`item-lore-${i}`} class="text-[#AAAAAA] font-minecraft text-sm item-lore space-y-1">
+                         {/* Lore/Enchants injected here */}
+                      </ul>
+                    </div>
+                ) : null}
+              </div>
+            ))}
+            
+            <!-- Selector overlay (Slot 1 active) -->
+            <div class="absolute left-1 top-1 bottom-1 w-[72px] border-4 border-white pointer-events-none z-10"></div>
+          </div>
+
+          <!-- Raw SNBT Data View -->
+          <div class="w-full mt-12 bg-black/50 rounded-xl p-4 border border-white/5 h-48 overflow-auto">
+            <h3 class="text-xs font-bold tracking-widest text-slate-500 uppercase mb-2">Raw SNBT Output</h3>
+            <pre><code id="snbtOutput" class="text-xs text-accent-teal/80 font-mono flex-wrap whitespace-pre-wrap">Awaiting generation...</code></pre>
+          </div>
+
+          <!-- Download Action -->
+          <div class="w-full mt-6 flex justify-end">
+            <button id="downloadBtn" class="px-6 py-3 bg-white/5 border border-white/10 text-white font-bold tracking-widest text-sm uppercase rounded-lg hover:bg-white/10 hover:border-accent-teal/50 transition-all opacity-50 cursor-not-allowed" disabled>
+              Download .NBT
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Basic Minecraft Font styling */
+  @font-face {
+    font-family: 'Minecraft';
+    src: local('Minecraftia'), local('Minecraft'), sans-serif; /* Fallback to standard fonts if pixel font not found, realistically we should load a web font */
+  }
+  .font-minecraft {
+    font-family: 'Courier New', Courier, monospace; /* Temporary fallback for testing visually */
+    line-height: 1.2;
+    text-shadow: 2px 2px 0px #3F3F3F;
+  }
+  
+  /* Prevent scrolling while hovering tooltips near edge */
+  .tooltip-container {
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.5);
+  }
+</style>
+
+<script>
+  import { parse, writeUncompressed } from 'prismarine-nbt';
+  
+  // DOM Elements
+  const generateBtn = document.getElementById('generateBtn');
+  const promptInput = document.getElementById('nbtPrompt');
+  const snbtOutput = document.getElementById('snbtOutput');
+  const statusMessage = document.getElementById('statusMessage');
+  const statusText = document.getElementById('statusText');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const itemSlot0 = document.getElementById('itemSlot0');
+  const tooltip = document.getElementById('tooltip-0');
+  const itemNameDisplay = document.getElementById('item-title-0');
+  const itemLoreDisplay = document.getElementById('item-lore-0');
+
+  let currentSnbt = "";
+  let uploadedSnbt = ""; // Store uploaded text to send to AI
+
+  function setStatus(msg, isError = false) {
+    statusMessage.classList.remove('hidden');
+    statusText.textContent = msg;
+    statusText.className = isError ? 'text-red-400' : 'text-accent-teal';
+  }
+
+  // Very basic parser to extract name and enchants for the tooltip
+  // A proper implementation would use prismarine-nbt's parsed object, 
+  // but for rapid visual feedback on raw SNBT strings:
+  function parseVisualsFromSnbt(snbt) {
+    let name = "Custom Item";
+    let loreHtml = "";
+
+    try {
+        // Look for Name:'{"text":"..."}' or similar constructs
+        const nameMatch = snbt.match(/Name:\s*['"](.*?)['"]/);
+        if (nameMatch) {
+            // Very naive cleanup of internal JSON strings
+            const innerStr = nameMatch[1].replace(/\\"/g, '"');
+            try {
+                const nameJson = JSON.parse(innerStr);
+                if (nameJson.text) name = nameJson.text;
+            } catch(e) {
+                // If it wasn't pure JSON, just use the string
+                name = innerStr.replace(/\{"text":"([^"]+)"\}/, "$1");
+            }
+        }
+
+        // Look for Enchantments:[...]
+        const enchMatch = snbt.match(/Enchantments:\s*\[(.*?)\]/);
+        if (enchMatch) {
+            const enchs = enchMatch[1].split('},{');
+            enchs.forEach(e => {
+                const idMatch = e.match(/id:\s*["']?minecraft:([^"']+)["']?/);
+                const lvlMatch = e.match(/lvl:\s*(\d+)/);
+                if (idMatch && lvlMatch) {
+                    const eName = idMatch[1].replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    loreHtml += `<li>${eName} ${lvlMatch[1]}</li>`;
+                }
+            });
+        }
+    } catch(e) {
+         console.warn("Could not parse visuals perfectly", e);
+    }
+    
+    return { name, loreHtml };
+  }
+
+  generateBtn.addEventListener('click', async () => {
+    const prompt = promptInput.value.trim();
+    if (!prompt && !uploadedSnbt) {
+      setStatus("Please describe the item or upload a file first.", true);
+      return;
+    }
+
+    setStatus("Forging item with AI...");
+    generateBtn.classList.add('opacity-50', 'cursor-not-allowed', 'animate-pulse');
+    generateBtn.disabled = true;
+    snbtOutput.textContent = "Forging...";
+
+    try {
+      // In production, this URL needs to point to your cPanel Python app domain
+      const response = await fetch('http://127.0.0.1:5000/api/generate-nbt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            prompt: prompt || "Optimize this NBT", 
+            uploaded_nbt: uploadedSnbt 
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'API Request Failed');
+      }
+
+      currentSnbt = data.snbt;
+      snbtOutput.textContent = currentSnbt;
+      
+      // Update Visuals
+      const visuals = parseVisualsFromSnbt(currentSnbt);
+      itemNameDisplay.textContent = visuals.name;
+      itemLoreDisplay.innerHTML = visuals.loreHtml || '<li class="text-[#555555]">No enchantments</li>';
+      
+      // Show item slot
+      itemSlot0.innerHTML = `<div class="w-full h-full bg-accent-teal/20 border-2 border-accent-teal/50 animate-pulse"></div>`;
+      itemSlot0.classList.remove('hidden');
+
+      // Enable Download
+      downloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      downloadBtn.disabled = false;
+      
+      setStatus("Item successfully forged!");
+
+    } catch (err) {
+      console.error(err);
+      setStatus(err.message, true);
+      snbtOutput.textContent = "Error occurred.";
+    } finally {
+      generateBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'animate-pulse');
+      generateBtn.disabled = false;
+    }
+  });
+
+  // Download logic (SNBT string -> Binary NBT File)
+  downloadBtn.addEventListener('click', async () => {
+      if (!currentSnbt) return;
+      
+      try {
+          const blob = new Blob([currentSnbt], { type: 'text/plain' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'generated_item.snbt'; // .snbt is universally accepted by commands
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+          setStatus("Downloaded .snbt file!");
+          
+      } catch (e) {
+          console.error(e);
+          setStatus("Failed to compile binary NBT.", true);
+      }
+  });
+
+  // Handle File Uploads (.nbt -> SNBT)
+  const nbtUpload = document.getElementById('nbtUpload');
+  const uploadText = document.getElementById('uploadText');
+
+  nbtUpload.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      setStatus(`Loading ${file.name}...`);
+      uploadText.innerHTML = `<span class="font-semibold text-accent-teal">${file.name}</span> attached`;
+
+      try {
+          const arrayBuffer = await file.arrayBuffer();
+          // We cast to Buffer because prismarine-nbt expects Node.js Buffers
+          const buffer = Buffer.from(arrayBuffer);
+          
+          // Parse the binary NBT
+          const { parsed, type } = await parse(buffer);
+          
+          // prismarine-nbt stringifies deeply nested JSON differently than SNBT,
+          // but stringifying the parsed object provides a structure the AI can understand and modify.
+          uploadedSnbt = JSON.stringify(parsed, null, 2);
+          
+          setStatus("File parsed. Ready to forge!");
+          snbtOutput.textContent = `Loaded existing NBT file:\n${uploadedSnbt.substring(0, 200)}...\n(Truncated for display)`;
+
+      } catch (err) {
+          console.error(err);
+          setStatus("Failed to parse .nbt file.", true);
+          uploadText.innerHTML = `<span class="font-semibold text-red-400">Error reading file</span>`;
+      }
+  });
+
+</script>
