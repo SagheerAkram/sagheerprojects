@@ -134,5 +134,5 @@ def health_check():
     return jsonify({"status": "Backend is running!"})
 
 if __name__ == '__main__':
-    # Run locally on port 5000
-    app.run(debug=True, port=5000)
+    # Run locally on port 8000
+    app.run(debug=True, port=8000)

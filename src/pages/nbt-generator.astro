@@ -223,7 +223,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     try {
       // In production, this URL needs to point to your cPanel Python app domain
-      const response = await fetch('http://127.0.0.1:5000/api/generate-nbt', {
+      const response = await fetch('http://127.0.0.1:8000/api/generate-nbt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

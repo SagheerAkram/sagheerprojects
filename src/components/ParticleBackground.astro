@@ -123,13 +123,19 @@
         }
       }
 
-      animId = requestAnimationFrame(draw);
+      if (isVisible) {
+          animId = requestAnimationFrame(draw);
+      }
     }
 
     // Pause when tab is hidden (save battery/CPU)
     document.addEventListener('visibilitychange', () => {
       isVisible = !document.hidden;
-      if (isVisible) draw();
+      if (isVisible) {
+          draw();
+      } else {
+          cancelAnimationFrame(animId);
+      }
     });
 
     draw();
