@@ -78,31 +78,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h2 class="text-[#AFAFAF] font-minecraft text-xl tracking-wider mb-12 uppercase w-full text-left">Generated Output</h2>
 
           <!-- Minecraft Hotbar UI -->
-          <div class="flex bg-[#8B8B8B] p-2 rounded-sm shadow-inner border-[3px] border-[#373737] relative h-20 items-center">
-            <!-- 9 Slots -->
-            {Array.from({ length: 9 }).map((_, i) => (
-              <div class="w-16 h-16 bg-[#8B8B8B] border-t-4 border-l-4 border-b-4 border-r-4 border-t-[#373737] border-l-[#373737] border-b-white border-r-white relative group cursor-pointer hover:bg-[#AFAFAF] transition-colors flex items-center justify-center">
-                {/* Simulated Item */}
-                {i === 0 ? (
-                   <div class="w-12 h-12 bg-transparent relative nbt-item-target hidden" id="itemSlot0">
-                     {/* Placeholder for item visual */}
+          <div class="mb-12 relative flex justify-center">
+            <div class="inline-flex bg-[#353535] p-1 border-t-2 border-l-2 border-[#1e1e1e] border-b-2 border-r-2 border-[#ffffff] shadow-2xl relative">
+              {Array.from({ length: 9 }).map((_, i) => (
+                <div class="w-16 h-16 bg-[#8b8b8b] border-2 border-t-[#373737] border-l-[#373737] border-b-[#ffffff] border-r-[#ffffff] flex items-center justify-center relative cursor-pointer hover:bg-[#AFAFAF] transition-colors" id={`slot-container-${i}`}>
+                   <div id={`itemSlot${i}`} class="w-full h-full p-2 hidden"></div>
+                   
+                   <!-- Minecraft Tooltip -->
+                   <div id={`tooltip-${i}`} class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-64 bg-[#110111]/95 text-white p-4 border-2 border-[#2b012b] hidden z-50 pointer-events-none shadow-[0_0_20px_rgba(43,1,43,0.8)]">
+                     <div class="text-[#55FFFF] font-minecraft text-lg mb-1" id={`item-title-${i}`}>Unknown Item</div>
+                     <ul class="text-[#AAAAAA] font-minecraft text-sm space-y-1" id={`item-lore-${i}`}>
+                        <li class="text-[#555555]">No enchantments</li>
+                     </ul>
                    </div>
-                ) : null}
-                
-                {/* Minecraft Tooltip Container */}
-                {i === 0 ? (
-                    <div id={`tooltip-${i}`} class="absolute bottom-20 left-1/2 -translate-x-1/2 bg-[#110111EB] border-2 border-[#1B053A] border-t-[#360980] border-l-[#360980] p-3 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity z-50 min-w-[250px]">
-                      <h4 id={`item-title-${i}`} class="text-[#55FFFF] font-minecraft text-base mb-2 item-name break-words">Empty Item</h4>
-                      <ul id={`item-lore-${i}`} class="text-[#AAAAAA] font-minecraft text-sm item-lore space-y-1">
-                         {/* Lore/Enchants injected here */}
-                      </ul>
-                    </div>
-                ) : null}
-              </div>
-            ))}
-            
-            <!-- Selector overlay (Slot 1 active) -->
-            <div class="absolute left-1 top-1 bottom-1 w-[72px] border-4 border-white pointer-events-none z-10"></div>
+                </div>
+              ))}
+              <!-- Active Slot Indicator -->
+              <div id="activeIndicator" class="absolute top-0 bottom-0 w-[68px] border-4 border-white pointer-events-none z-10 transition-all duration-200" style="left: 4px;"></div>
+            </div>
           </div>
 
           <!-- Raw SNBT Data View -->
@@ -141,10 +134,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .tooltip-container {
     box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.5);
   }
+  
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0) rotate(45deg); }
+    50% { transform: translateY(-5px) rotate(45deg); }
+  }
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
+  }
 </style>
 
 <script>
   import { parse, writeUncompressed } from 'prismarine-nbt';
+  import { Buffer } from 'buffer';
+  window.Buffer = Buffer;
   
   // DOM Elements
   const generateBtn = document.getElementById('generateBtn');
@@ -153,13 +156,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const statusMessage = document.getElementById('statusMessage');
   const statusText = document.getElementById('statusText');
   const downloadBtn = document.getElementById('downloadBtn');
-  const itemSlot0 = document.getElementById('itemSlot0');
-  const tooltip = document.getElementById('tooltip-0');
-  const itemNameDisplay = document.getElementById('item-title-0');
-  const itemLoreDisplay = document.getElementById('item-lore-0');
+  const activeIndicator = document.getElementById('activeIndicator');
 
-  let currentSnbt = "";
-  let uploadedSnbt = ""; // Store uploaded text to send to AI
+  let currentItems = []; // Array of SNBT strings
+  let selectedIndex = 0;
+  let uploadedSnbt = "";
 
   function setStatus(msg, isError = false) {
     statusMessage.classList.remove('hidden');
@@ -167,94 +168,140 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     statusText.className = isError ? 'text-red-400' : 'text-accent-teal';
   }
 
-  // Very basic parser to extract name and enchants for the tooltip
-  // A proper implementation would use prismarine-nbt's parsed object, 
-  // but for rapid visual feedback on raw SNBT strings:
   function parseVisualsFromSnbt(snbt) {
     let name = "Custom Item";
     let loreHtml = "";
+    let itemId = "diamond_sword";
 
     try {
-        // Look for Name:'{"text":"..."}' or similar constructs
+        const idMatch = snbt.match(/id:\s*["']minecraft:([^"']+)["']/);
+        if (idMatch) itemId = idMatch[1];
+
         const nameMatch = snbt.match(/Name:\s*['"](.*?)['"]/);
         if (nameMatch) {
-            // Very naive cleanup of internal JSON strings
             const innerStr = nameMatch[1].replace(/\\"/g, '"');
             try {
                 const nameJson = JSON.parse(innerStr);
                 if (nameJson.text) name = nameJson.text;
             } catch(e) {
-                // If it wasn't pure JSON, just use the string
                 name = innerStr.replace(/\{"text":"([^"]+)"\}/, "$1");
             }
         }
 
-        // Look for Enchantments:[...]
         const enchMatch = snbt.match(/Enchantments:\s*\[(.*?)\]/);
         if (enchMatch) {
             const enchs = enchMatch[1].split('},{');
             enchs.forEach(e => {
-                const idMatch = e.match(/id:\s*["']?minecraft:([^"']+)["']?/);
-                const lvlMatch = e.match(/lvl:\s*(\d+)/);
-                if (idMatch && lvlMatch) {
-                    const eName = idMatch[1].replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                    loreHtml += `<li>${eName} ${lvlMatch[1]}</li>`;
+                const idM = e.match(/id:\s*["']?minecraft:([^"']+)["']?/);
+                const lvlM = e.match(/lvl:\s*(\d+)/);
+                if (idM && lvlM) {
+                    const eName = idM[1].replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    loreHtml += `<li>${eName} ${lvlM[1]}</li>`;
                 }
             });
         }
-    } catch(e) {
-         console.warn("Could not parse visuals perfectly", e);
-    }
-    
-    return { name, loreHtml };
+    } catch(e) {}
+    return { name, loreHtml, itemId };
+  }
+
+  function updateHotbarDisplay(items) {
+      // Clear previous slots
+      for(let i=0; i<9; i++) {
+          const slot = document.getElementById(`itemSlot${i}`);
+          if (slot) slot.classList.add('hidden');
+      }
+
+      items.forEach((snbt, i) => {
+          if (i > 8) return;
+          const slot = document.getElementById(`itemSlot${i}`);
+          const tooltip = document.getElementById(`tooltip-${i}`);
+          const title = document.getElementById(`item-title-${i}`);
+          const lore = document.getElementById(`item-lore-${i}`);
+          const container = document.getElementById(`slot-container-${i}`);
+
+          if (!slot) return;
+
+          const visuals = parseVisualsFromSnbt(snbt);
+          title.textContent = visuals.name;
+          lore.innerHTML = visuals.loreHtml || '<li class="text-[#555555]">No enchantments</li>';
+
+          let iconColor = "bg-accent-teal/20";
+          let iconContent = "";
+          
+          if (visuals.itemId === "stick") {
+              iconColor = "bg-amber-800/20";
+              iconContent = `<div class="w-1 h-12 bg-amber-900 rotate-45 rounded-full shadow-[0_0_10px_rgba(0,0,0,0.5)]"></div>`;
+          } else if (visuals.itemId.includes("sword")) {
+              iconColor = "bg-sky-400/20";
+              iconContent = `<div class="w-2 h-12 bg-sky-200 rotate-45 rounded-sm relative shadow-[0_0_10px_rgba(0,0,0,0.5)]"><div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-6 h-2 bg-amber-900"></div></div>`;
+          } else if (visuals.itemId.includes("axe") || visuals.itemId.includes("pickaxe")) {
+              iconColor = "bg-emerald-400/20";
+              iconContent = `<div class="w-8 h-8 border-2 border-emerald-200 bg-emerald-500/30 rotate-45 rounded"></div>`;
+          } else if (visuals.itemId.includes("helmet") || visuals.itemId.includes("chestplate") || visuals.itemId.includes("leggings") || visuals.itemId.includes("boots")) {
+              iconColor = "bg-indigo-400/20";
+              iconContent = `<div class="w-10 h-10 border-4 border-indigo-200 bg-indigo-500/30 rounded-lg"></div>`;
+          } else {
+              iconColor = "bg-slate-400/20";
+              iconContent = `<div class="w-8 h-8 border-2 border-white/20 bg-white/5 rounded-lg"></div>`;
+          }
+
+          slot.innerHTML = `<div class="w-full h-full ${iconColor} flex items-center justify-center animate-bounce-subtle">${iconContent}</div>`;
+          slot.classList.remove('hidden');
+
+          // Hover events
+          container.onmouseenter = () => tooltip.classList.remove('hidden');
+          container.onmouseleave = () => tooltip.classList.add('hidden');
+          
+          // Selection event
+          container.onclick = () => {
+              selectedIndex = i;
+              snbtOutput.textContent = snbt;
+              // Move indicator: 4px padding + (64px slot * i)
+              activeIndicator.style.left = `${4 + (64 * i)}px`;
+          };
+      });
+      
+      // Select first item by default
+      if (items.length > 0) {
+          const firstContainer = document.getElementById('slot-container-0');
+          if (firstContainer) firstContainer.click();
+      }
   }
 
   generateBtn.addEventListener('click', async () => {
     const prompt = promptInput.value.trim();
     if (!prompt && !uploadedSnbt) {
-      setStatus("Please describe the item or upload a file first.", true);
+      setStatus("Please describe the items or upload a file first.", true);
       return;
     }
 
-    setStatus("Forging item with AI...");
+    setStatus("Forging items with AI...");
     generateBtn.classList.add('opacity-50', 'cursor-not-allowed', 'animate-pulse');
     generateBtn.disabled = true;
     snbtOutput.textContent = "Forging...";
 
     try {
-      // In production, this URL needs to point to your cPanel Python app domain
-      const response = await fetch('http://127.0.0.1:8000/api/generate-nbt', {
+      const response = await fetch('http://127.0.0.1:8001/api/generate-nbt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            prompt: prompt || "Optimize this NBT", 
-            uploaded_nbt: uploadedSnbt 
-        })
+        body: JSON.stringify({ prompt: prompt || "Optimize this NBT", uploaded_nbt: uploadedSnbt })
       });
 
       const data = await response.json();
+      if (!response.ok) throw new Error(data.details || data.error);
 
-      if (!response.ok) {
-        throw new Error(data.error || 'API Request Failed');
+      currentItems = data.items || [];
+      if (currentItems.length === 0) {
+          // Fallback if AI returned single snbt accidentally
+          if (data.snbt) currentItems = [data.snbt];
+          else throw new Error("AI returned no items.");
       }
 
-      currentSnbt = data.snbt;
-      snbtOutput.textContent = currentSnbt;
+      updateHotbarDisplay(currentItems);
       
-      // Update Visuals
-      const visuals = parseVisualsFromSnbt(currentSnbt);
-      itemNameDisplay.textContent = visuals.name;
-      itemLoreDisplay.innerHTML = visuals.loreHtml || '<li class="text-[#555555]">No enchantments</li>';
-      
-      // Show item slot
-      itemSlot0.innerHTML = `<div class="w-full h-full bg-accent-teal/20 border-2 border-accent-teal/50 animate-pulse"></div>`;
-      itemSlot0.classList.remove('hidden');
-
-      // Enable Download
-      downloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
       downloadBtn.disabled = false;
-      
-      setStatus("Item successfully forged!");
+      downloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      setStatus(`Successfully forged ${currentItems.length} items! Click slots to view code.`);
 
     } catch (err) {
       console.error(err);
@@ -266,29 +313,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   });
 
-  // Download logic (SNBT string -> Binary NBT File)
   downloadBtn.addEventListener('click', async () => {
-      if (!currentSnbt) return;
-      
-      try {
-          const blob = new Blob([currentSnbt], { type: 'text/plain' });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.style.display = 'none';
-          a.href = url;
-          a.download = 'generated_item.snbt'; // .snbt is universally accepted by commands
-          document.body.appendChild(a);
-          a.click();
-          window.URL.revokeObjectURL(url);
-          setStatus("Downloaded .snbt file!");
-          
-      } catch (e) {
-          console.error(e);
-          setStatus("Failed to compile binary NBT.", true);
-      }
+    const snbt = currentItems[selectedIndex];
+    if (!snbt) return;
+    
+    try {
+        // Just download as .snbt text file as it's easier for users to copy into Minecraft
+        const blob = new Blob([snbt], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `item_${selectedIndex + 1}.snbt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        setStatus("Exported SNBT file!");
+    } catch (e) {
+        setStatus("Export failed.", true);
+    }
   });
 
-  // Handle File Uploads (.nbt -> SNBT)
+  // Handle File Uploads
   const nbtUpload = document.getElementById('nbtUpload');
   const uploadText = document.getElementById('uploadText');
 
@@ -301,24 +347,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       try {
           const arrayBuffer = await file.arrayBuffer();
-          // We cast to Buffer because prismarine-nbt expects Node.js Buffers
           const buffer = Buffer.from(arrayBuffer);
-          
-          // Parse the binary NBT
-          const { parsed, type } = await parse(buffer);
-          
-          // prismarine-nbt stringifies deeply nested JSON differently than SNBT,
-          // but stringifying the parsed object provides a structure the AI can understand and modify.
-          uploadedSnbt = JSON.stringify(parsed, null, 2);
-          
-          setStatus("File parsed. Ready to forge!");
-          snbtOutput.textContent = `Loaded existing NBT file:\n${uploadedSnbt.substring(0, 200)}...\n(Truncated for display)`;
-
+          const { parsed } = await parse(buffer);
+          uploadedSnbt = JSON.stringify(parsed);
+          setStatus("File parsed. Description will modify this item.");
       } catch (err) {
-          console.error(err);
           setStatus("Failed to parse .nbt file.", true);
-          uploadText.innerHTML = `<span class="font-semibold text-red-400">Error reading file</span>`;
       }
   });
-
 </script>

@@ -71,5 +71,33 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <Footer />
+
+    <script is:inline>
+      // Global reveal animation observer
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { 
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      function initReveals() {
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach((el) => {
+          revealObserver.observe(el);
+        });
+      }
+
+      // Initial run
+      initReveals();
+
+      // Support for client-side navigation or dynamic content
+      document.addEventListener('astro:page-load', initReveals);
+    </script>
   </body>
 </html>

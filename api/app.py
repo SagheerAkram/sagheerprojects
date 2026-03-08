@@ -4,42 +4,43 @@ import os
 import requests
 import random
 import json
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 # Enable CORS for the Astro frontend (adjust origins in production!)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # --- Configuration & Keys ---
-# In production on cPanel, you would set these as Environment Variables.
-# For now, we hardcode the provided keys per request.
-GEMINI_KEYS = [
-    "AIzaSyDatyVlhOUNbxMq4cgUCX1ncZtNEmQ7rRg",
-    "AIzaSyCOzC0N2SOTRclsRKrSDI0Kj7Vn9Y88r8A",
-    "AIzaSyDmfPRlo_RarTQ2f3d-0wuIsWlsXBCC6yQ",
-    "AIzaSyBxL0wlyZzN4h9InrJlq1dxzfNGvYB0ZFI",
-    "AIzaSyDZs3LbuuXpfQ0vUpq-P6FV2D9aRNNveiM",
-    "AIzaSyB5lHWXakvTUxfHw9Gg1eVtYwgai2uDcO0"
-]
-OPENROUTER_KEY = "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"
+# Loaded from .env file or environment variables
+GEMINI_KEYS = os.getenv("GEMINI_KEYS", "").split(",")
+OPENROUTER_KEY = os.getenv("OPENROUTER_KEY", "")
 
 # System prompt to ensure safe, legitimate SNBT generation
 SYSTEM_PROMPT = """
 You are an expert Minecraft NBT/SNBT generator. 
-The user will ask for a custom Minecraft item (e.g., a sword, armor, or a fun tool).
-Your ONLY job is to output the exact, raw SNBT (Stringified NBT) for the requested item(s).
+The user will ask for one or more custom Minecraft items.
+Your job is to generate the exact SNBT (Stringified NBT) for each requested item.
+
+OUTPUT FORMAT:
+Return a JSON object with an "items" key containing an array of SNBT strings.
+Example: {"items": ["{id:\\"minecraft:stick\\",Count:1b,tag:{...}}", "{id:\\"minecraft:diamond_sword\\",Count:1b,tag:{...}}"]}
 
 RULES:
-1. ONLY output the raw SNBT string. Do not include markdown formatting (like ``` json), explanations, or any other text.
-2. The SNBT MUST be perfectly valid for Minecraft Java Edition.
-3. Keep enchantments within the legal maximum integer limit (e.g., 255 for standard enchants, do not use 999999999 as it crashes the game).
-4. Do NOT generate nesting shulker boxes, book-based crash payloads, or any data designed to overload server memory or crash the game. Stick to high-stat but game-safe items (e.g., Sharpness 255, custom Lore, Unbreakable tags).
-5. Output format must exactly match: {id:"minecraft:item_name",Count:1b,tag:{display:{Name:'{"text":"Custom Name"}'},Enchantments:[{id:"minecraft:sharpness",lvl:255s}]}}
+1. Return ONLY the raw JSON object. No markdown, no explanations. 
+2. You can generate up to 9 items (matching the hotbar). If they ask for more, pick the best 9.
+3. The SNBT MUST be perfectly valid for Minecraft Java Edition.
+4. Keep enchantments within the legal maximum integer limit (255).
+5. Do NOT generate nesting shulker boxes or crash payloads. Stick to high-stat items (e.g., Sharpness 255, custom Lore, Unbreakable tags).
+6. If the user asks for a specific slot or "all types", spread them across the list.
 
-If the user asks for something that violates rule 4 (e.g., "give me a server crasher"), generate a safe, funny item instead (like a "Potato of Disappointment").
+If the user asks for something unsafe, generate a safe, funny item instead.
 """
 
 def generate_with_gemini(prompt, api_key):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
     headers = {'Content-Type': 'application/json'}
     data = {
         "contents": [{"parts": [{"text": SYSTEM_PROMPT + "\n\nUser Request: " + prompt}]}],
@@ -66,7 +67,7 @@ def generate_with_openrouter(prompt):
         "X-Title": "SagheerProjects NBT Tool" # Optional
     }
     data = {
-        "model": "google/gemini-2.5-pro", # Using 2.5-pro via OpenRouter for better capabilities and permissiveness
+        "model": "google/gemini-2.0-flash-001", 
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt}
@@ -93,14 +94,22 @@ def generate_nbt():
     if uploaded_nbt:
         prompt = f"Modify this existing SNBT based on the request.\nExisting SNBT:\n{uploaded_nbt}\n\nRequest: {prompt}"
 
-    # 1. Try OpenRouter First (More Permissive for Fun/Educational Generation)
+    last_error = "Unknown error"
+    # 1. Try OpenRouter First
     snbt_result = None
     try:
+        if not OPENROUTER_KEY:
+             # re-attempt load if somehow empty
+             from dotenv import load_dotenv
+             load_dotenv()
+             globals()['OPENROUTER_KEY'] = os.getenv("OPENROUTER_KEY", "")
+             
         snbt_result = generate_with_openrouter(prompt)
         if snbt_result:
             print("Successfully generated using OpenRouter.")
     except Exception as e:
-        print(f"OpenRouter failed: {e}")
+        last_error = f"OpenRouter failed: {str(e)}"
+        print(last_error)
 
     # 2. Fallback to direct Gemini Keys if OpenRouter fails
     if not snbt_result:
@@ -113,26 +122,45 @@ def generate_nbt():
                     print("Successfully generated using a fallback Gemini key.")
                     break
             except Exception as e:
-                print(f"Gemini Key failed: {e}")
+                last_err_gemini = f"Gemini Key failed: {str(e)}"
+                print(last_err_gemini)
+                last_error = f"{last_error} | {last_err_gemini}"
                 continue
 
     if not snbt_result:
-        return jsonify({"error": "All AI generation services failed. Please try again later."}), 500
+        print(f"FAILED COMPLETELY: {last_error}")
+        return jsonify({
+            "error": "AI Generation Failed",
+            "details": f"Latest error: {last_error}",
+            "status": "service_outage"
+        }), 503
 
-    # Clean up common AI markdown formatting if it ignored rule 1
+    # Clean up common AI markdown formatting if it ignored rules
+    snbt_result = snbt_result.strip()
     if snbt_result.startswith("```json"):
-        snbt_result = snbt_result[7:-3].strip()
-    elif snbt_result.startswith("```snbt"):
         snbt_result = snbt_result[7:-3].strip()
     elif snbt_result.startswith("```"):
         snbt_result = snbt_result[3:-3].strip()
+    
+    # Try to parse as JSON for multi-item support
+    items = []
+    try:
+        parsed = json.loads(snbt_result)
+        if isinstance(parsed, dict) and 'items' in parsed:
+            items = parsed['items']
+        elif isinstance(parsed, list):
+            items = parsed
+        else:
+            items = [snbt_result] # Fallback to single item if JSON isn't as expected
+    except:
+        # If it's not valid JSON, it might be a single raw SNBT string
+        items = [snbt_result.strip('`').strip()]
 
-    return jsonify({"snbt": snbt_result})
+    return jsonify({"items": items})
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
-    return jsonify({"status": "Backend is running!"})
+    return jsonify({"status": "Backend is running!", "key_loaded": bool(OPENROUTER_KEY)})
 
 if __name__ == '__main__':
-    # Run locally on port 8000
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=8001)
