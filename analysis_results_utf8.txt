@@ -1,0 +1,12 @@
+--- STATS ---
+total_items_found_recursively: 10871
+has_custom_name: 2524
+has_lore: 1525
+has_enchantments: 1078
+has_entity_tag: 667
+has_fireworks: 91
+has_attribute_modifiers: 492
+has_public_bukkit_values: 100
+
+Unique Item IDs (291):
+minecraft:leather_boots, minecraft:zombie_head, minecraft:bow, minecraft:white_stained_glass_pane, minecraft:light_blue_shulker_box, minecraft:golden_hoe, minecraft:diamond_sword, minecraft:magenta_stained_glass_pane, minecraft:pointed_dripstone, minecraft:honeycomb, minecraft:wooden_hoe, minecraft:coal_block, minecraft:netherite_hoe, minecraft:wooden_sword, minecraft:orange_shulker_box, minecraft:item_frame, minecraft:netherite_boots, minecraft:snowball, minecraft:grass_block, minecraft:slime_spawn_egg, minecraft:oak_sign, minecraft:prismarine_shard, minecraft:blaze_spawn_egg, minecraft:debug_stick, minecraft:allay_spawn_egg, minecraft:diamond_block, minecraft:golden_carrot, minecraft:gold_ingot, minecraft:silverfish_spawn_egg, minecraft:wither_spawn_egg, minecraft:red_shulker_box, minecraft:emerald_ore, minecraft:deepslate_iron_ore, minecraft:powered_rail, minecraft:cherry_boat, minecraft:black_stained_glass_pane, minecraft:stick, minecraft:iron_hoe, minecraft:netherite_leggings, minecraft:barrier, minecraft:light_gray_shulker_box, minecraft:red_stained_glass_pane, minecraft:stone_button, minecraft:diamond, minecraft:white_shulker_box, minecraft:purple_stained_glass, minecraft:netherite_shovel, minecraft:magma_cream, minecraft:iron_axe, minecraft:enchanted_golden_apple...
