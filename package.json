@@ -16,8 +16,6 @@
         "astro": "^4.5.0",
         "buffer": "^6.0.3",
         "framer-motion": "^11.0.8",
-        "nbt-parser": "^1.0.2",
-        "prismarine-nbt": "^2.8.0",
         "tailwindcss": "^3.4.1"
     },
     "devDependencies": {
