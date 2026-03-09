@@ -43,6 +43,24 @@ import { photos, categories } from '../data/photography.js';
     </div>
 
     <!-- Gallery grid -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org/",
+      "@type": "ImageGallery",
+      "name": "Sagheer Akram's Photography Portfolio",
+      "description": "A collection of architectural, natural, and urban photography by Sagheer Akram.",
+      "author": {
+        "@type": "Person",
+        "name": "Sagheer Akram"
+      },
+      "image": photos.map(photo => ({
+        "@type": "ImageObject",
+        "contentUrl": `https://sagheerakram.com${photo.src}`,
+        "name": photo.title,
+        "caption": photo.description,
+        "keywords": [photo.category, "Sagheer Akram", "Photography"]
+      }))
+    })} />
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery">
       {photos.map((photo) => (
         <div
@@ -52,7 +70,7 @@ import { photos, categories } from '../data/photography.js';
         >
           <img
             src={photo.src}
-            alt={photo.title}
+            alt={`${photo.title} - ${photo.category} photography by Sagheer Akram`}
             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105"
             loading="lazy"
           />

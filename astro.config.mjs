@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
     output: 'static',
     integrations: [tailwind()],
-    site: 'https://sagheerprojects.fun',
+    site: 'https://sagheerakram.com/',
     build: {
         assets: 'assets'
     }
