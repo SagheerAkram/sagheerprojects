@@ -22,22 +22,17 @@
 
 <script>
   (function () {
-    // Respect reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // Skip on touch devices — no cursor
     if (window.matchMedia('(hover: none)').matches) return;
 
-    const glow = document.getElementById('cursor-glow');
-    if (!glow) return;
-
+    let glow = null;
     let mouseX = -999;
     let mouseY = -999;
     let currentX = -999;
     let currentY = -999;
-    let raf: number;
+    let raf;
 
-    // Section color map: data-glow-accent attribute on <section> elements
-    const sectionAccents: Record<string, string> = {
+    const sectionAccents = {
       blue:   'rgba(0, 212, 255, 0.065)',
       violet: 'rgba(124, 58, 237, 0.07)',
       teal:   'rgba(0, 201, 167, 0.06)',
@@ -45,11 +40,12 @@
 
     let currentAccent = sectionAccents.blue;
 
-    document.addEventListener('mousemove', (e) => {
+    function handleMouseMove(e) {
       mouseX = e.clientX;
       mouseY = e.clientY;
 
-      // Detect which section the cursor is in
+      if (!glow) return;
+
       const el = document.elementFromPoint(e.clientX, e.clientY);
       const section = el?.closest('[data-glow-accent]');
       const accent = section?.getAttribute('data-glow-accent') ?? 'blue';
@@ -59,23 +55,36 @@
         currentAccent = nextAccent;
         glow.style.background = `radial-gradient(circle, ${currentAccent} 0%, transparent 70%)`;
       }
-    }, { passive: true });
+    }
 
-    function lerp(a: number, b: number, t: number) {
+    function init() {
+      glow = document.getElementById('cursor-glow');
+    }
+
+    function lerp(a, b, t) {
       return a + (b - a) * t;
     }
 
     function tick() {
-      currentX = lerp(currentX, mouseX, 0.1);
-      currentY = lerp(currentY, mouseY, 0.1);
-      glow.style.left = currentX + 'px';
-      glow.style.top = currentY + 'px';
+      if (glow) {
+        currentX = lerp(currentX, mouseX, 0.1);
+        currentY = lerp(currentY, mouseY, 0.1);
+        glow.style.left = currentX + 'px';
+        glow.style.top = currentY + 'px';
+      }
       raf = requestAnimationFrame(tick);
     }
 
-    tick();
+    // Singleton listener
+    if (!window.hasCursorGlowListeners) {
+      document.addEventListener('mousemove', handleMouseMove, { passive: true });
+      tick();
+      window.hasCursorGlowListeners = true;
+    }
 
-    // Pause when not visible
+    init();
+    document.addEventListener('astro:page-load', init);
+
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         cancelAnimationFrame(raf);

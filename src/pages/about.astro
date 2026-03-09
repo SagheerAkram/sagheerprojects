@@ -4,48 +4,70 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="About — Sagheer Akram"
-  description="Student, researcher, and observer of digital patterns. Exploring AI, code, and the moments in between."
+  title="About // Sagheer Akram"
+  description="Student explorer. Photography, Python, Chess, and the moments in between."
 >
   <section class="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24">
 
     <!-- Header -->
-    <div class="mb-20">
-      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60">CS STUDENT // NIGHT OWL // LATE NIGHT BUILDER</span>
-      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mt-6 mb-10">
-        I break things just to see<br/>how they fit back together.
+    <div class="mb-20 reveal">
+      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60 italic block mb-6 split-text-mask">
+        <span class="split-text-inner">CREATOR // EXPLORER // CHESS PLAYER</span>
+      </span>
+      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10 overflow-hidden">
+        <span class="block split-text-mask"><span class="split-text-inner">I building tools and</span></span>
+        <span class="block split-text-mask"><span class="split-text-inner delay-100">capturing memories.</span></span>
       </h1>
-      <p class="text-slate-400 max-w-2xl leading-relaxed text-lg md:text-xl">
-        I'm Sagheer. Most of my day is spent staring at a terminal, trying to convince a machine to see the world the way I do. I'm not here to change the world—I'm here to understand it, one line of code at a time.
+      <p class="text-slate-400 max-w-2xl leading-relaxed text-lg md:text-xl reveal-stagger">
+        Hey, I'm Sagheer. I'm a student exploring software engineering, automation, and the art of photography. I enjoy building small tools, learning tech at my own pace, and making my digital space a little better every day.
       </p>
     </div>
 
-    <!-- Philosophy -->
-    <div class="grid md:grid-cols-2 gap-12 mb-24">
+    <!-- What I Do -->
+    <div class="grid md:grid-cols-2 gap-12 mb-24 reveal-stagger">
       <div class="reveal">
-        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">The 3 AM Curiosity</h2>
+        <h2 class="text-white font-bold text-xl mb-4 tracking-tight italic">Tech & Tools</h2>
         <p class="text-slate-400 leading-relaxed">
-          There’s a specific kind of quiet that only happens late at night. That’s when I do my best work. It’s not about being "productive"—it’s about following a thread of curiosity until it leads somewhere interesting. Whether it's AI logic or a simple automation script, I love the raw honesty of a working system.
+          I spend my time learning Python and building small utilities that make life easier. Whether it's automation scripts or diving into new frameworks, I love the feeling of watching a piece of logic come to life.
         </p>
       </div>
       <div class="reveal">
-        <h2 class="text-white font-bold text-xl mb-4 tracking-tight">Nature & Logic</h2>
+        <h2 class="text-white font-bold text-xl mb-4 tracking-tight italic">Beyond the Code</h2>
         <p class="text-slate-400 leading-relaxed">
-          I've always found it weird how similar tree roots look to network diagrams. Nature is just a massive, complex system that doesn't need a manual. I try to bring that same organic feeling to the code I write. It should feel intentional, quiet, and reliable.
+          When I'm not at the screen, I'm likely holding a camera, solving a Rubik's cube, or lost in a game of chess. I believe a perfect day is a mix of aesthetic design, a bit of learning, and a good challenge.
         </p>
       </div>
     </div>
 
-    <!-- Stats/Quick Facts - Refined -->
-    <div class="mb-24 py-12 border-y border-white/[0.05] reveal">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <!-- Skills & Tools -->
+    <div class="mb-24 reveal">
+      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">The Toolkit</h2>
+      <div class="flex flex-wrap items-center justify-center gap-10 p-10 rounded-2xl bg-white/[0.02] border border-white/[0.05] reveal-stagger">
         {[
-          { label: 'Currently', value: 'Learning CS' },
-          { label: 'Tools', value: 'AI / Python / Web' },
-          { label: 'Motto', value: 'Stay Curious' },
-          { label: 'Energy', value: 'Strong Coffee' },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg', name: 'Python' },
+          { icon: 'https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg', name: 'Git' },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/visualstudio/visualstudio-plain.svg', name: 'VS Code' },
+          { icon: 'https://www.vectorlogo.zone/logos/linux/linux-icon.svg', name: 'Linux' },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-line.svg', name: 'Photoshop' },
+        ].map((skill) => (
+          <div class="group flex flex-col items-center gap-3 transition-transform duration-500 hover:scale-110">
+            <img src={skill.icon} alt={skill.name} class="w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-700 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]" />
+            <span class="text-[10px] font-mono text-slate-500 group-hover:text-accent-ice uppercase tracking-widest">{skill.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="mb-24 py-12 border-y border-white/[0.05] reveal">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal-stagger">
+        {[
+          { label: 'Learning', value: 'Software Eng' },
+          { label: 'Passions', value: 'Photography' },
+          { label: 'Hobbies', value: 'Chess & Cubing' },
+          { label: 'Energy', value: 'Aesthetic Design' },
         ].map((stat) => (
-          <div>
+          <div class="glass-glow p-4 rounded-xl">
             <p class="text-xs uppercase tracking-widest text-slate-500 mb-2">{stat.label}</p>
             <p class="text-lg font-bold text-accent-ice tracking-tight">{stat.value}</p>
           </div>
@@ -53,16 +75,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
 
-    <!-- Exploring -->
-    <div class="reveal">
-      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight">What I'm Messing With</h2>
-      <div class="space-y-6">
+    <!-- GitHub & LeetCode Performance -->
+    <div class="mb-24 reveal">
+      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">Metrics & Progress</h2>
+      <div class="space-y-8 reveal-stagger">
+         <div class="grid md:grid-cols-2 gap-6">
+            <div class="tilt-card"><img src="https://github-readme-stats.vercel.app/api?username=SagheerAkram&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" alt="GitHub Stats" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" /></div>
+            <div class="tilt-card"><img src="https://github-readme-streak-stats.herokuapp.com/?user=SagheerAkram&theme=tokyonight&hide_border=true" alt="GH Streak" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" /></div>
+         </div>
+         <div class="tilt-card"><img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=SagheerAkram&theme=tokyonight" alt="GH Details" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" /></div>
+         <div class="pt-4 tilt-card">
+            <img src="https://leetcard.jacoblin.cool/SagheerAkram?theme=dark&font=Karma&ext=heatmap" alt="LeetCode Status" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" />
+         </div>
+      </div>
+    </div>
+
+    <!-- Projects / Interests -->
+    <div class="reveal mb-24">
+      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">The Focus</h2>
+      <div class="space-y-6 reveal-stagger">
         {[
-          { title: 'AI Automation', desc: 'Making tools that actually help. Not just chatbots, but systems that can handle the boring stuff so I can focus on building.' },
-          { title: 'Terminal Experiments', desc: 'I love the command line. Building things like OmniShell—secure, fast, and minimal communication tools.' },
-          { title: 'Visual Systems', desc: 'Trying to make data look as beautiful as it is complex. Dark modes, subtle glows, and clean typography.' },
+          { title: 'Automation Scripts', desc: 'Simple utilities for workflows, file automation, and digital experiments. High efficiency, low friction.' },
+          { title: 'Photography Showcase', desc: 'Aesthetic projects and edits. Capturing the world through a lens that values light and silence.' },
+          { title: 'Data Explorations', desc: 'Analyzing datasets and exploring new ways to visualize information. Built to understand how systems work from the inside out.' },
         ].map((item) => (
-          <div class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-accent-ice/20 transition-all duration-500">
+          <div class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-accent-ice/20 transition-all duration-500 hover:translate-x-2">
             <h3 class="text-white font-bold mb-2 group-hover:text-accent-ice transition-colors">{item.title}</h3>
             <p class="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
           </div>
@@ -70,25 +107,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
 
+    <!-- Fun Facts -->
+    <div class="reveal">
+        <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">Fun Facts</h2>
+        <ul class="grid md:grid-cols-2 gap-4 reveal-stagger">
+            {[
+                'I have a thing for aesthetic designs',
+                'Learning a bit every day is my core loop',
+                'Tech, Chess, and Rubik’s Cubes are my trio',
+                'My contribution graph is turning greener daily'
+            ].map(fact => (
+                <li class="flex items-center gap-4 text-slate-400 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] transition-colors">
+                    <span class="w-1.5 h-1.5 rounded-full bg-accent-ice"></span>
+                    {fact}
+                </li>
+            ))}
+        </ul>
+    </div>
+
   </section>
 </BaseLayout>
 
 <script>
-  // Simple scroll reveals
-  const revealElements = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
+  // Tilt Card Logic
+  function initTilt() {
+    const cards = document.querySelectorAll('.tilt-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e: any) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        (card as HTMLElement).style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        (card as HTMLElement).style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
     });
-  }, { 
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
+  }
 
-  revealElements.forEach((el) => {
-    observer.observe(el);
-  });
+  // Initial runs
+  initTilt();
+
+  // Support for client-side navigation
+  document.addEventListener('astro:page-load', initTilt);
 </script>

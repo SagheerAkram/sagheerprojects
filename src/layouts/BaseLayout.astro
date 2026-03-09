@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import CursorGlow from '../components/CursorGlow.astro';
 import CustomCursor from '../components/CustomCursor.astro';
 import ParticleBackground from '../components/ParticleBackground.astro';
-import VibeUI from '../components/VibeUI.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   title?: string;
@@ -15,8 +15,8 @@ export interface Props {
 }
 
 const {
-  title = 'Sagheer Akram — Researcher. Builder. Artist.',
-  description = 'Personal creative lab of Sagheer Akram — exploring the intersection of AI, code, and visual narratives.',
+  title = 'Sagheer Akram // Researcher. Builder. Artist.',
+  description = 'Personal creative lab of Sagheer Akram, exploring the intersection of AI, code, and visual narratives.',
   image = '/og-image.jpg',
 } = Astro.props;
 
@@ -55,8 +55,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <ViewTransitions />
   </head>
-  <body class="antialiased">
+  <body class="antialiased relative">
+    <!-- Premium Global Cursor Glow -->
+    <div id="global-glow" class="fixed pointer-events-none w-[600px] h-[600px] rounded-full bg-accent-ice opacity-[0.03] blur-[120px] -translate-x-1/2 -translate-y-1/2 z-[5] transition-opacity duration-1000"></div>
     <!-- Premium Futurism Background System -->
     <div class="bg-mesh"></div>
     <div class="subgrid"></div>
@@ -65,7 +68,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <CursorGlow />
     <CustomCursor />
     <ParticleBackground />
-    <VibeUI />
     <Navbar />
     <main>
       <slot />
@@ -96,8 +98,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       // Initial run
       initReveals();
 
+      // Mouse Glow Follower logic
+      let glowElement = null;
+      function updateGlowPosition(e) {
+        if (!glowElement) glowElement = document.getElementById('global-glow');
+        if (glowElement) {
+          glowElement.style.left = e.clientX + 'px';
+          glowElement.style.top = e.clientY + 'px';
+        }
+      }
+
+      // Add listener once globally
+      if (!window.hasGlobalGlowListener) {
+        window.addEventListener('mousemove', updateGlowPosition);
+        window.hasGlobalGlowListener = true;
+      }
+
       // Support for client-side navigation or dynamic content
-      document.addEventListener('astro:page-load', initReveals);
+      document.addEventListener('astro:page-load', () => {
+        initReveals();
+        glowElement = document.getElementById('global-glow'); // Re-capture element after navigation
+      });
     </script>
   </body>
 </html>

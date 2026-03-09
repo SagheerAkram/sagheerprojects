@@ -65,8 +65,8 @@
 </style>
 
 <script>
-  const dot = document.getElementById('custom-cursor-dot');
-  const ring = document.getElementById('custom-cursor-ring');
+  let dot = null;
+  let ring = null;
   
   let mouseX = 0;
   let mouseY = 0;
@@ -84,7 +84,6 @@
       if (ring) ring.style.opacity = '1';
     }
 
-    // Dot is instant for perfect accuracy
     if (dot) {
       dot.style.transform = `translate3d(${mouseX - 3}px, ${mouseY - 3}px, 0)`;
     }
@@ -103,9 +102,6 @@
     requestAnimationFrame(animate);
   };
 
-  window.addEventListener('mousemove', updateCursor);
-  animate();
-
   // Hover states
   const handleMouseEnter = () => document.body.classList.add('cursor-hover');
   const handleMouseLeave = () => document.body.classList.remove('cursor-hover');
@@ -118,18 +114,28 @@
     });
   };
 
-  addListeners();
-  
-  // Re-add listeners on Astro page loads if using View Transitions
-  document.addEventListener('astro:after-swap', addListeners);
+  function init() {
+    dot = document.getElementById('custom-cursor-dot');
+    ring = document.getElementById('custom-cursor-ring');
+    addListeners();
+  }
 
-  document.addEventListener('mouseleave', () => {
-    if (dot) dot.style.opacity = '0';
-    if (ring) ring.style.opacity = '0';
-  });
+  // Global listeners (only once)
+  if (!window.hasCustomCursorListeners) {
+    window.addEventListener('mousemove', updateCursor);
+    document.addEventListener('mouseleave', () => {
+      if (dot) dot.style.opacity = '0';
+      if (ring) ring.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', () => {
+      if (dot) dot.style.opacity = '1';
+      if (ring) ring.style.opacity = '1';
+    });
+    animate();
+    window.hasCustomCursorListeners = true;
+  }
 
-  document.addEventListener('mouseenter', () => {
-    if (dot) dot.style.opacity = '1';
-    if (ring) ring.style.opacity = '1';
-  });
+  // Run on first load and page changes
+  init();
+  document.addEventListener('astro:page-load', init);
 </script>

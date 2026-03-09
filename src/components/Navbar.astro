@@ -20,20 +20,26 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <!-- Desktop nav -->
-    <ul class="hidden md:flex items-center gap-10">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class={`text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:text-accent-ice ${
-              currentPath.startsWith(link.href) ? 'text-accent-ice' : 'text-slate-500'
-            }`}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div class="hidden md:block relative px-1 py-1 rounded-full border border-white/[0.03] bg-white/[0.02]">
+      <!-- Sliding Indicator -->
+      <div id="nav-indicator" class="absolute h-[calc(100%-8px)] top-1 bg-accent-ice/10 border border-accent-ice/20 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] z-0"></div>
+      
+      <ul class="relative flex items-center gap-1">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              data-nav-link
+              class={`relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 ${
+                currentPath.startsWith(link.href) ? 'text-accent-ice' : 'text-slate-500 hover:text-white'
+              }`}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
 
     <!-- Mobile hamburger -->
     <button
@@ -92,6 +98,30 @@ const currentPath = Astro.url.pathname;
   window.addEventListener('scroll', scrollHandler, { passive: true });
   scrollHandler();
 
+  // Nav indicator logic
+  function initNavIndicator() {
+    const indicator = document.getElementById('nav-indicator');
+    const links = document.querySelectorAll('[data-nav-link]');
+    const activeLink = Array.from(links).find(link => link.getAttribute('href') === window.location.pathname) || links[0];
+
+    const moveIndicator = (el: Element | null) => {
+      if (!indicator || !el) return;
+      const rect = (el as HTMLElement).getBoundingClientRect();
+      const parentRect = (indicator.parentElement as HTMLElement).getBoundingClientRect();
+      
+      indicator.style.width = rect.width + 'px';
+      indicator.style.left = (rect.left - parentRect.left) + 'px';
+    };
+
+    if (activeLink) moveIndicator(activeLink);
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => moveIndicator(link));
+      link.addEventListener('mouseleave', () => moveIndicator(activeLink));
+    });
+  }
+
+  // Mobile menu logic
   const openBtn = document.getElementById('mobile-menu-btn');
   const closeBtn = document.getElementById('close-menu');
   const menu = document.getElementById('mobile-menu');
@@ -103,4 +133,12 @@ const currentPath = Astro.url.pathname;
 
   openBtn?.addEventListener('click', toggleMenu);
   closeBtn?.addEventListener('click', toggleMenu);
+
+  // Initial runs
+  initNavIndicator();
+  
+  // Re-run on page transitions
+  document.addEventListener('astro:page-load', () => {
+    initNavIndicator();
+  });
 </script>

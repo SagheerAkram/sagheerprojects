@@ -47,7 +47,7 @@
       content?: string; // For code fragments
     }
 
-    const codeFragments = ["if(vibe)", "process.env", "await signal()", "0xGHL", "flux", "=>", "{}", "debug", "chaos"];
+    const codeFragments = ["if(active)", "process.env", "await signal()", "0xGHL", "flux", "=>", "{}", "debug", "logic"];
 
     const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, (_, i) => {
       const isCode = !isMobile && i % 10 === 0;

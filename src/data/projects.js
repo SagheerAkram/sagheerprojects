@@ -1,6 +1,6 @@
 // src/data/projects.js
-// Randomly vibe coded. No logic. Just intuition.
-// Re-building the world, one line of unstable code at a time.
+// Portfolio data. Structured with intent.
+// Documenting the journey, one project at a time.
 
 export const projects = [
     {
