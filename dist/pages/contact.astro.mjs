@@ -1,0 +1,35 @@
+/* empty css                                 */
+import { c as createComponent, r as renderComponent, d as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_CntiJJAx.mjs';
+import 'kleur/colors';
+import { $ as $$BaseLayout } from '../chunks/BaseLayout_DJf43fjC.mjs';
+export { renderers } from '../renderers.mjs';
+
+const $$Contact = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Get in touch // Sagheer Akram", "description": "I'm always looking for interesting conversations. Reach out via email or social media." }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<section class="relative z-10 min-h-[80vh] flex items-center justify-center px-6 py-32"> <div class="max-w-2xl w-full"> <!-- Header --> <div class="mb-16"> <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60 uppercase">SIGNAL // CONTACT</span> <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mt-6 mb-8">
+Get in touch.
+</h1> <p class="text-slate-400 text-lg md:text-xl leading-relaxed">
+I'm always looking for interesting conversations, whether it's about AI, systems, or just how the world works.
+</p> </div> <!-- Contact Cluster --> <div class="space-y-12"> <div> <p class="text-[10px] uppercase tracking-[0.4em] text-slate-600 font-bold mb-4">PRIMARY BROADCAST</p> <a href="mailto:contact@sagheerprojects.fun" class="text-2xl md:text-3xl font-bold text-white hover:text-accent-ice transition-colors break-all underline decoration-white/10 underline-offset-8 decoration-2 hover:decoration-accent-ice">
+contact@sagheerprojects.fun
+</a> </div> <div class="grid grid-cols-2 gap-8"> <div> <p class="text-[10px] uppercase tracking-[0.4em] text-slate-600 font-bold mb-4">SOCIAL // X</p> <a href="https://x.com/flokii9990" target="_blank" class="text-xl font-bold text-white hover:text-accent-ice transition-colors">
+@flokii9990
+</a> </div> <div> <p class="text-[10px] uppercase tracking-[0.4em] text-slate-600 font-bold mb-4">SOCIAL // INSTA</p> <a href="https://instagram.com/rizzsagheer" target="_blank" class="text-xl font-bold text-white hover:text-accent-ice transition-colors">
+@rizzsagheer
+</a> </div> </div> </div> <!-- Closing --> <p class="mt-24 text-slate-600 italic text-sm">
+"Expect a response when the sun is down or the coffee is fresh."
+</p> </div> </section> ` })}`;
+}, "C:/Users/SM/Desktop/Github Projects/sagheerprojects/src/pages/contact.astro", void 0);
+
+const $$file = "C:/Users/SM/Desktop/Github Projects/sagheerprojects/src/pages/contact.astro";
+const $$url = "/contact/";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Contact,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

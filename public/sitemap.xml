@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://sagheerprojects.fun/</loc>
     <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/og-image.jpg</image:loc>
+      <image:title>Sagheer Akram Portfolio</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://sagheerprojects.fun/photography/</loc>
     <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/projects/atlas.png</image:loc>
+      <image:title>ATLAS - Codebase Visualization</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/projects/omnishell.png</image:loc>
+      <image:title>OmniShell - Secure Bridge</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/projects/quickcmd.png</image:loc>
+      <image:title>QuickCmd - AI CLI</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://sagheerprojects.fun/about/</loc>
@@ -28,20 +44,36 @@
     <loc>https://sagheerprojects.fun/projects/omnishell/</loc>
     <lastmod>2026-03-10</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/projects/omnishell.png</image:loc>
+      <image:title>OmniShell Interface</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://sagheerprojects.fun/projects/quickcmd/</loc>
     <lastmod>2026-03-10</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/projects/quickcmd.png</image:loc>
+      <image:title>QuickCmd AI Flow</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://sagheerprojects.fun/projects/atlas/</loc>
     <lastmod>2026-03-10</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/projects/atlas.png</image:loc>
+      <image:title>ATLAS Graph Visualization</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://sagheerprojects.fun/projects/code-archaeologist/</loc>
     <lastmod>2026-03-10</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://sagheerprojects.fun/projects/codearchaeologist.png</image:loc>
+      <image:title>CodeArchaeologist Analysis</image:title>
+    </image:image>
   </url>
 </urlset>
