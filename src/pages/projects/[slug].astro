@@ -122,7 +122,7 @@ const { project } = Astro.props;
 
     <!-- Visual Showcase / Interactive Block -->
      <section class="mb-24 rounded-3xl overflow-hidden bg-white/[0.02] border border-white/[0.05] aspect-video relative group reveal">
-        <div class={`absolute inset-0 transition-opacity duration-1000 opacity-40 group-hover:opacity-60 bg-cover bg-center ${project.bannerGradient}`} style={`background-image: url(${project.image})`}></div>
+        <div class={`absolute inset-0 transition-opacity duration-1000 opacity-60 group-hover:opacity-80 bg-cover bg-center bg-gradient-to-b ${project.bannerGradient}`} style={`background-image: url(${project.image})`}></div>
         <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
         
         <div class="absolute inset-0 flex items-center justify-center p-8 md:p-16">
