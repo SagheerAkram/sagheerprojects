@@ -6,7 +6,8 @@ export default defineConfig({
     output: 'static',
     integrations: [tailwind()],
     site: 'https://sagheerprojects.fun/',
+    trailingSlash: 'always',
     build: {
-        assets: 'assets'
+        format: 'directory'
     }
 });
