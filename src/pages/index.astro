@@ -2,6 +2,7 @@
 // src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { photos } from '../data/photography.js';
+import ExamStatus from '../components/ExamStatus.astro';
 
 const previewPhotos = photos.slice(0, 6);
 ---
@@ -17,6 +18,11 @@ const previewPhotos = photos.slice(0, 6);
       <div class="flex items-center gap-3 reveal">
         <span class="w-8 h-px bg-accent-teal/30"></span>
         <span class="text-[10px] font-bold tracking-[0.3em] text-accent-teal uppercase">EST. 2025 · PERSONAL LAB</span>
+      </div>
+
+      <!-- Real-time Developer Status -->
+      <div class="mt-6 reveal">
+        <ExamStatus />
       </div>
 
       <!-- Main heading -->
