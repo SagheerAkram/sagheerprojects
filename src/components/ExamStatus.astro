@@ -269,16 +269,15 @@
       { type: 'practical', subject: 'Chemistry Practical', date: '2026-06-11', start: 11.5, dur: 3 },
     ];
 
-    const ALL_DONE_DATE = '2026-06-11T09:30:00Z'; // 14:30 PKT (11:30 AM start + 3h dur)
-    const SEASON_START  = '2026-03-30T04:00:00Z'; // 09:00 AM PKT = 04:00 UTC
+    const THEORY_DONE_DATE = '2026-04-15T09:30:00Z'; // 14:30 PKT (09:00 start + ~5h window)
+    const ALL_DONE_DATE    = '2026-06-11T09:30:00Z'; // 14:30 PKT
+    const SEASON_START     = '2026-03-30T04:00:00Z'; // 09:00 AM PKT = 04:00 UTC
 
     // Helper: Convert PKT date string + start hour to JS Date
     function pktToDate(dateStr, startHour) {
       const [y, m, d] = dateStr.split('-').map(Number);
       const startMin = Math.round(startHour * 60);
-      // PKT is UTC+5, so we subtract 5 hours from the PKT time to get UTC
-      const date = new Date(Date.UTC(y, m - 1, d, Math.floor(startMin / 60) - 5, startMin % 60));
-      return date;
+      return new Date(Date.UTC(y, m - 1, d, Math.floor(startMin / 60) - 5, startMin % 60));
     }
 
     function formatDaysHours(ms) {
@@ -324,22 +323,24 @@
       const totalExams = EVENTS.length;
       const progressPercent = (completed / totalExams) * 100;
       
-      // Calculate Freedom Days
+      // Calculate Freedom Days (Until Theory Done)
+      const theoryEnd = new Date(THEORY_DONE_DATE).getTime();
       const lastExamEnd = new Date(ALL_DONE_DATE).getTime();
-      const freedomMs = Math.max(0, lastExamEnd - nowMs);
+      
+      const freedomMs = Math.max(0, theoryEnd - nowMs);
       const freedomDays = Math.ceil(freedomMs / (1000 * 60 * 60 * 24));
 
       // Update basic stats
       statDone.textContent = `${completed}/${totalExams}`;
       statBurden.textContent = `${progressPercent.toFixed(0)}%`;
-      statFreedom.textContent = freedomDays > 0 ? freedomDays : 'FREEDOM!';
+      statFreedom.textContent = nowMs > theoryEnd ? 'FREEDOM' : freedomDays;
       statsGrid.classList.remove('hidden');
 
-      // 1. ARE ALL EXAMS DONE?
+      // 1. IS TOTAL SEASON DONE? (After June 11)
       if (nowMs >= lastExamEnd) {
         widget.classList.add('s-done');
-        labelEl.textContent = '✨ FREEDOM ACHIEVED';
-        subEl.textContent = 'Mission Complete. Building mode engaged.';
+        labelEl.textContent = '✨ TOTAL FREEDOM';
+        subEl.textContent = 'All exams & practicals finished. Enjoy!';
         pillEl.classList.remove('hidden');
         pillText.textContent = '100% RELAX';
         barWrap.classList.add('hidden');
@@ -366,7 +367,22 @@
         return;
       }
 
-      // 3. JUST FINISHED AN EXAM? (Rest of the day after an exam)
+      // 3. AFTER THEORY BUT BEFORE PRACTICALS (THE REAL "FREEDOM" STATE)
+      if (nowMs >= theoryEnd && !active) {
+          const nextPractical = windows.find(w => w.type === 'practical' && w.startMs > nowMs);
+          if (nextPractical) {
+              // We are between April 15 and a practical
+              widget.classList.add('s-done');
+              labelEl.textContent = '🎉 THEORY FINISHED // FREEDOM';
+              subEl.textContent = `Main burden off. Next practical: ${nextPractical.subject}`;
+              pillEl.classList.remove('hidden');
+              pillText.textContent = formatDaysHours(nextPractical.startMs - nowMs) + ' GAP';
+              barWrap.classList.add('hidden');
+              return;
+          }
+      }
+
+      // 4. JUST FINISHED AN EXAM? (Rest of the day after an exam)
       const justFinished = windows.find(w => nowMs > w.endMs && (nowMs - w.endMs) < 6 * 60 * 60 * 1000);
       if (justFinished) {
           widget.classList.add('s-done');
@@ -377,7 +393,7 @@
           return;
       }
 
-      // 4. BEFORE SEASON START
+      // 5. BEFORE SEASON START
       const seasonStartMs = new Date(SEASON_START).getTime();
       if (nowMs < seasonStartMs) {
         widget.classList.add('s-soon');
@@ -389,7 +405,7 @@
         return;
       }
 
-      // 5. GAP BETWEEN EXAMS
+      // 6. GAP BETWEEN THEORY EXAMS
       const next = windows.find(w => w.startMs > nowMs);
       if (next) {
         widget.classList.add('s-between');
