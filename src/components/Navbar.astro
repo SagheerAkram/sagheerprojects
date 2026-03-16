@@ -1,10 +1,10 @@
 ---
 // src/components/Navbar.astro
 const navLinks = [
-  { href: '/exams', label: 'Exams' },
-  { href: '/projects', label: 'Archive' },
-  { href: '/photography', label: 'Visuals' },
-  { href: '/about', label: 'About' },
+  { href: '/exams/', label: 'Exams' },
+  { href: '/projects/', label: 'Archive' },
+  { href: '/photography/', label: 'Visuals' },
+  { href: '/about/', label: 'About' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -88,7 +88,7 @@ const currentPath = Astro.url.pathname;
         ))}
       </ul>
       <div class="mt-auto pb-12">
-        <p class="text-[10px] uppercase tracking-widest text-slate-700">Digital Archive // v2.0</p>
+        <p class="text-[10px] uppercase tracking-widest text-slate-700">Digital Archive • v2.0</p>
       </div>
     </div>
   </div>

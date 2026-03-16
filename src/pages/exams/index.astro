@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExamCenter from '../../components/ExamCenter.astro';
+---
+
+<BaseLayout title="Examination Battlefield | Mission Control">
+  <main class="pt-24 space-y-12 pb-32">
+    <!-- ACADEMIC DASHBOARD -->
+    <section class="relative z-10 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div>
+            <h2 class="text-4xl md:text-8xl font-black text-white tracking-tighter mb-4 italic">Academic Status.</h2>
+            <p class="text-slate-500 max-w-md font-bold uppercase tracking-[0.3em] text-[10px]">THE JOURNEY TO 1100+ MARKS // MATRIC 2026</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl relative overflow-hidden group">
+              <div class="flex items-center gap-6 relative z-10">
+                  <div class="flex flex-col">
+                      <span class="text-4xl font-black text-accent-ice italic tracking-tighter leading-none">456<span class="text-xs text-slate-500 not-italic ml-1">/545</span></span>
+                      <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-2 ml-1">PART 1 BASELINE</span>
+                  </div>
+                  <div class="h-12 w-px bg-white/10"></div>
+                  <div class="flex flex-col">
+                      <span class="text-4xl font-black text-accent-teal italic tracking-tighter leading-none">83.6%</span>
+                      <span class="text-[8px] font-bold text-accent-teal uppercase tracking-widest mt-2">CURRENT KPI</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <div class="group p-10 rounded-[50px] bg-accent-teal/5 border border-accent-teal/10 hover:border-accent-teal/30 transition-all">
+            <div class="flex justify-between items-start mb-8">
+              <span class="text-[9px] font-black tracking-widest text-accent-teal uppercase">[[ ELITE TARGET ]]</span>
+            </div>
+            <h3 class="text-4xl font-black text-white mb-8 italic tracking-tighter">Math & CS</h3>
+            <div class="space-y-10">
+              <div>
+                <div class="flex justify-between text-[11px] font-bold text-slate-300 uppercase mb-3"><span>Mathematics</span><span class="text-accent-teal">75/75 ULTIMATE</span></div>
+                <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[95%] bg-accent-teal shadow-[0_0_20px_rgba(20,184,166,0.4)]"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Other cards would go here for brevity, keeping simple for now to ensure routing works -->
+        </div>
+      </div>
+    </section>
+
+    <!-- THE JOURNAL -->
+    <section class="px-6">
+      <div class="max-w-6xl mx-auto p-12 md:p-16 rounded-[60px] bg-white/[0.01] border border-white/[0.03] relative overflow-hidden group">
+        <h4 class="text-xs font-black text-accent-teal tracking-[0.4em] uppercase mb-10 italic">[[ THE MATRICULATION JOURNAL ]]</h4>
+        <blockquote class="text-3xl md:text-5xl font-serif italic text-white leading-[1.1] tracking-tight">
+          "The goal isn't just to score—it's to <span class="text-accent-ice">master.</span>"
+        </blockquote>
+      </div>
+    </section>
+
+    <ExamCenter />
+  </main>
+
+</BaseLayout>

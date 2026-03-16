@@ -2,7 +2,6 @@
 // src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { photos } from '../data/photography.js';
-import ExamStatus from '../components/ExamStatus.astro';
 import Archive from '../components/Archive.astro';
 
 const previewPhotos = photos.slice(0, 6);
@@ -16,10 +15,10 @@ const previewPhotos = photos.slice(0, 6);
   <section class="relative min-h-screen flex flex-col justify-center px-6 md:px-16 pt-32 pb-16 overflow-hidden">
     <div class="relative z-10 max-w-6xl mx-auto w-full">
       <div class="flex flex-col lg:grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-7">
-          <div class="flex items-center gap-3 mb-8 reveal">
+        <div class="lg:col-span-12 lg:text-center">
+          <div class="flex items-center justify-center gap-3 mb-8 reveal">
             <span class="w-8 h-px bg-accent-teal/30"></span>
-            <span class="text-[10px] font-bold tracking-[0.3em] text-accent-teal uppercase">EST. 2025 // MISSION CONTROL</span>
+            <span class="text-[10px] font-black tracking-[0.3em] text-accent-teal uppercase">EST. 2025 • MISSION CONTROL</span>
           </div>
 
           <h1 class="text-6xl md:text-9xl font-black text-white tracking-tighter leading-[0.85] reveal">
@@ -27,12 +26,12 @@ const previewPhotos = photos.slice(0, 6);
             <span class="block text-xl md:text-3xl font-light tracking-widest text-slate-500 mt-6 lowercase">making code feel a bit more human.</span>
           </h1>
 
-          <p class="text-slate-400 text-lg md:text-xl leading-relaxed mb-12 max-w-xl mt-12 reveal">
+          <p class="text-slate-400 text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto mt-12 reveal">
             I’m a student researcher spent on the intersection of AI, code, and nature. 
             Currently in the thick of the matriculation season 2026.
           </p>
 
-          <div class="flex flex-wrap gap-8 reveal">
+          <div class="flex flex-wrap justify-center gap-8 reveal">
             <a href="/projects" class="group relative px-8 py-4 bg-white text-black font-black uppercase tracking-tighter text-sm rounded-full transition-all hover:bg-accent-ice">
               Enter the Archive
             </a>
@@ -41,10 +40,6 @@ const previewPhotos = photos.slice(0, 6);
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-y-1 transition-transform opacity-40"><path d="m7 10 5 5 5-5"/></svg>
             </a>
           </div>
-        </div>
-
-        <div class="lg:col-span-5 w-full flex justify-center lg:justify-end reveal">
-          <ExamStatus />
         </div>
       </div>
     </div>
@@ -62,7 +57,7 @@ const previewPhotos = photos.slice(0, 6);
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
         <div class="reveal">
-          <h2 class="text-sm font-black tracking-[0.4em] text-accent-teal uppercase mb-8 italic">// IDENTITY LOG</h2>
+          <h2 class="text-sm font-black tracking-[0.4em] text-accent-teal uppercase mb-8 italic">• IDENTITY LOG</h2>
           <p class="text-3xl md:text-5xl font-black text-white leading-[1.1] tracking-tighter mb-12">
             A student researcher building at the intersection of <span class="text-accent-ice italic">logic</span> and <span class="text-accent-teal">creativity.</span>
           </p>
@@ -118,156 +113,14 @@ const previewPhotos = photos.slice(0, 6);
     </div>
   </section>
 
-  <!-- ACADEMIC DASHBOARD -->
-  <section class="relative z-10 py-32 bg-mesh-dark">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 reveal">
-        <div>
-          <h2 class="text-4xl md:text-8xl font-black text-white tracking-tighter mb-4 italic">Academic Status.</h2>
-          <p class="text-slate-500 max-w-md font-bold uppercase tracking-[0.3em] text-[10px]">THE JOURNEY TO 1100+ MARKS // MATRIC 2026</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl relative overflow-hidden group">
-            <div class="flex items-center gap-6 relative z-10">
-                <div class="flex flex-col">
-                    <span class="text-4xl font-black text-accent-ice italic tracking-tighter leading-none">456<span class="text-xs text-slate-500 not-italic ml-1">/545</span></span>
-                    <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-2 ml-1">PART 1 BASELINE</span>
-                </div>
-                <div class="h-12 w-px bg-white/10"></div>
-                <div class="flex flex-col">
-                    <span class="text-4xl font-black text-accent-teal italic tracking-tighter leading-none">83.6%</span>
-                    <span class="text-[8px] font-bold text-accent-teal uppercase tracking-widest mt-2">CURRENT KPI</span>
-                </div>
-            </div>
-            <div class="absolute -bottom-8 -right-8 w-24 h-24 bg-accent-teal/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-        <!-- Elite Targets -->
-        <div class="group p-10 rounded-[50px] bg-accent-teal/5 border border-accent-teal/10 hover:border-accent-teal/30 transition-all reveal">
-          <div class="flex justify-between items-start mb-8">
-            <span class="text-[9px] font-black tracking-widest text-accent-teal uppercase">[[ ELITE TARGET ]]</span>
-            <div class="w-2 h-2 rounded-full bg-accent-teal animate-pulse"></div>
-          </div>
-          <h3 class="text-4xl font-black text-white mb-8 italic tracking-tighter">Math & CS</h3>
-          <div class="space-y-10">
-            <div>
-              <div class="flex justify-between text-[11px] font-bold text-slate-300 uppercase mb-3"><span>Mathematics</span><span class="text-accent-teal">75/75 ULTIMATE</span></div>
-              <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[95%] bg-accent-teal shadow-[0_0_20px_rgba(20,184,166,0.4)] transition-all group-hover:w-full duration-1000"></div></div>
-              <p class="text-[9px] text-slate-500 mt-3 font-mono">P1: 66/75 // TARGETING FULL MARKS IN P2</p>
-            </div>
-            <div>
-              <div class="flex justify-between text-[11px] font-bold text-slate-300 uppercase mb-3"><span>Computer Science</span><span class="text-accent-teal">50/50 PREX</span></div>
-              <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden"><div class="h-full w-full bg-accent-teal shadow-[0_0_20px_rgba(20,184,166,0.4)]"></div></div>
-              <p class="text-[9px] text-slate-500 mt-3 font-mono">P1: 50/50 // MAINTAINING THE STREAK</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pushing Hard -->
-        <div class="group p-10 rounded-[50px] bg-accent-ice/5 border border-accent-ice/10 hover:border-accent-ice/30 transition-all reveal" style="transition-delay: 100ms;">
-          <div class="flex justify-between items-start mb-8">
-            <span class="text-[9px] font-black tracking-widest text-accent-ice uppercase">[[ PUSHING HARD ]]</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="text-accent-ice group-hover:translate-x-1 transition-transform"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <h3 class="text-4xl font-black text-white mb-8 italic tracking-tighter">Science Core</h3>
-          <div class="space-y-10">
-            <div class="relative">
-              <div class="flex justify-between text-[11px] font-bold text-slate-300 uppercase mb-3"><span>Physics</span><span class="text-accent-ice">REACHING 120/120</span></div>
-              <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[92%] bg-accent-ice transition-all group-hover:w-[98%] duration-1000 shadow-[0_0_20px_rgba(125,211,252,0.3)]"></div></div>
-              <p class="text-[9px] text-slate-500 mt-3 font-mono">P1: 55/60 // PUSHING FOR MAX IN P2</p>
-            </div>
-            <div class="relative">
-              <div class="flex justify-between text-[11px] font-bold text-slate-300 uppercase mb-3"><span>Chemistry</span><span class="text-accent-ice">TARGET 120/120</span></div>
-              <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[80%] bg-accent-ice transition-all group-hover:w-[90%] duration-1000 shadow-[0_0_20px_rgba(125,211,252,0.3)]"></div></div>
-              <p class="text-[9px] text-slate-500 mt-3 font-mono">P1: 48/60 // REMASTERED FOCUS FOR P2</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Weakest Link -->
-        <div class="group p-10 rounded-[50px] bg-red-500/5 border border-red-500/10 hover:border-red-500/20 transition-all reveal" style="transition-delay: 200ms;">
-          <div class="flex justify-between items-start mb-8">
-            <span class="text-[9px] font-black tracking-widest text-red-500 uppercase">[[ WEAKEST LINK ]]</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="text-red-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <h3 class="text-4xl font-black text-white mb-8 italic tracking-tighter">Humanities</h3>
-          <div class="space-y-10">
-            <div>
-              <div class="flex justify-between text-[11px] font-bold text-slate-300 uppercase mb-3"><span>Urdu</span><span class="text-red-500">GRINDING GAP</span></div>
-              <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden"><div class="h-full w-[45%] bg-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.2)]"></div></div>
-              <p class="text-[9px] text-slate-600 mt-3 font-mono italic">STRATEGIC FOCUS: 3HRS/DAY ON GRAMMAR</p>
-            </div>
-            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-                <p class="text-[10px] text-slate-500 leading-relaxed font-medium italic">"Current bottleneck identified in Urdu literature. Deploying additional research and practice modules to bridge the score variance."</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- THE JOURNAL -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch reveal">
-        <div class="lg:col-span-8 p-12 md:p-16 rounded-[60px] bg-white/[0.01] border border-white/[0.03] relative overflow-hidden group">
-          <div class="absolute top-0 right-0 p-12 text-[9px] font-black text-slate-800 tracking-[0.5em] uppercase pointer-events-none">MT-LOG // 2026_SSN</div>
-          <h4 class="text-xs font-black text-accent-teal tracking-[0.4em] uppercase mb-10 italic">[[ THE MATRICULATION JOURNAL ]]</h4>
-          
-          <div class="space-y-8">
-            <blockquote class="text-3xl md:text-5xl font-serif italic text-white leading-[1.1] tracking-tight">
-              "The goal isn't just to score—it's to <span class="text-accent-ice">master.</span> A 75/75 in Maths isn't just a number; it's the ultimate proof of logic. Computer Science is my native tongue (50/50). Urdu is my dragon, but every dragon has a pattern to map."
-            </blockquote>
-            
-            <p class="text-slate-500 text-lg leading-relaxed max-w-2xl font-light">
-              Combined with my 456 baseline, every exam in Part 2 is a crucial module update. Chemistry (48) and Physics (55) are undergoing intense optimization. The mission is clear: 1100+ total.
-            </p>
-          </div>
-
-          <div class="mt-12 flex gap-4">
-              <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[9px] font-bold text-slate-400 uppercase tracking-widest">MISSION: 1100+</span>
-              <span class="px-4 py-2 rounded-full bg-accent-teal/10 border border-accent-teal/20 text-[9px] font-bold text-accent-teal uppercase tracking-widest">TARGET: ALL FULL MARKS</span>
-          </div>
-
-          <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-accent-teal/5 blur-[100px] rounded-full group-hover:bg-accent-teal/10 transition-all duration-1000"></div>
-        </div>
-
-        <div class="lg:col-span-4 flex flex-col gap-6">
-            <div class="flex-1 p-10 rounded-[50px] bg-white/[0.02] border border-white/5 relative overflow-hidden">
-                <span class="text-[9px] font-black text-slate-600 uppercase tracking-widest mb-6 block">// PART 1 RECORD</span>
-                <div class="space-y-4">
-                    {[
-                        { s: 'Computer', m: '50/50', c: 'text-accent-teal' },
-                        { s: 'Physics', m: '55/60', c: 'text-accent-ice' },
-                        { s: 'Chemistry', m: '48/60', c: 'text-slate-400' },
-                        { s: 'Maths', m: '66/75', c: 'text-accent-ice' },
-                        { s: 'English', m: '65/75', c: 'text-slate-500' },
-                        { s: 'Urdu', m: 'Pending', c: 'text-red-500/50' },
-                        { s: 'Islamiyat', m: '39/50', c: 'text-slate-600'}
-                    ].map(item => (
-                        <div class="flex justify-between items-center group/item">
-                            <span class="text-[11px] font-bold text-slate-500 uppercase group-hover/item:text-white transition-colors tracking-tight">{item.s}</span>
-                            <span class={`text-[11px] font-mono font-black ${item.c}`}>{item.m}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            
-            <div class="p-10 rounded-[40px] bg-accent-teal/10 border border-accent-teal/20 text-center relative overflow-hidden group">
-                <span class="text-[10px] font-black text-accent-teal uppercase tracking-[0.3em] mb-3 block">PREDICTED SUM</span>
-                <span class="text-6xl font-black text-white italic tracking-tighter relative z-10">1050+</span>
-                <div class="absolute inset-0 bg-gradient-to-br from-accent-teal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-    </div>
-  </section>
 
 
   <!-- LAB ARSENAL -->
   <section class="py-32 border-t border-white/5 bg-black/40">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-24 reveal">
-        <h2 class="text-sm font-black tracking-[0.5em] text-accent-ice uppercase mb-6 italic">[[ LAB ARSENAL ]]</h2>
+        <h2 class="text-sm font-black tracking-[0.5em] text-accent-ice uppercase mb-6 italic">• LAB ARSENAL</h2>
         <h3 class="text-4xl md:text-6xl font-black text-white tracking-tighter italic">Human-AI Collaboration Stack.</h3>
       </div>
 

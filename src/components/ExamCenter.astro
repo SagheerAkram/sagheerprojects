@@ -7,234 +7,372 @@
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
       
-      <!-- LEFT: Meta Data & Mission Title -->
-      <div class="lg:col-span-4 sticky top-32">
-        <div class="flex items-center gap-3 mb-6 reveal">
-          <span class="w-12 h-px bg-red-500/50"></span>
-          <span class="text-[10px] font-black tracking-[0.4em] text-red-500 uppercase italic">OPERATIONAL PHASE: EXAMS</span>
+      <!-- LEFT: MISSION STATS & NEXT UP -->
+      <div class="lg:col-span-12 xl:col-span-5 xl:sticky xl:top-32 h-fit">
+        <div class="flex items-center gap-3 mb-8 reveal">
+            <div class="w-12 h-px bg-accent-teal/50"></div>
+            <span class="text-[10px] font-black tracking-[0.4em] text-accent-teal uppercase italic">SYSTEMS: ARMED // MISSION: MATRIC 2026</span>
         </div>
         
-        <h2 class="text-6xl md:text-8xl font-black text-white tracking-tighter italic leading-[0.8] mb-12 reveal">
-          Exam<br/>Center.
-        </h2>
+        <div id="next-exam-hero" class="relative group p-12 rounded-[60px] bg-white/[0.02] border border-white/10 backdrop-blur-3xl overflow-hidden mb-12">
+            <!-- Background Glow -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-accent-ice/5 blur-[120px] group-hover:bg-accent-ice/10 transition-all duration-1000"></div>
+            
+            <div class="relative z-10">
+                <span class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4 block italic">[[ NEXT OBJECTIVE ]]</span>
+                <h2 id="hero-subject" class="text-6xl md:text-8xl font-black text-white tracking-tighter italic leading-[0.8] mb-8">
+                  Loading...
+                </h2>
+                
+                <!-- COUNTDOWN CLOCK -->
+                <div class="flex gap-4 md:gap-8 items-center mb-10">
+                    <div class="countdown-unit">
+                        <span id="cd-days" class="text-4xl md:text-6xl font-black text-accent-ice tabular-nums italic">00</span>
+                        <span class="text-[8px] font-black text-slate-600 uppercase tracking-widest block mt-2">Days</span>
+                    </div>
+                    <div class="w-px h-12 bg-white/5"></div>
+                    <div class="countdown-unit">
+                        <span id="cd-hours" class="text-4xl md:text-6xl font-black text-accent-ice tabular-nums italic">00</span>
+                        <span class="text-[8px] font-black text-slate-600 uppercase tracking-widest block mt-2">Hours</span>
+                    </div>
+                    <div class="w-px h-12 bg-white/5"></div>
+                    <div class="countdown-unit">
+                        <span id="cd-mins" class="text-4xl md:text-6xl font-black text-accent-ice tabular-nums italic">00</span>
+                        <span class="text-[8px] font-black text-slate-600 uppercase tracking-widest block mt-2">Mins</span>
+                    </div>
+                </div>
 
-        <div class="space-y-8 reveal">
-          <div class="p-8 rounded-[40px] bg-white/[0.02] border border-white/5 backdrop-blur-3xl relative overflow-hidden group">
-            <span class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-4 block">// CANDIDATE_ID</span>
-            <div class="flex items-end justify-between relative z-10">
-                <span class="text-5xl font-black text-white tracking-widest italic leading-none">240357</span>
-                <span class="text-[10px] font-bold text-accent-teal uppercase tracking-widest bg-accent-teal/10 px-2 py-1 rounded">VERIFIED</span>
+                <div class="flex items-center gap-4">
+                    <div class="px-4 py-2 rounded-full bg-accent-teal/10 border border-accent-teal/20">
+                        <span id="hero-date" class="text-[10px] font-black text-accent-teal uppercase tracking-widest">30 Mar @ 09:00</span>
+                    </div>
+                    <span class="text-[9px] font-bold text-slate-500 uppercase tracking-[0.2em]">PKT ZONE</span>
+                </div>
             </div>
-            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-accent-teal/5 blur-3xl group-hover:bg-accent-teal/10 transition-all"></div>
-          </div>
+        </div>
 
-          <div class="grid grid-cols-2 gap-4">
-              <div class="p-6 rounded-3xl bg-white/[0.01] border border-white/5">
-                <span class="text-[8px] font-bold text-slate-600 uppercase mb-2 block">Phase 01</span>
-                <span class="text-lg font-black text-white italic tracking-tight">THEORY</span>
-                <span class="text-[10px] text-slate-500 block mt-1">Ongoing</span>
-              </div>
-              <div class="p-6 rounded-3xl bg-white/[0.01] border border-white/5 opacity-40">
-                <span class="text-[8px] font-bold text-slate-600 uppercase mb-2 block">Phase 02</span>
-                <span class="text-lg font-black text-white italic tracking-tight">PRACS</span>
-                <span class="text-[10px] text-slate-500 block mt-1">May 21</span>
-              </div>
-          </div>
+        <!-- PRACS: SMALL CORNER MODULE -->
+        <div id="practicals-module" class="p-8 rounded-[40px] bg-white/[0.01] border border-white/5 opacity-60 hover:opacity-100 transition-opacity">
+            <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
+                <span class="w-4 h-px bg-slate-700"></span> 
+                Phase 02: Practicals
+            </h4>
+            <div id="pracs-list" class="space-y-4">
+                <!-- Injected -->
+            </div>
         </div>
       </div>
 
-      <!-- RIGHT: Interactive Datesheet & Tracking -->
-      <div class="lg:col-span-8">
-        <div id="main-exam-portal" class="bg-white/[0.01] border border-white/5 rounded-[50px] p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12 pb-8 border-b border-white/10">
-                <div>
-                    <h3 id="main-status-label" class="text-2xl font-black text-white italic tracking-tight uppercase mb-1">Loading System...</h3>
-                    <p id="main-status-sub" class="text-[10px] font-medium text-slate-500 uppercase tracking-widest">Awaiting PKT synchronization</p>
+      <!-- RIGHT: BATTLEFIELD LIST -->
+      <div class="lg:col-span-12 xl:col-span-7">
+        <div class="mission-header flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-12">
+            <div>
+                <h3 class="text-3xl font-black text-white italic tracking-tighter">Mission Log.</h3>
+                <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-2">Score Secured vs Potential Stake</p>
+            </div>
+            
+            <!-- MISSION TRACKER UI -->
+            <div class="text-right flex flex-col items-end w-full md:w-auto min-w-[260px]">
+                <div class="flex flex-col items-end gap-1 mb-3">
+                    <span id="main-stat-total" class="text-5xl font-black text-accent-ice italic tracking-tighter leading-none">0/1200</span>
+                    <span class="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em] flex items-center gap-2">
+                        STAKES_ESTABLISHED
+                        <span class="w-1 h-1 rounded-full bg-accent-teal"></span>
+                    </span>
                 </div>
-                <div class="flex gap-4">
-                    <div class="text-right">
-                        <span id="main-stat-total" class="text-2xl font-black text-accent-teal italic block leading-none">0/11</span>
-                        <span class="text-[8px] font-bold text-slate-600 uppercase tracking-widest">CONQUERED</span>
+                
+                <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/10 relative">
+                    <!-- Base Foundation (9th) -->
+                    <div id="foundation-bar" class="absolute inset-y-0 left-0 bg-accent-teal/40 transition-all duration-1000" style="width: 38%"></div>
+                    <!-- Current Mission Fill -->
+                    <div id="global-progress-bar" class="absolute inset-y-0 left-0 bg-gradient-to-r from-accent-teal to-accent-ice shadow-lg transition-all duration-1000" style="width: 0%"></div>
+                </div>
+                
+                <div class="flex items-center gap-4 mt-3">
+                    <div class="flex items-center gap-1.5">
+                        <div class="w-1.5 h-1.5 rounded-full bg-accent-teal/40"></div>
+                        <span class="text-[8px] font-bold text-slate-500 uppercase">9th BASE: 456</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <div class="w-1.5 h-1.5 rounded-full bg-accent-teal animate-pulse"></div>
+                        <span class="text-[8px] font-black text-white uppercase tracking-tighter">TARGET: 1000+</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="main-datesheet-list" class="space-y-4">
-                <!-- Injected via script -->
-            </div>
-            
-            <div class="mt-12 p-8 rounded-3xl bg-accent-teal/5 border border-accent-teal-500/10 hidden" id="main-live-container">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-xs font-black text-accent-teal uppercase tracking-widest italic animate-pulse">[[ ACTIVE MODULE PROGRESS ]]</span>
-                    <span id="main-live-percent" class="text-xs font-mono font-bold text-white">0%</span>
-                </div>
-                <div class="h-3 w-full bg-white/5 rounded-full overflow-hidden">
-                    <div id="main-live-bar" class="h-full w-0 bg-accent-teal shadow-[0_0_20px_rgba(20,184,166,0.3)] transition-all duration-1000"></div>
-                </div>
-            </div>
+        <div id="theory-list" class="space-y-3">
+            <!-- Theory Exams Injected Here -->
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <style>
     #exam-battlefield {
-        background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
+        background: radial-gradient(circle at 10% 20%, rgba(20, 184, 166, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 90% 80%, rgba(125, 211, 252, 0.03) 0%, transparent 50%);
     }
 
-    .main-exam-row {
+    .exam-tile {
         display: grid;
         grid-template-columns: 1fr auto;
-        padding: 24px;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 24px;
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        padding: 24px 32px;
+        background: rgba(255, 255, 255, 0.01);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        border-radius: 32px;
+        transition: all 0.5s cubic-bezier(0.2, 1, 0.2, 1);
         align-items: center;
-        gap: 20px;
     }
 
-    .main-exam-row:hover {
-        background: rgba(255, 255, 255, 0.04);
+    .exam-tile:hover {
+        background: rgba(255, 255, 255, 0.03);
         border-color: rgba(255, 255, 255, 0.1);
-        transform: scale(1.01);
+        transform: translateY(-2px);
     }
 
-    .main-exam-row.active {
-        background: rgba(239, 68, 68, 0.05);
-        border-color: rgba(239, 68, 68, 0.2);
-        box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);
+    .exam-tile.active {
+        background: rgba(20, 184, 166, 0.05);
+        border-color: rgba(20, 184, 166, 0.2);
+        box-shadow: 0 10px 40px -10px rgba(20, 184, 166, 0.1);
     }
 
-    .main-exam-row.done {
-        opacity: 0.5;
-        border-style: dashed;
+    .exam-tile.done {
+        opacity: 0.3;
+        filter: grayscale(1);
     }
 
-    .subject-info h4 {
-        font-size: 16px;
+    .exam-tile .subject-name {
+        font-size: 20px;
         font-weight: 900;
         color: #fff;
-        margin-bottom: 4px;
+        font-style: italic;
         letter-spacing: -0.02em;
+        margin-bottom: 2px;
     }
 
-    .subject-info .meta {
+    .exam-tile .meta {
         font-size: 10px;
-        font-weight: 500;
+        font-weight: 700;
         color: #64748b;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.15em;
     }
 
-    .status-tag {
-        font-size: 9px;
+    .status-pill {
+        font-size: 8px;
         font-weight: 900;
-        padding: 4px 12px;
+        padding: 6px 16px;
         border-radius: 99px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
+        border: 1px solid transparent;
     }
 
-    .status-tag.locked { background: rgba(255, 255, 255, 0.05); color: #475569; }
-    .status-tag.active { background: #ef4444; color: white; animation: blink 1s infinite; }
-    .status-tag.done { background: rgba(20,184,166,0.1); color: #14b8a6; }
+    .status-pill.upcoming { border-color: rgba(255, 255, 255, 0.1); color: #475569; }
+    .status-pill.active { background: #14b8a6; color: white; box-shadow: 0 0 20px rgba(20, 184, 166, 0.4); }
+    .status-pill.done { border-color: rgba(20, 184, 166, 0.2); color: #14b8a6; }
 
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.6; }
+    .prac-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 20px;
+        border-left: 2px solid transparent;
+    }
+    
+    .prac-item:hover {
+        border-color: #7dd3fc;
+        background: rgba(125, 211, 252, 0.05);
+    }
+
+    /* MISSION TRACKER FIX */
+    .mission-header {
+        position: relative;
+        z-index: 20;
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-blur: 10px;
+        padding: 20px;
+        border-radius: 30px;
+        border: 1px solid rgba(255,255,255,0.05);
     }
 </style>
 
 <script is:inline>
   (function () {
-    const EVENTS = [
-      { id: 'eng', subject: 'English (Comp)', date: '2026-03-30', start: 9, dur: 3 },
-      { id: 'phy', subject: 'Physics', date: '2026-04-01', start: 9, dur: 3 },
-      { id: 'qur', subject: 'Tarjama-ul-Quran', date: '2026-04-03', start: 9, dur: 3 },
-      { id: 'cs',  subject: 'Computer Science', date: '2026-04-06', start: 9, dur: 3 },
-      { id: 'ch',  subject: 'Chemistry', date: '2026-04-08', start: 9, dur: 3 },
-      { id: 'ur',  subject: 'Urdu (Comp)', date: '2026-04-10', start: 9, dur: 3 },
-      { id: 'ma',  subject: 'Mathematics', date: '2026-04-13', start: 9, dur: 3 },
-      { id: 'ps',  subject: 'Pakistan Studies', date: '2026-04-15', start: 9, dur: 3 },
-      { id: 'pp',  subject: 'Physics Practical', date: '2026-05-21', start: 11.5, dur: 3 },
-      { id: 'cp',  subject: 'Computer Practical', date: '2026-06-05', start: 9, dur: 3 },
-      { id: 'chp', subject: 'Chemistry Practical', date: '2026-06-11', start: 11.5, dur: 3 },
+    const DATA = [
+      { id: 'eng', subject: 'English (Comp)', date: '2026-03-30', start: 9, part1: 65, target: 65, total: 75, max: 150, mood: 'green' },
+      { id: 'phy', subject: 'Physics', date: '2026-04-01', start: 9, part1: 55, target: 55, total: 60, max: 150, mood: 'orange', pracTotal: 30 },
+      { id: 'qur', subject: 'Tarjama-ul-Quran', date: '2026-04-03', start: 9, part1: 39, target: 45, total: 50, max: 100, mood: 'orange' },
+      { id: 'cs',  subject: 'Computer Science', date: '2026-04-06', start: 9, part1: 50, target: 50, total: 50, max: 150, mood: 'emerald', pracTotal: 50 },
+      { id: 'ch',  subject: 'Chemistry', date: '2026-04-08', start: 9, part1: 48, target: 55, total: 60, max: 150, mood: 'yellow', pracTotal: 30 },
+      { id: 'ur',  subject: 'Urdu (Comp)', date: '2026-04-10', start: 9, part1: 57, target: 50, total: 75, max: 150, mood: 'red' },
+      { id: 'ma',  subject: 'Mathematics', date: '2026-04-13', start: 9, part1: 66, target: 75, total: 75, max: 150, mood: 'lime' },
+      { id: 'ps',  subject: 'Pakistan Studies', date: '2026-04-15', start: 9, part1: 0, target: 80, total: 100, max: 100, mood: 'yellow' },
+    ];
+
+    const COMPLETED = [
+      { id: 'isl', subject: 'Islamiyat', obtained: 76, total: 100 }
+    ];
+
+    const PRACTICALS = [
+      { id: 'pp',  subject: 'Physics Prac', date: '2026-05-21', start: 11.5, target: 30 },
+      { id: 'cp',  subject: 'Computer Prac', date: '2026-06-05', start: 9, target: 50 },
+      { id: 'chp', subject: 'Chemistry Prac', date: '2026-06-11', start: 11.5, target: 30 },
     ];
 
     function pktToDate(dateStr, startHour) {
       const [y, m, d] = dateStr.split('-').map(Number);
       const startMin = Math.round(startHour * 60);
-      return new Date(Date.UTC(y, m - 1, d, Math.floor(startMin / 60) - 5, startMin % 60));
+      return new Date(Date.UTC(y, m - 1, d, Math.floor(startMin / 60) - 5, startMin % 60)).getTime();
     }
 
-    function updatePortal() {
+    const MOOD_COLORS = {
+      red: 'text-red-400 border-red-900/30',
+      green: 'text-green-400 border-green-900/30',
+      emerald: 'text-emerald-400 border-emerald-900/30',
+      orange: 'text-orange-400 border-orange-900/30',
+      yellow: 'text-yellow-400 border-yellow-900/30',
+      lime: 'text-lime-400 border-lime-900/30',
+      blue: 'text-blue-400 border-blue-900/30'
+    };
+
+    function updateDashboard() {
         const now = new Date().getTime();
-        const list = document.getElementById('main-datesheet-list');
-        const statusLabel = document.getElementById('main-status-label');
-        const totalDone = document.getElementById('main-stat-total');
-        const liveContainer = document.getElementById('main-live-container');
-        const liveBar = document.getElementById('main-live-bar');
-        const livePercent = document.getElementById('main-live-percent');
+        const theoryList = document.getElementById('theory-list');
+        const pracsList = document.getElementById('pracs-list');
+        const totalStat = document.getElementById('main-stat-total');
+        const heroSubject = document.getElementById('hero-subject');
+        const heroDate = document.getElementById('hero-date');
+        const cdDays = document.getElementById('cd-days');
+        const cdHours = document.getElementById('cd-hours');
+        const cdMins = document.getElementById('cd-mins');
 
-        if (!list) return;
+        if (!theoryList) return;
 
-        let completedCount = 0;
-        let activeExam = null;
+        let completedTheory = 0;
+        let totalObtained = COMPLETED.reduce((acc, curr) => acc + curr.obtained, 0);
+        let nextUp = null;
 
-        const html = EVENTS.map(e => {
-            const start = pktToDate(e.date, e.start).getTime();
-            const end = pktToDate(e.date, e.start + e.dur).getTime();
+        // Render Theory
+        theoryList.innerHTML = DATA.map(e => {
+            const start = pktToDate(e.date, e.start);
+            const end = start + (3 * 3600 * 1000); 
             
-            let status = 'locked';
-            let label = 'LOCKED';
+            let status = 'upcoming';
+            let label = e.target >= e.total ? `GOAL: ${e.target} (FULL)` : `GOAL: ${e.target}+`;
             let rowClass = '';
+            let moodClass = MOOD_COLORS[e.mood] || 'text-slate-400';
 
             if (now >= start && now < end) {
-                status = 'active';
-                label = 'LIVE NOW';
-                rowClass = 'active';
-                activeExam = { start, end, subject: e.subject };
+                status = 'active'; label = 'LIVE'; rowClass = 'active';
             } else if (now >= end) {
-                status = 'done';
-                label = 'CONQUERED';
-                rowClass = 'done';
-                completedCount++;
+                status = 'done'; label = 'CONQUERED'; rowClass = 'done';
+                completedTheory++;
+                totalObtained += e.part1 + e.total; // Assumed done counts as total for now or calculate later
+            } else {
+                if (!nextUp) nextUp = { ...e, start };
+                totalObtained += e.part1; // Only part 1 counted for upcoming
             }
 
             const d = new Date(start);
             const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-            const timeStr = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: true });
-
+            
             return `
-                <div class="main-exam-row ${rowClass}">
-                    <div class="subject-info">
-                        <h4>${e.subject}</h4>
-                        <div class="meta">${dateStr} // ${timeStr} PKT // 3 HOUR LOAD</div>
+                <div class="exam-tile ${rowClass}">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <div class="subject-name">${e.subject}</div>
+                            <span class="text-[9px] font-black ${moodClass} border px-2 py-0.5 rounded-full uppercase italic">${label}</span>
+                        </div>
+                        <div class="meta">
+                            ${dateStr} @ ${d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: true })}
+                            <span class="mx-2 opacity-10">|</span>
+                            PART 1: ${e.part1}/${e.total} OBTAINED
+                        </div>
                     </div>
-                    <span class="status-tag ${status}">${label}</span>
+                    <span class="status-pill ${status}">${status === 'done' ? 'CONQUERED' : (status === 'active' ? 'LIVE' : 'UPCOMING')}</span>
                 </div>
             `;
         }).join('');
 
-        list.innerHTML = html;
-        totalDone.textContent = `${completedCount}/${EVENTS.length}`;
+        // Render Practicals
+        pracsList.innerHTML = PRACTICALS.map(e => {
+            const start = pktToDate(e.date, e.start);
+            const d = new Date(start);
+            return `
+                <div class="prac-item group">
+                    <div>
+                        <div class="text-[12px] font-black text-white italic group-hover:text-accent-ice transition-colors">${e.subject}</div>
+                        <div class="text-[8px] font-bold text-slate-500 uppercase tracking-widest">${d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}</div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[9px] font-black text-accent-ice uppercase block">GOAL: ${e.target}</span>
+                        <span class="text-[7px] text-slate-600 font-bold">FULL MARKS</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
 
-        if (activeExam) {
-            statusLabel.textContent = `CRITICAL: ${activeExam.subject}`;
-            liveContainer.classList.remove('hidden');
-            const pct = ((now - activeExam.start) / (activeExam.end - activeExam.start)) * 100;
-            liveBar.style.width = `${pct}%`;
-            livePercent.textContent = `${pct.toFixed(1)}%`;
+        // Global Stats
+        const totalStatVal = document.getElementById('main-stat-total');
+        const progressBar = document.getElementById('global-progress-bar');
+        const foundationBar = document.getElementById('foundation-bar');
+        
+        // Final Secured = 9th Base + Any 10th exams already done (simulated by targets)
+        const foundationMarks = COMPLETED.reduce((acc, curr) => acc + curr.obtained, 0) + 
+                               DATA.reduce((acc, curr) => acc + curr.part1, 0);
+
+        let potentialSecured = foundationMarks;
+        DATA.forEach(e => {
+            const start = pktToDate(e.date, e.start);
+            const end = start + (3 * 3600 * 1000);
+            if (now >= end) {
+                potentialSecured += e.target; // When exam is done, we "Stake" your target marks
+            }
+        });
+
+        if (totalStatVal) {
+            totalStatVal.innerHTML = `${potentialSecured} <span class="text-slate-700 text-xl">/ 1200</span>`;
+        }
+        
+        if (progressBar && foundationBar) {
+            const foundPercent = (foundationMarks / 1200) * 100;
+            const potentialPercent = Math.min((potentialSecured / 1200) * 100, 100);
+            
+            foundationBar.style.width = `${foundPercent}%`;
+            
+            requestAnimationFrame(() => {
+                progressBar.style.width = `${potentialPercent}%`;
+                progressBar.style.transition = 'width 2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+        }
+
+        // Update Hero Countdown
+        if (nextUp) {
+            heroSubject.textContent = nextUp.subject;
+            const diff = nextUp.start - now;
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            cdDays.textContent = String(d).padStart(2, '0');
+            cdHours.textContent = String(h).padStart(2, '0');
+            cdMins.textContent = String(m).padStart(2, '0');
+            
+            heroDate.textContent = new Date(nextUp.start).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true });
         } else {
-            statusLabel.textContent = 'STANDBY: AWAITING NEXT MODULE';
-            liveContainer.classList.add('hidden');
+            heroSubject.textContent = "SEQUENCE COMPLETE";
+            cdDays.textContent = "00"; cdHours.textContent = "00"; cdMins.textContent = "00";
         }
     }
 
-    updatePortal();
-    setInterval(updatePortal, 1000);
-    document.addEventListener('astro:page-load', updatePortal);
+    updateDashboard();
+    setInterval(updateDashboard, 60000); 
+    document.addEventListener('astro:page-load', updateDashboard);
   })();
 </script>
