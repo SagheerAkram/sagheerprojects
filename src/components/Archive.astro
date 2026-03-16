@@ -1,0 +1,47 @@
+---
+// src/components/Archive.astro
+import { projects } from '../data/projects.js';
+---
+
+<section id="archive" class="relative z-10 py-32 bg-black">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8 reveal">
+        <div>
+          <h2 class="text-sm font-black tracking-[0.4em] text-slate-700 uppercase mb-8 italic">// PROJECT ARCHIVE</h2>
+          <h3 class="text-4xl md:text-7xl font-black text-white tracking-tighter italic">Digital Relics &<br/>Experiments.</h3>
+        </div>
+        <p class="text-slate-500 max-w-xs text-xs font-bold uppercase tracking-[0.2em] leading-loose">
+            A comprehensive log of systems built, deployed, and archived. Each entry represents a milestone in technical exploration.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1px bg-white/5 border border-white/5 rounded-3xl overflow-hidden reveal">
+      {projects.map((project) => (
+        <a href={`/projects/${project.id || ''}`} class="group relative bg-[#050505] p-10 hover:bg-white/[0.03] transition-all duration-700 flex flex-col justify-between aspect-square">
+          <div>
+            <div class="flex justify-between items-start mb-10">
+                <span class="text-[9px] font-black text-slate-600 uppercase tracking-widest">{project.category || 'Module'}</span>
+                <span class="text-[8px] font-mono text-slate-800">EXP_{Math.floor(Math.random()*9000)+1000}</span>
+            </div>
+            <h4 class="text-2xl font-black text-white italic tracking-tighter mb-4 group-hover:text-accent-ice transition-colors">
+                {project.title}
+            </h4>
+            <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed font-light mb-8">
+                {project.description}
+            </p>
+          </div>
+          
+          <div class="flex flex-wrap gap-2 mt-auto">
+            {project.tags?.slice(0, 3).map((tag) => (
+                <span class="text-[8px] font-bold text-slate-600 border border-white/5 px-2 py-1 rounded">
+                    {tag.toUpperCase()}
+                </span>
+            ))}
+          </div>
+
+          <div class="absolute inset-0 border border-accent-ice/30 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

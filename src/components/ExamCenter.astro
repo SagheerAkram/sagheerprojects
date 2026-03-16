@@ -1,0 +1,240 @@
+---
+// src/components/ExamCenter.astro
+// Immersive full-width section for the 2026 Matriculation Exams
+---
+
+<section id="exam-battlefield" class="relative z-10 py-32 bg-mesh-dark border-y border-white/5 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      
+      <!-- LEFT: Meta Data & Mission Title -->
+      <div class="lg:col-span-4 sticky top-32">
+        <div class="flex items-center gap-3 mb-6 reveal">
+          <span class="w-12 h-px bg-red-500/50"></span>
+          <span class="text-[10px] font-black tracking-[0.4em] text-red-500 uppercase italic">OPERATIONAL PHASE: EXAMS</span>
+        </div>
+        
+        <h2 class="text-6xl md:text-8xl font-black text-white tracking-tighter italic leading-[0.8] mb-12 reveal">
+          Exam<br/>Center.
+        </h2>
+
+        <div class="space-y-8 reveal">
+          <div class="p-8 rounded-[40px] bg-white/[0.02] border border-white/5 backdrop-blur-3xl relative overflow-hidden group">
+            <span class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-4 block">// CANDIDATE_ID</span>
+            <div class="flex items-end justify-between relative z-10">
+                <span class="text-5xl font-black text-white tracking-widest italic leading-none">240357</span>
+                <span class="text-[10px] font-bold text-accent-teal uppercase tracking-widest bg-accent-teal/10 px-2 py-1 rounded">VERIFIED</span>
+            </div>
+            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-accent-teal/5 blur-3xl group-hover:bg-accent-teal/10 transition-all"></div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+              <div class="p-6 rounded-3xl bg-white/[0.01] border border-white/5">
+                <span class="text-[8px] font-bold text-slate-600 uppercase mb-2 block">Phase 01</span>
+                <span class="text-lg font-black text-white italic tracking-tight">THEORY</span>
+                <span class="text-[10px] text-slate-500 block mt-1">Ongoing</span>
+              </div>
+              <div class="p-6 rounded-3xl bg-white/[0.01] border border-white/5 opacity-40">
+                <span class="text-[8px] font-bold text-slate-600 uppercase mb-2 block">Phase 02</span>
+                <span class="text-lg font-black text-white italic tracking-tight">PRACS</span>
+                <span class="text-[10px] text-slate-500 block mt-1">May 21</span>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Interactive Datesheet & Tracking -->
+      <div class="lg:col-span-8">
+        <div id="main-exam-portal" class="bg-white/[0.01] border border-white/5 rounded-[50px] p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12 pb-8 border-b border-white/10">
+                <div>
+                    <h3 id="main-status-label" class="text-2xl font-black text-white italic tracking-tight uppercase mb-1">Loading System...</h3>
+                    <p id="main-status-sub" class="text-[10px] font-medium text-slate-500 uppercase tracking-widest">Awaiting PKT synchronization</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="text-right">
+                        <span id="main-stat-total" class="text-2xl font-black text-accent-teal italic block leading-none">0/11</span>
+                        <span class="text-[8px] font-bold text-slate-600 uppercase tracking-widest">CONQUERED</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-datesheet-list" class="space-y-4">
+                <!-- Injected via script -->
+            </div>
+            
+            <div class="mt-12 p-8 rounded-3xl bg-accent-teal/5 border border-accent-teal-500/10 hidden" id="main-live-container">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs font-black text-accent-teal uppercase tracking-widest italic animate-pulse">[[ ACTIVE MODULE PROGRESS ]]</span>
+                    <span id="main-live-percent" class="text-xs font-mono font-bold text-white">0%</span>
+                </div>
+                <div class="h-3 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div id="main-live-bar" class="h-full w-0 bg-accent-teal shadow-[0_0_20px_rgba(20,184,166,0.3)] transition-all duration-1000"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    #exam-battlefield {
+        background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
+    }
+
+    .main-exam-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        align-items: center;
+        gap: 20px;
+    }
+
+    .main-exam-row:hover {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.01);
+    }
+
+    .main-exam-row.active {
+        background: rgba(239, 68, 68, 0.05);
+        border-color: rgba(239, 68, 68, 0.2);
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);
+    }
+
+    .main-exam-row.done {
+        opacity: 0.5;
+        border-style: dashed;
+    }
+
+    .subject-info h4 {
+        font-size: 16px;
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 4px;
+        letter-spacing: -0.02em;
+    }
+
+    .subject-info .meta {
+        font-size: 10px;
+        font-weight: 500;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .status-tag {
+        font-size: 9px;
+        font-weight: 900;
+        padding: 4px 12px;
+        border-radius: 99px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .status-tag.locked { background: rgba(255, 255, 255, 0.05); color: #475569; }
+    .status-tag.active { background: #ef4444; color: white; animation: blink 1s infinite; }
+    .status-tag.done { background: rgba(20,184,166,0.1); color: #14b8a6; }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+</style>
+
+<script is:inline>
+  (function () {
+    const EVENTS = [
+      { id: 'eng', subject: 'English (Comp)', date: '2026-03-30', start: 9, dur: 3 },
+      { id: 'phy', subject: 'Physics', date: '2026-04-01', start: 9, dur: 3 },
+      { id: 'qur', subject: 'Tarjama-ul-Quran', date: '2026-04-03', start: 9, dur: 3 },
+      { id: 'cs',  subject: 'Computer Science', date: '2026-04-06', start: 9, dur: 3 },
+      { id: 'ch',  subject: 'Chemistry', date: '2026-04-08', start: 9, dur: 3 },
+      { id: 'ur',  subject: 'Urdu (Comp)', date: '2026-04-10', start: 9, dur: 3 },
+      { id: 'ma',  subject: 'Mathematics', date: '2026-04-13', start: 9, dur: 3 },
+      { id: 'ps',  subject: 'Pakistan Studies', date: '2026-04-15', start: 9, dur: 3 },
+      { id: 'pp',  subject: 'Physics Practical', date: '2026-05-21', start: 11.5, dur: 3 },
+      { id: 'cp',  subject: 'Computer Practical', date: '2026-06-05', start: 9, dur: 3 },
+      { id: 'chp', subject: 'Chemistry Practical', date: '2026-06-11', start: 11.5, dur: 3 },
+    ];
+
+    function pktToDate(dateStr, startHour) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const startMin = Math.round(startHour * 60);
+      return new Date(Date.UTC(y, m - 1, d, Math.floor(startMin / 60) - 5, startMin % 60));
+    }
+
+    function updatePortal() {
+        const now = new Date().getTime();
+        const list = document.getElementById('main-datesheet-list');
+        const statusLabel = document.getElementById('main-status-label');
+        const totalDone = document.getElementById('main-stat-total');
+        const liveContainer = document.getElementById('main-live-container');
+        const liveBar = document.getElementById('main-live-bar');
+        const livePercent = document.getElementById('main-live-percent');
+
+        if (!list) return;
+
+        let completedCount = 0;
+        let activeExam = null;
+
+        const html = EVENTS.map(e => {
+            const start = pktToDate(e.date, e.start).getTime();
+            const end = pktToDate(e.date, e.start + e.dur).getTime();
+            
+            let status = 'locked';
+            let label = 'LOCKED';
+            let rowClass = '';
+
+            if (now >= start && now < end) {
+                status = 'active';
+                label = 'LIVE NOW';
+                rowClass = 'active';
+                activeExam = { start, end, subject: e.subject };
+            } else if (now >= end) {
+                status = 'done';
+                label = 'CONQUERED';
+                rowClass = 'done';
+                completedCount++;
+            }
+
+            const d = new Date(start);
+            const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+            const timeStr = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            return `
+                <div class="main-exam-row ${rowClass}">
+                    <div class="subject-info">
+                        <h4>${e.subject}</h4>
+                        <div class="meta">${dateStr} // ${timeStr} PKT // 3 HOUR LOAD</div>
+                    </div>
+                    <span class="status-tag ${status}">${label}</span>
+                </div>
+            `;
+        }).join('');
+
+        list.innerHTML = html;
+        totalDone.textContent = `${completedCount}/${EVENTS.length}`;
+
+        if (activeExam) {
+            statusLabel.textContent = `CRITICAL: ${activeExam.subject}`;
+            liveContainer.classList.remove('hidden');
+            const pct = ((now - activeExam.start) / (activeExam.end - activeExam.start)) * 100;
+            liveBar.style.width = `${pct}%`;
+            livePercent.textContent = `${pct.toFixed(1)}%`;
+        } else {
+            statusLabel.textContent = 'STANDBY: AWAITING NEXT MODULE';
+            liveContainer.classList.add('hidden');
+        }
+    }
+
+    updatePortal();
+    setInterval(updatePortal, 1000);
+    document.addEventListener('astro:page-load', updatePortal);
+  })();
+</script>

@@ -27,11 +27,11 @@
     </div>
     <div class="stat-item">
         <span class="stat-val" id="stat-burden">0%</span>
-        <span class="stat-label">BURDEN OFF</span>
+        <span class="stat-label">TOTAL PROGRESS</span>
     </div>
     <div class="stat-item">
       <span class="stat-val" id="stat-freedom">0</span>
-      <span class="stat-label">DAYS TO FREEDOM</span>
+      <span class="stat-label">DAYS REMAINING</span>
     </div>
   </div>
 
@@ -40,19 +40,44 @@
     <div class="live-bar-track">
       <div id="live-bar-fill" class="live-bar-fill"></div>
     </div>
-    <span id="live-bar-label" class="live-bar-label">0%</span>
+    <div class="flex justify-between mt-1">
+        <span class="text-[8px] font-bold text-accent-teal uppercase">Exam Progress</span>
+        <span id="live-bar-label" class="live-bar-label">0%</span>
+    </div>
+  </div>
+
+  <!-- Interactive Date Sheet -->
+  <div class="datesheet-container mt-4">
+    <div class="flex items-center justify-between mb-4 border-b border-white/5 pb-3">
+        <div class="flex flex-col">
+            <span class="text-[8px] font-black tracking-[0.3em] text-slate-500 uppercase italic">Interactive Datesheet</span>
+            <span class="text-[10px] font-bold text-accent-teal mt-1">MISSION_CONTROL // v2.6</span>
+        </div>
+        <div class="flex flex-col items-end">
+            <span class="text-[8px] font-black text-slate-600 uppercase tracking-widest mb-1">CANDIDATE_ID</span>
+            <span class="px-3 py-1 rounded-lg bg-accent-teal/10 border border-accent-teal/30 text-[11px] font-black text-white tracking-widest shadow-[0_0_15px_rgba(20,184,166,0.2)]">240357</span>
+        </div>
+    </div>
+    <div class="datesheet-list" id="datesheet-list">
+        <!-- Rows will be injected here -->
+    </div>
   </div>
 
   <!-- Result Portal (Unlocks after all exams) -->
   <div id="result-portal" class="result-portal hidden">
-    <div class="result-card">
+    <div class="result-card group/portal">
       <div class="result-header">
-        <span class="portal-tag">RESULT PORTAL</span>
-        <span class="roll-number">ROLL: 240357</span>
+        <div class="flex flex-col">
+            <span class="portal-tag">RESULT_PORTAL // UNLOCKED</span>
+            <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">VERIFIED CREDENTIAL</span>
+        </div>
+        <div class="flex flex-col items-end">
+            <span class="text-[10px] font-black text-white px-3 py-1 rounded bg-accent-teal/20 border border-accent-teal/40">ROLL: 240357</span>
+        </div>
       </div>
       <a href="https://bisedgkhan.edu.pk" target="_blank" rel="noopener noreferrer" class="check-btn">
-        CHECK ON BISE DG KHAN
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        <span>ACCESS OFFICIAL TRANSCRIPT</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="group-hover/portal:translate-x-1 transition-transform"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
       </a>
     </div>
   </div>
@@ -64,40 +89,42 @@
     display: inline-flex;
     flex-direction: column;
     gap: 14px;
-    padding: 16px 22px;
-    border-radius: 24px;
-    background: rgba(255,255,255,0.02);
+    padding: 24px;
+    border-radius: 32px;
+    background: rgba(255,255,255,0.01);
     border: 1px solid rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(20px);
     font-family: 'Space Mono', monospace;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    max-width: fit-content;
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+    min-width: 380px;
+    max-width: 440px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.02);
   }
 
   .exam-status-widget:hover {
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.03);
     border-color: rgba(255,255,255,0.1);
     transform: translateY(-2px);
   }
 
   /* State themes */
-  .s-soon     { border-color: rgba(251,191,36,0.25)!important; background: rgba(251,191,36,0.03)!important; }
-  .s-live     { border-color: rgba(239,68,68,0.4)!important;   background: rgba(239,68,68,0.05)!important;  }
-  .s-done     { border-color: rgba(20,184,166,0.3)!important;   background: rgba(20,184,166,0.04)!important; }
-  .s-between  { border-color: rgba(148,163,184,0.2)!important;  background: rgba(148,163,184,0.02)!important;}
-  .s-practical{ border-color: rgba(168,85,247,0.3)!important;   background: rgba(168,85,247,0.04)!important; }
+  .s-soon     { border-color: rgba(251,191,36,0.2)!important; }
+  .s-live     { border-color: rgba(239,68,68,0.3)!important;  }
+  .s-done     { border-color: rgba(20,184,166,0.2)!important; }
+  .s-between  { border-color: rgba(148,163,184,0.1)!important; }
+  .s-practical{ border-color: rgba(168,85,247,0.2)!important; }
 
   .status-row {
     display: flex;
     align-items: center;
     gap: 16px;
+    margin-bottom: 8px;
   }
 
   .pulse-wrap {
     position: relative;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     flex-shrink: 0;
   }
 
@@ -128,13 +155,14 @@
   .status-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
+    flex: 1;
   }
 
   .status-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #f8fafc;
     white-space: nowrap;
@@ -143,30 +171,28 @@
 
   .status-sub {
     font-size: 10px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: #94a3b8;
+    color: #64748b;
     white-space: nowrap;
   }
 
   .status-pill {
     display: flex;
     align-items: center;
-    padding: 5px 14px;
+    padding: 6px 14px;
     border-radius: 100px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     color: #e2e8f0;
-    white-space: nowrap;
     font-variant-numeric: tabular-nums;
-    transition: all 0.4s;
   }
   
-  .s-live .status-pill { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.1); }
-  .s-done .status-pill { border-color: rgba(20,184,166,0.3); background: rgba(20,184,166,0.1); }
+  .s-live .status-pill { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.1); color: #ef4444; }
+  .s-done .status-pill { border-color: rgba(20,184,166,0.3); background: rgba(20,184,166,0.1); color: #14b8a6; }
 
   .status-pill.hidden { display: none; }
 
@@ -174,79 +200,147 @@
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    gap: 1px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.01);
+    margin: 4px -24px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
   .stats-grid.hidden { display: none; }
 
   .stat-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
 
   .stat-val {
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 14px;
+    font-weight: 900;
     color: #f1f5f9;
+    font-variant-numeric: tabular-nums;
   }
 
   .stat-label {
-    font-size: 8px;
-    letter-spacing: 0.1em;
-    color: #64748b;
+    font-size: 7px;
+    letter-spacing: 0.2em;
+    color: #475569;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 800;
   }
 
   /* Live progress bar */
   .live-bar-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    margin-top: 8px;
     width: 100%;
   }
   .live-bar-wrap.hidden { display: none; }
 
   .live-bar-track {
     flex: 1;
-    height: 4px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 4px;
+    height: 6px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
     overflow: hidden;
   }
 
   .live-bar-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #ef4444, #f59e0b);
-    border-radius: 4px;
+    background: linear-gradient(90deg, #ef4444, #f59e0b, #3b82f6);
+    background-size: 200% 100%;
+    border-radius: 10px;
     transition: width 1s linear;
     position: relative;
-    overflow: hidden;
+    box-shadow: 0 0 20px rgba(239,68,68,0.2);
   }
 
-  /* Shimmer on fill */
   .live-bar-fill::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-    animation: shimmer 2.5s ease-in-out infinite;
-    background-size: 200% 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    animation: shimmer 1.5s infinite;
   }
 
   .live-bar-label {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: #94a3b8;
-    white-space: nowrap;
-    min-width: 32px;
-    text-align: right;
+    font-size: 9px;
+    font-weight: 900;
+    color: #cbd5e1;
     font-variant-numeric: tabular-nums;
   }
+
+  /* Datesheet List */
+  .datesheet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .datesheet-list::-webkit-scrollbar { width: 2px; }
+  .datesheet-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+  .exam-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+    transition: all 0.3s ease;
+  }
+
+  .exam-row.active {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.2);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.1);
+  }
+
+  .exam-row.done {
+    opacity: 0.6;
+    background: rgba(20, 184, 166, 0.02);
+  }
+
+  .exam-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .exam-subject {
+    font-size: 9px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.05em;
+  }
+
+  .exam-meta {
+    font-size: 8px;
+    font-weight: 500;
+    color: #475569;
+    text-transform: uppercase;
+  }
+
+  .exam-status-tag {
+    font-size: 7px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tag-locked { background: rgba(255,255,255,0.05); color: #64748b; }
+  .tag-live { background: #ef4444; color: #fff; animation: blink 1s infinite; }
+  .tag-conquered { background: rgba(20,184,166,0.15); color: #14b8a6; }
 
   @keyframes pulse-ring {
     0%   { transform: scale(1);    opacity: 0.5; }
@@ -259,20 +353,18 @@
     to   { transform: translateX(100%); }
   }
 
-  @media (max-width: 640px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .stat-item:last-child { grid-column: span 2; }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
   }
 
-  /* Result Portal Styles */
   .result-portal {
     padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    animation: slide-up 0.6s ease-out;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
   .result-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px dashed rgba(255,255,255,0.2);
+    background: rgba(20,184,166,0.05);
+    border: 1px dashed rgba(20,184,166,0.2);
     border-radius: 16px;
     padding: 12px;
     display: flex;
@@ -291,10 +383,10 @@
     letter-spacing: 0.15em;
   }
   .roll-number {
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 10px;
+    font-weight: 900;
     color: #fff;
-    background: rgba(20,184,166,0.15);
+    background: #14b8a6;
     padding: 2px 8px;
     border-radius: 6px;
   }
@@ -306,60 +398,91 @@
     background: #fff;
     color: #000;
     text-decoration: none;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 900;
     padding: 10px;
     border-radius: 10px;
     transition: all 0.3s ease;
     letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
   .check-btn:hover {
     transform: scale(1.02);
     background: #14b8a6;
     color: #fff;
   }
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
 </style>
 
 <script is:inline>
   (function () {
-    // Exact dates from user screenshots (PKT timezone assumed UTC+5)
-    // Theoretically 09:00 AM start, ~3h duration for theoretical, ~2.5-3h for practicals
     const EVENTS = [
-      { type: 'exam', subject: 'English (Comp)', date: '2026-03-30', start: 9, dur: 3 },
-      { type: 'exam', subject: 'Physics', date: '2026-04-01', start: 9, dur: 3 },
-      { type: 'exam', subject: 'Tarjama-ul-Quran', date: '2026-04-03', start: 9, dur: 3 },
-      { type: 'exam', subject: 'Computer Science', date: '2026-04-06', start: 9, dur: 3 },
-      { type: 'exam', subject: 'Chemistry', date: '2026-04-08', start: 9, dur: 3 },
-      { type: 'exam', subject: 'Urdu (Comp)', date: '2026-04-10', start: 9, dur: 3 },
-      { type: 'exam', subject: 'Mathematics', date: '2026-04-13', start: 9, dur: 3 },
-      { type: 'exam', subject: 'Pakistan Studies', date: '2026-04-15', start: 9, dur: 3 },
-      { type: 'practical', subject: 'Physics Practical', date: '2026-05-21', start: 11.5, dur: 3 },
-      { type: 'practical', subject: 'Computer Practical', date: '2026-06-05', start: 9, dur: 3 },
-      { type: 'practical', subject: 'Chemistry Practical', date: '2026-06-11', start: 11.5, dur: 3 },
+      { id: 'eng', subject: 'English (Comp)', date: '2026-03-30', start: 9, dur: 3 },
+      { id: 'phy', subject: 'Physics', date: '2026-04-01', start: 9, dur: 3 },
+      { id: 'qur', subject: 'Tarjama-ul-Quran', date: '2026-04-03', start: 9, dur: 3 },
+      { id: 'cs',  subject: 'Computer Science', date: '2026-04-06', start: 9, dur: 3 },
+      { id: 'ch',  subject: 'Chemistry', date: '2026-04-08', start: 9, dur: 3 },
+      { id: 'ur',  subject: 'Urdu (Comp)', date: '2026-04-10', start: 9, dur: 3 },
+      { id: 'ma',  subject: 'Mathematics', date: '2026-04-13', start: 9, dur: 3 },
+      { id: 'ps',  subject: 'Pakistan Studies', date: '2026-04-15', start: 9, dur: 3 },
+      { id: 'pp',  subject: 'Physics Practical', date: '2026-05-21', start: 11.5, dur: 3 },
+      { id: 'cp',  subject: 'Computer Practical', date: '2026-06-05', start: 9, dur: 3 },
+      { id: 'chp', subject: 'Chemistry Practical', date: '2026-06-11', start: 11.5, dur: 3 },
     ];
 
-    const THEORY_DONE_DATE = '2026-04-15T09:30:00Z'; // 14:30 PKT (09:00 start + ~5h window)
-    const ALL_DONE_DATE    = '2026-06-11T09:30:00Z'; // 14:30 PKT
-    const SEASON_START     = '2026-03-30T04:00:00Z'; // 09:00 AM PKT = 04:00 UTC
+    const THEORY_DONE_DATE = '2026-04-15T10:00:00Z'; 
+    const ALL_DONE_DATE    = '2026-06-11T14:30:00Z'; 
+    const ROLL_NUMBER = "240357";
 
-    // Helper: Convert PKT date string + start hour to JS Date
     function pktToDate(dateStr, startHour) {
       const [y, m, d] = dateStr.split('-').map(Number);
       const startMin = Math.round(startHour * 60);
       return new Date(Date.UTC(y, m - 1, d, Math.floor(startMin / 60) - 5, startMin % 60));
     }
 
-    function formatDaysHours(ms) {
+    function formatTimeLeft(ms) {
+      if (ms < 0) return "CONQUERED";
       const d = Math.floor(ms / (1000 * 60 * 60 * 24));
       const h = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((ms % 60000) / 1000);
       if (d > 0) return `${d}D ${h}H`;
       if (h > 0) return `${h}H ${m}M`;
-      return `${m}M ${Math.floor((ms % 60000) / 1000)}S`;
+      return `${m}m ${s}s`;
+    }
+
+    function renderDatesheet(nowMs, windows) {
+        const list = document.getElementById('datesheet-list');
+        if (!list) return;
+
+        list.innerHTML = windows.map(w => {
+            let statusClass = 'tag-locked';
+            let rowClass = '';
+            let statusText = 'LOCKED';
+            
+            if (nowMs >= w.startMs && nowMs < w.endMs) {
+                statusClass = 'tag-live';
+                rowClass = 'active';
+                statusText = 'LIVE NOW';
+            } else if (nowMs >= w.endMs) {
+                statusClass = 'tag-conquered';
+                rowClass = 'done';
+                statusText = 'CONQUERED';
+            }
+
+            const eventDate = new Date(w.startMs);
+            const dateStr = eventDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+            const timeStr = eventDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            return `
+                <div class="exam-row ${rowClass}" id="exam-row-${w.id}">
+                    <div class="exam-info">
+                        <span class="exam-subject">${w.subject}</span>
+                        <span class="exam-meta">${dateStr} // ${timeStr} PKT</span>
+                    </div>
+                    <span class="exam-status-tag ${statusClass}">${statusText}</span>
+                </div>
+            `;
+        }).join('');
     }
 
     function update() {
@@ -376,60 +499,54 @@
       const barWrap = document.getElementById('live-bar-wrap');
       const barFill = document.getElementById('live-bar-fill');
       const barLabel = document.getElementById('live-bar-label');
-      const statsGrid = document.getElementById('stats-grid');
       const resultPortal = document.getElementById('result-portal');
       
       const statDone = document.getElementById('stat-done');
       const statBurden = document.getElementById('stat-burden');
       const statFreedom = document.getElementById('stat-freedom');
 
-      // Clear states
-      widget.classList.remove('s-soon', 's-live', 's-done', 's-between', 's-practical');
-      
-      // Calculate Exams Progress
       const windows = EVENTS.map(e => ({
         ...e,
         startMs: pktToDate(e.date, e.start).getTime(),
         endMs: pktToDate(e.date, e.start + e.dur).getTime()
       }));
 
+      // Render datesheet once or update periodically if needed
+      // For now, we update it every second to keep status tags fresh
+      renderDatesheet(nowMs, windows);
+
       const completed = windows.filter(w => nowMs > w.endMs).length;
-      const totalExams = EVENTS.length;
-      const progressPercent = (completed / totalExams) * 100;
+      const progressPercent = (completed / EVENTS.length) * 100;
+      const theoryEndMs = new Date(THEORY_DONE_DATE).getTime();
+      const allEndMs = new Date(ALL_DONE_DATE).getTime();
       
-      // Calculate Freedom Days (Until Theory Done)
-      const theoryEnd = new Date(THEORY_DONE_DATE).getTime();
-      const lastExamEnd = new Date(ALL_DONE_DATE).getTime();
-      
-      const freedomMs = Math.max(0, theoryEnd - nowMs);
-      const freedomDays = Math.ceil(freedomMs / (1000 * 60 * 60 * 24));
+      const remainingMs = Math.max(0, theoryEndMs - nowMs);
+      const remainingDays = Math.ceil(remainingMs / (1000 * 60 * 60 * 24));
 
-      // Update basic stats
-      statDone.textContent = `${completed}/${totalExams}`;
+      statDone.textContent = `${completed}/${EVENTS.length}`;
       statBurden.textContent = `${progressPercent.toFixed(0)}%`;
-      statFreedom.textContent = nowMs > theoryEnd ? 'FREEDOM' : freedomDays;
-      statsGrid.classList.remove('hidden');
+      statFreedom.textContent = nowMs > theoryEndMs ? (nowMs > allEndMs ? '0' : 'PRACS') : remainingDays;
 
-      // 1. IS TOTAL SEASON DONE? (After June 11)
-      if (nowMs >= lastExamEnd) {
+      widget.classList.remove('s-soon', 's-live', 's-done', 's-between', 's-practical');
+
+      // 1. ALL DONE
+      if (nowMs >= allEndMs) {
         widget.classList.add('s-done');
-        labelEl.textContent = '✨ TOTAL FREEDOM';
-        subEl.textContent = 'All exams & practicals finished. Enjoy!';
+        labelEl.textContent = 'MISSION ACCOMPLISHED';
+        subEl.textContent = 'All exams finished successfully.';
         pillEl.classList.remove('hidden');
-        pillText.textContent = '100% RELAX';
+        pillText.textContent = '100% OFF';
         barWrap.classList.add('hidden');
         resultPortal.classList.remove('hidden');
         return;
       }
 
-      resultPortal.classList.add('hidden');
-
-      // 2. IS AN EXAM LIVE RIGHT NOW?
+      // 2. LIVE EXAM
       const active = windows.find(w => nowMs >= w.startMs && nowMs < w.endMs);
       if (active) {
-        widget.classList.add(active.type === 'practical' ? 's-practical' : 's-live');
-        labelEl.textContent = active.type === 'practical' ? '🔬 PRACTICAL IN PROGRESS' : '🔥 EXAM LIVE';
-        subEl.textContent = active.subject;
+        widget.classList.add(active.id.includes('p') ? 's-practical' : 's-live');
+        labelEl.textContent = active.id.includes('p') ? '🔬 PRACTICAL IN PROGRESS' : '🔥 EXAM IN PROGRESS';
+        subEl.textContent = `${active.subject} // ROLL: ${ROLL_NUMBER}`;
         
         const elapsed = nowMs - active.startMs;
         const total = active.endMs - active.startMs;
@@ -440,68 +557,31 @@
         barLabel.textContent = `${pct.toFixed(1)}%`;
         
         pillEl.classList.remove('hidden');
-        pillText.textContent = formatDaysHours(active.endMs - nowMs) + ' LEFT';
+        pillText.textContent = formatTimeLeft(active.endMs - nowMs) + ' LEFT';
         return;
       }
 
-      // 3. AFTER THEORY BUT BEFORE PRACTICALS (THE REAL "FREEDOM" STATE)
-      if (nowMs >= theoryEnd && !active) {
-          const nextPractical = windows.find(w => w.type === 'practical' && w.startMs > nowMs);
-          if (nextPractical) {
-              // We are between April 15 and a practical
-              widget.classList.add('s-done');
-              labelEl.textContent = '🎉 THEORY FINISHED // FREEDOM';
-              subEl.textContent = `Main burden off. Next practical: ${nextPractical.subject}`;
-              pillEl.classList.remove('hidden');
-              pillText.textContent = formatDaysHours(nextPractical.startMs - nowMs) + ' GAP';
-              barWrap.classList.add('hidden');
-              return;
-          }
-      }
-
-      // 4. JUST FINISHED AN EXAM? (Rest of the day after an exam)
-      const justFinished = windows.find(w => nowMs > w.endMs && (nowMs - w.endMs) < 6 * 60 * 60 * 1000);
-      if (justFinished) {
-          widget.classList.add('s-done');
-          labelEl.textContent = '✅ BURDEN REDUCED';
-          subEl.textContent = `${justFinished.subject} conquered. Rest up.`;
-          pillEl.classList.add('hidden');
-          barWrap.classList.add('hidden');
-          return;
-      }
-
-      // 5. BEFORE SEASON START
-      const seasonStartMs = new Date(SEASON_START).getTime();
-      if (nowMs < seasonStartMs) {
-        widget.classList.add('s-soon');
-        labelEl.textContent = '🚀 PREPARING FOR SEASON';
-        subEl.textContent = 'First: ' + EVENTS[0].subject;
-        pillEl.classList.remove('hidden');
-        pillText.textContent = formatDaysHours(seasonStartMs - nowMs) + ' TO GO';
-        barWrap.classList.add('hidden');
-        return;
-      }
-
-      // 6. GAP BETWEEN THEORY EXAMS
+      // 3. GAP/LOCKED
       const next = windows.find(w => w.startMs > nowMs);
       if (next) {
-        widget.classList.add('s-between');
-        labelEl.textContent = '📖 LOADING NEXT PHASE';
-        subEl.textContent = 'Target: ' + next.subject;
+        const gapMs = next.startMs - nowMs;
+        if (gapMs < 24 * 60 * 60 * 1000) {
+            widget.classList.add('s-soon');
+            labelEl.textContent = 'UPCOMING MISSION';
+            subEl.textContent = 'Next: ' + next.subject;
+        } else {
+            widget.classList.add('s-between');
+            labelEl.textContent = 'PREP PHASE';
+            subEl.textContent = 'Next target: ' + next.subject;
+        }
         pillEl.classList.remove('hidden');
-        pillText.textContent = formatDaysHours(next.startMs - nowMs) + ' AWAY';
+        pillText.textContent = formatTimeLeft(gapMs) + ' TO GO';
         barWrap.classList.add('hidden');
-        return;
       }
     }
 
-    // Initialize and heartbeat
     update();
     setInterval(update, 1000);
-
-    // Astro page transition support
-    document.addEventListener('astro:page-load', () => {
-      update();
-    });
+    document.addEventListener('astro:page-load', update);
   })();
 </script>
