@@ -3,7 +3,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { photos } from '../data/photography.js';
 import ExamStatus from '../components/ExamStatus.astro';
-import ExamCenter from '../components/ExamCenter.astro';
 import Archive from '../components/Archive.astro';
 
 const previewPhotos = photos.slice(0, 6);
@@ -263,8 +262,6 @@ const previewPhotos = photos.slice(0, 6);
     </div>
   </section>
 
-  <!-- EXAM BATTLEFIELD -->
-  <ExamCenter />
 
   <!-- LAB ARSENAL -->
   <section class="py-32 border-t border-white/5 bg-black/40">
