@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sagheer Akram // Student Researcher. AI Experimenter.</title><meta name="description" content="Personal creative lab of Sagheer Akram. Exploring the intersection of AI, code, and visual narratives."><link rel="canonical" href="https://sagheerprojects.fun/"><!-- Mobile Specific Meta --><meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><!-- Open Graph / SEO --><meta property="og:type" content="website"><meta property="og:url" content="https://sagheerprojects.fun/"><meta property="og:site_name" content="Sagheer Akram Portfolio"><meta property="og:title" content="Sagheer Akram // Student Researcher. AI Experimenter."><meta property="og:description" content="Personal creative lab of Sagheer Akram. Exploring the intersection of AI, code, and visual narratives."><meta property="og:image" content="https://sagheerprojects.fun/og-image.jpg"><meta property="og:image:secure_url" content="https://sagheerprojects.fun/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@rizzsagheer"><meta name="twitter:url" content="https://sagheerprojects.fun/"><meta name="twitter:title" content="Sagheer Akram // Student Researcher. AI Experimenter."><meta name="twitter:description" content="Personal creative lab of Sagheer Akram. Exploring the intersection of AI, code, and visual narratives."><meta name="twitter:image" content="https://sagheerprojects.fun/og-image.jpg"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Preconnect fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/about.c_iCT34s.css">
+<link rel="stylesheet" href="/_astro/index.ARINHQLM.css"><script type="module" src="/_astro/hoisted.BGlapXBS.js"></script></head> <body class="antialiased relative"> <!-- Premium Global Cursor Glow --> <div id="global-glow" class="fixed pointer-events-none w-[600px] h-[600px] rounded-full bg-accent-ice opacity-[0.03] blur-[120px] -translate-x-1/2 -translate-y-1/2 z-[5] transition-opacity duration-1000"></div> <!-- Premium Futurism Background System --> <div class="bg-mesh"></div> <div class="subgrid"></div> <!-- Signature character — subtle cursor glow --> <div id="cursor-glow" aria-hidden="true" class="pointer-events-none fixed z-50 rounded-full" style="
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    top: -300px;
+    left: -300px;
+    transition: background 0.8s ease;
+    will-change: transform;
+  "></div>  <div id="custom-cursor-dot" class="custom-cursor dot" data-astro-cid-ofxtmv4x></div> <div id="custom-cursor-ring" class="custom-cursor ring" data-astro-cid-ofxtmv4x></div>   <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></canvas>  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"> <nav class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between"> <!-- Brand --> <a href="/" class="group flex items-center gap-3"> <div class="w-2 h-2 rounded-full bg-accent-ice opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_10px_#a5f3fc]"></div> <span class="text-sm font-black tracking-[0.3em] text-white uppercase transition-all duration-300 group-hover:tracking-[0.4em]">
+Sagheer Akram.
+</span> </a> <!-- Desktop nav --> <div class="hidden md:block relative px-1 py-1 rounded-full border border-white/[0.03] bg-white/[0.02]"> <!-- Sliding Indicator --> <div id="nav-indicator" class="absolute h-[calc(100%-8px)] top-1 bg-accent-ice/10 border border-accent-ice/20 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] z-0"></div> <ul class="relative flex items-center gap-1"> <li> <a href="/projects" data-nav-link class="relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 text-slate-500 hover:text-white"> Archive </a> </li><li> <a href="/photography" data-nav-link class="relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 text-slate-500 hover:text-white"> Visuals </a> </li><li> <a href="/about" data-nav-link class="relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 text-slate-500 hover:text-white"> About </a> </li> </ul> </div> <!-- Mobile hamburger --> <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu" aria-expanded="false"> <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span> <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300"></span> <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span> </button> </nav> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden fixed inset-0 bg-[#050505]/95 backdrop-blur-xl z-50"> <div class="flex flex-col h-full p-8"> <div class="flex justify-end p-2"> <button id="close-menu" class="text-slate-500 hover:text-white"> <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg> </button> </div> <ul class="flex flex-col gap-8 mt-12"> <li><a href="/" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter">Home</a></li> <li> <a href="/projects" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter"> Archive </a> </li><li> <a href="/photography" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter"> Visuals </a> </li><li> <a href="/about" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter"> About </a> </li> </ul> <div class="mt-auto pb-12"> <p class="text-[10px] uppercase tracking-widest text-slate-700">Digital Archive // v2.0</p> </div> </div> </div> </header>  <main>   <section class="relative min-h-[90vh] flex items-center px-8 md:px-16 pt-28 pb-16 overflow-hidden"> <div class="relative z-10 max-w-5xl" id="hero-content"> <!-- Eyebrow --> <div class="flex items-center gap-3 reveal"> <span class="w-8 h-px bg-accent-teal/30"></span> <span class="text-[10px] font-bold tracking-[0.3em] text-accent-teal uppercase">EST. 2025 · PERSONAL LAB</span> </div> <!-- Real-time Developer Status --> <div class="mt-6 reveal"> <div id="exam-status-widget" class="exam-status-widget reveal" data-astro-cid-bhp7fsau> <!-- Top row: dot + label + countdown pill --> <div class="status-row" data-astro-cid-bhp7fsau> <div class="pulse-wrap" data-astro-cid-bhp7fsau> <span id="status-dot" class="pulse-dot" data-astro-cid-bhp7fsau></span> </div> <div class="status-text" data-astro-cid-bhp7fsau> <span id="status-label" class="status-label" data-astro-cid-bhp7fsau>—</span> <span id="status-sub" class="status-sub" data-astro-cid-bhp7fsau></span> </div> <div id="status-pill" class="status-pill hidden" data-astro-cid-bhp7fsau> <span id="pill-text" data-astro-cid-bhp7fsau></span> </div> </div> <!-- Stats Grid --> <div id="stats-grid" class="stats-grid hidden" data-astro-cid-bhp7fsau> <div class="stat-item" data-astro-cid-bhp7fsau> <span class="stat-val" id="stat-done" data-astro-cid-bhp7fsau>0/11</span> <span class="stat-label" data-astro-cid-bhp7fsau>COMPLETED</span> </div> <div class="stat-item" data-astro-cid-bhp7fsau> <span class="stat-val" id="stat-burden" data-astro-cid-bhp7fsau>0%</span> <span class="stat-label" data-astro-cid-bhp7fsau>BURDEN OFF</span> </div> <div class="stat-item" data-astro-cid-bhp7fsau> <span class="stat-val" id="stat-freedom" data-astro-cid-bhp7fsau>0</span> <span class="stat-label" data-astro-cid-bhp7fsau>DAYS TO FREEDOM</span> </div> </div> <!-- Live exam progress bar (only visible during exam) --> <div id="live-bar-wrap" class="live-bar-wrap hidden" data-astro-cid-bhp7fsau> <div class="live-bar-track" data-astro-cid-bhp7fsau> <div id="live-bar-fill" class="live-bar-fill" data-astro-cid-bhp7fsau></div> </div> <span id="live-bar-label" class="live-bar-label" data-astro-cid-bhp7fsau>0%</span> </div> <!-- Result Portal (Unlocks after all exams) --> <div id="result-portal" class="result-portal hidden" data-astro-cid-bhp7fsau> <div class="result-card" data-astro-cid-bhp7fsau> <div class="result-header" data-astro-cid-bhp7fsau> <span class="portal-tag" data-astro-cid-bhp7fsau>RESULT PORTAL</span> <span class="roll-number" data-astro-cid-bhp7fsau>ROLL: 240357</span> </div> <a href="https://bisedgkhan.edu.pk" target="_blank" rel="noopener noreferrer" class="check-btn" data-astro-cid-bhp7fsau>
+CHECK ON BISE DG KHAN
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-bhp7fsau><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" data-astro-cid-bhp7fsau></path><polyline points="15 3 21 3 21 9" data-astro-cid-bhp7fsau></polyline><line x1="10" y1="14" x2="21" y2="3" data-astro-cid-bhp7fsau></line></svg> </a> </div> </div> </div>  <script>
+  (function () {
+    // Exact dates from user screenshots (PKT timezone assumed UTC+5)
+    // Theoretically 09:00 AM start, ~3h duration for theoretical, ~2.5-3h for practicals
+    const EVENTS = [
+      { type: 'exam', subject: 'English (Comp)', date: '2026-03-30', start: 9, dur: 3 },
+      { type: 'exam', subject: 'Physics', date: '2026-04-01', start: 9, dur: 3 },
+      { type: 'exam', subject: 'Tarjama-ul-Quran', date: '2026-04-03', start: 9, dur: 3 },
+      { type: 'exam', subject: 'Computer Science', date: '2026-04-06', start: 9, dur: 3 },
+      { type: 'exam', subject: 'Chemistry', date: '2026-04-08', start: 9, dur: 3 },
+      { type: 'exam', subject: 'Urdu (Comp)', date: '2026-04-10', start: 9, dur: 3 },
+      { type: 'exam', subject: 'Mathematics', date: '2026-04-13', start: 9, dur: 3 },
+      { type: 'exam', subject: 'Pakistan Studies', date: '2026-04-15', start: 9, dur: 3 },
+      { type: 'practical', subject: 'Physics Practical', date: '2026-05-21', start: 11.5, dur: 3 },
+      { type: 'practical', subject: 'Computer Practical', date: '2026-06-05', start: 9, dur: 3 },
+      { type: 'practical', subject: 'Chemistry Practical', date: '2026-06-11', start: 11.5, dur: 3 },
+    ];
+
+    const THEORY_DONE_DATE = '2026-04-15T09:30:00Z'; // 14:30 PKT (09:00 start + ~5h window)
+    const ALL_DONE_DATE    = '2026-06-11T09:30:00Z'; // 14:30 PKT
+    const SEASON_START     = '2026-03-30T04:00:00Z'; // 09:00 AM PKT = 04:00 UTC
+
+    // Helper: Convert PKT date string + start hour to JS Date
+    function pktToDate(dateStr, startHour) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const startMin = Math.round(startHour * 60);
+      return new Date(Date.UTC(y, m - 1, d, Math.floor(startMin / 60) - 5, startMin % 60));
+    }
+
+    function formatDaysHours(ms) {
+      const d = Math.floor(ms / (1000 * 60 * 60 * 24));
+      const h = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+      if (d > 0) return `${d}D ${h}H`;
+      if (h > 0) return `${h}H ${m}M`;
+      return `${m}M ${Math.floor((ms % 60000) / 1000)}S`;
+    }
+
+    function update() {
+      const now = new Date();
+      const nowMs = now.getTime();
+      
+      const widget = document.getElementById('exam-status-widget');
+      if (!widget) return;
+
+      const labelEl = document.getElementById('status-label');
+      const subEl = document.getElementById('status-sub');
+      const pillEl = document.getElementById('status-pill');
+      const pillText = document.getElementById('pill-text');
+      const barWrap = document.getElementById('live-bar-wrap');
+      const barFill = document.getElementById('live-bar-fill');
+      const barLabel = document.getElementById('live-bar-label');
+      const statsGrid = document.getElementById('stats-grid');
+      const resultPortal = document.getElementById('result-portal');
+      
+      const statDone = document.getElementById('stat-done');
+      const statBurden = document.getElementById('stat-burden');
+      const statFreedom = document.getElementById('stat-freedom');
+
+      // Clear states
+      widget.classList.remove('s-soon', 's-live', 's-done', 's-between', 's-practical');
+      
+      // Calculate Exams Progress
+      const windows = EVENTS.map(e => ({
+        ...e,
+        startMs: pktToDate(e.date, e.start).getTime(),
+        endMs: pktToDate(e.date, e.start + e.dur).getTime()
+      }));
+
+      const completed = windows.filter(w => nowMs > w.endMs).length;
+      const totalExams = EVENTS.length;
+      const progressPercent = (completed / totalExams) * 100;
+      
+      // Calculate Freedom Days (Until Theory Done)
+      const theoryEnd = new Date(THEORY_DONE_DATE).getTime();
+      const lastExamEnd = new Date(ALL_DONE_DATE).getTime();
+      
+      const freedomMs = Math.max(0, theoryEnd - nowMs);
+      const freedomDays = Math.ceil(freedomMs / (1000 * 60 * 60 * 24));
+
+      // Update basic stats
+      statDone.textContent = `${completed}/${totalExams}`;
+      statBurden.textContent = `${progressPercent.toFixed(0)}%`;
+      statFreedom.textContent = nowMs > theoryEnd ? 'FREEDOM' : freedomDays;
+      statsGrid.classList.remove('hidden');
+
+      // 1. IS TOTAL SEASON DONE? (After June 11)
+      if (nowMs >= lastExamEnd) {
+        widget.classList.add('s-done');
+        labelEl.textContent = '✨ TOTAL FREEDOM';
+        subEl.textContent = 'All exams & practicals finished. Enjoy!';
+        pillEl.classList.remove('hidden');
+        pillText.textContent = '100% RELAX';
+        barWrap.classList.add('hidden');
+        resultPortal.classList.remove('hidden');
+        return;
+      }
+
+      resultPortal.classList.add('hidden');
+
+      // 2. IS AN EXAM LIVE RIGHT NOW?
+      const active = windows.find(w => nowMs >= w.startMs && nowMs < w.endMs);
+      if (active) {
+        widget.classList.add(active.type === 'practical' ? 's-practical' : 's-live');
+        labelEl.textContent = active.type === 'practical' ? '🔬 PRACTICAL IN PROGRESS' : '🔥 EXAM LIVE';
+        subEl.textContent = active.subject;
+        
+        const elapsed = nowMs - active.startMs;
+        const total = active.endMs - active.startMs;
+        const pct = (elapsed / total) * 100;
+        
+        barWrap.classList.remove('hidden');
+        barFill.style.width = `${pct}%`;
+        barLabel.textContent = `${pct.toFixed(1)}%`;
+        
+        pillEl.classList.remove('hidden');
+        pillText.textContent = formatDaysHours(active.endMs - nowMs) + ' LEFT';
+        return;
+      }
+
+      // 3. AFTER THEORY BUT BEFORE PRACTICALS (THE REAL "FREEDOM" STATE)
+      if (nowMs >= theoryEnd && !active) {
+          const nextPractical = windows.find(w => w.type === 'practical' && w.startMs > nowMs);
+          if (nextPractical) {
+              // We are between April 15 and a practical
+              widget.classList.add('s-done');
+              labelEl.textContent = '🎉 THEORY FINISHED // FREEDOM';
+              subEl.textContent = `Main burden off. Next practical: ${nextPractical.subject}`;
+              pillEl.classList.remove('hidden');
+              pillText.textContent = formatDaysHours(nextPractical.startMs - nowMs) + ' GAP';
+              barWrap.classList.add('hidden');
+              return;
+          }
+      }
+
+      // 4. JUST FINISHED AN EXAM? (Rest of the day after an exam)
+      const justFinished = windows.find(w => nowMs > w.endMs && (nowMs - w.endMs) < 6 * 60 * 60 * 1000);
+      if (justFinished) {
+          widget.classList.add('s-done');
+          labelEl.textContent = '✅ BURDEN REDUCED';
+          subEl.textContent = `${justFinished.subject} conquered. Rest up.`;
+          pillEl.classList.add('hidden');
+          barWrap.classList.add('hidden');
+          return;
+      }
+
+      // 5. BEFORE SEASON START
+      const seasonStartMs = new Date(SEASON_START).getTime();
+      if (nowMs < seasonStartMs) {
+        widget.classList.add('s-soon');
+        labelEl.textContent = '🚀 PREPARING FOR SEASON';
+        subEl.textContent = 'First: ' + EVENTS[0].subject;
+        pillEl.classList.remove('hidden');
+        pillText.textContent = formatDaysHours(seasonStartMs - nowMs) + ' TO GO';
+        barWrap.classList.add('hidden');
+        return;
+      }
+
+      // 6. GAP BETWEEN THEORY EXAMS
+      const next = windows.find(w => w.startMs > nowMs);
+      if (next) {
+        widget.classList.add('s-between');
+        labelEl.textContent = '📖 LOADING NEXT PHASE';
+        subEl.textContent = 'Target: ' + next.subject;
+        pillEl.classList.remove('hidden');
+        pillText.textContent = formatDaysHours(next.startMs - nowMs) + ' AWAY';
+        barWrap.classList.add('hidden');
+        return;
+      }
+    }
+
+    // Initialize and heartbeat
+    update();
+    setInterval(update, 1000);
+
+    // Astro page transition support
+    document.addEventListener('astro:page-load', () => {
+      update();
+    });
+  })();
+</script> </div> <!-- Main heading --> <h1 class="text-6xl md:text-9xl font-black text-white tracking-tighter leading-[0.85] mt-8 reveal">
+Sagheer Akram
+<span class="block text-xl md:text-3xl font-light tracking-widest text-slate-500 mt-6 lowercase">making code feel a bit more human.</span> </h1> <!-- Description --> <p class="text-slate-400 text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mt-12 reveal">
+I’m a student researcher who spends too much time thinking about how logic connects to nature. 
+        Whether it's AI that actually talks back or code that lives in the shadows, 
+        this is where I document my late-night experiments.
+</p> <!-- CTAs --> <div class="flex flex-col sm:row gap-12 items-start reveal"> <a href="/projects" class="group flex items-center gap-4 text-white font-bold tracking-tighter text-xl hover:text-accent-teal transition-colors">
+Explore the Archive
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:translate-x-2 transition-transform opacity-40"><path d="m9 18 6-6-6-6"></path></svg> </a> <a href="/photography" class="group flex items-center gap-4 text-white font-bold tracking-tighter text-xl hover:text-accent-teal transition-colors">
+Visual Memories
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:translate-x-2 transition-transform opacity-40"><path d="m9 18 6-6-6-6"></path></svg> </a> </div> </div> <!-- Scroll indicator --> <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-20"> <div class="w-px h-12 bg-gradient-to-b from-accent-ice to-transparent"></div> </div> </section>  <section class="relative z-10 max-w-6xl mx-auto px-6 py-32"> <div class="flex items-end justify-between mb-20 reveal"> <div> <h2 class="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4 italic">Recent Logs.</h2> <p class="text-slate-500 max-w-md font-light">The stuff I've been breaking and fixing lately.</p> </div> <a href="/projects" class="text-xs font-bold tracking-widest text-slate-500 hover:text-accent-teal transition-colors uppercase border-b border-white/10 pb-1 hidden sm:block">Open Archive</a> </div> <div class="grid grid-cols-1 md:grid-cols-3 gap-12"> <a href="/projects/omnishell" class="group relative block p-8 rounded-3xl bg-white/[0.01] border border-white/[0.03] hover:border-accent-teal/20 transition-all duration-700 hover:bg-white/[0.02]"> <h3 class="text-2xl font-black text-white mb-4 group-hover:text-accent-teal transition-colors tracking-tight italic">OmniShell</h3> <p class="text-slate-500 text-sm leading-relaxed mb-8">Secure communication that doesn’t care about central servers.</p> <div class="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-600 group-hover:text-accent-teal transition-colors">Read Log</div> </a><a href="/projects/quickcmd" class="group relative block p-8 rounded-3xl bg-white/[0.01] border border-white/[0.03] hover:border-accent-teal/20 transition-all duration-700 hover:bg-white/[0.02]"> <h3 class="text-2xl font-black text-white mb-4 group-hover:text-accent-teal transition-colors tracking-tight italic">QuickCmd</h3> <p class="text-slate-500 text-sm leading-relaxed mb-8">An AI that understands my intent without taking over my machine.</p> <div class="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-600 group-hover:text-accent-teal transition-colors">Read Log</div> </a><a href="/projects/atlas" class="group relative block p-8 rounded-3xl bg-white/[0.01] border border-white/[0.03] hover:border-accent-teal/20 transition-all duration-700 hover:bg-white/[0.02]"> <h3 class="text-2xl font-black text-white mb-4 group-hover:text-accent-teal transition-colors tracking-tight italic">ATLAS</h3> <p class="text-slate-500 text-sm leading-relaxed mb-8">Mapping out the gravity of my codebases in 3D.</p> <div class="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-600 group-hover:text-accent-teal transition-colors">Read Log</div> </a> </div> </section>  <section class="relative z-10 max-w-6xl mx-auto px-6 py-32"> <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center"> <div class="lg:col-span-12 mb-12 reveal"> <h2 class="text-4xl md:text-6xl font-black text-white tracking-tighter italic mb-8">Through the Lens.</h2> <p class="text-slate-400 leading-relaxed text-lg max-w-2xl font-light">
+When the screen gets too loud, I take my camera outside. 
+          There's a specific kind of logic in how light hits a mossy rock 
+          or how a city falls silent at 3 AM. This is my way of capturing that.
+</p> </div> <div class="lg:col-span-12 grid grid-cols-2 md:grid-cols-4 gap-6 reveal"> <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-white/5 group border border-white/5"> <img src="/photography/sagheer-akram-photography-late-night-3-am-light.jpg" alt="3 AM Light" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-100 group-hover:scale-105" loading="lazy"> </div><div class="aspect-[3/4] rounded-2xl overflow-hidden bg-white/5 group border border-white/5"> <img src="/photography/sagheer-akram-photography-nature-digital-bloom.jpg" alt="Digital Bloom" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-100 group-hover:scale-105" loading="lazy"> </div><div class="aspect-[3/4] rounded-2xl overflow-hidden bg-white/5 group border border-white/5"> <img src="/photography/sagheer-akram-photography-stillness-sunday-silence.jpg" alt="Sunday Silence" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-100 group-hover:scale-105" loading="lazy"> </div><div class="aspect-[3/4] rounded-2xl overflow-hidden bg-white/5 group border border-white/5"> <img src="/photography/sagheer-akram-photography-nature-vibrant-growth.jpg" alt="Vibrant Growth" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-100 group-hover:scale-105" loading="lazy"> </div> </div> <div class="lg:col-span-12 text-center mt-12 reveal"> <a href="/photography" class="inline-block text-white font-bold tracking-tighter text-2xl hover:text-accent-teal transition-colors">
+Look at the full gallery
+</a> </div> </div> </section>  </main> <footer class="mt-32 pb-16 relative overflow-hidden"> <!-- Subtle top border/gradient --> <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent"></div> <div class="max-w-6xl mx-auto px-6"> <!-- Contact CTA - The "Chill Contact Button" --> <div class="py-24 text-center"> <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter mb-8">
+Have an idea? <br class="md:hidden"> <span class="text-slate-500 italic font-medium">Let's explore it.</span> </h2> <a href="mailto:contact@sagheerprojects.fun" class="inline-block px-12 py-5 bg-white text-black font-bold text-sm tracking-[0.2em] uppercase rounded-full hover:bg-accent-ice hover:scale-105 transition-all duration-300 active:scale-95">
+Chill Contact
+</a> </div> <!-- Main Footer Content --> <div class="flex flex-col md:flex-row items-center justify-between gap-12 pt-16 border-t border-white/[0.05]"> <!-- Brand & Identity --> <div class="text-center md:text-left"> <a href="/" class="text-xl font-black text-white tracking-tighter hover:text-accent-ice transition-colors">
+Sagheer Akram.
+</a> <p class="text-[10px] uppercase tracking-[0.3em] text-slate-600 mt-3 font-bold">
+Researcher // Student // Observer
+</p> </div> <!-- Quick Links --> <nav class="flex items-center gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500"> <a href="/projects" class="hover:text-white transition-colors">Projects</a> <a href="/about" class="hover:text-white transition-colors">About</a> <a href="/photography" class="hover:text-white transition-colors">Visuals</a> </nav> <!-- Social Discovery --> <div class="flex items-center gap-6"> <a href="https://github.com/SagheerAkram" target="_blank" class="text-slate-500 hover:text-white transition-colors"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"> <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"></path> </svg> </a> <a href="https://instagram.com/rizzsagheer" target="_blank" class="text-slate-500 hover:text-white transition-colors"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect> <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path> <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line> </svg> </a> </div> </div> <!-- Copyright --> <div class="mt-16 text-center"> <p class="text-[10px] uppercase tracking-widest text-slate-700">
+© 2026 // SAGHEER AKRAM. ALL MOMENTS ARCHIVED.
+</p> </div> </div> </footer> <script>
+      // Global reveal animation observer
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { 
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      function initReveals() {
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach((el) => {
+          revealObserver.observe(el);
+        });
+      }
+
+      // Initial run
+      initReveals();
+
+      // Mouse Glow Follower logic
+      let glowElement = null;
+      function updateGlowPosition(e) {
+        if (!glowElement) glowElement = document.getElementById('global-glow');
+        if (glowElement) {
+          glowElement.style.left = e.clientX + 'px';
+          glowElement.style.top = e.clientY + 'px';
+        }
+      }
+
+      // Add listener once globally
+      if (!window.hasGlobalGlowListener) {
+        window.addEventListener('mousemove', updateGlowPosition);
+        window.hasGlobalGlowListener = true;
+      }
+
+      // Support for client-side navigation or dynamic content
+      document.addEventListener('astro:page-load', () => {
+        initReveals();
+        glowElement = document.getElementById('global-glow'); // Re-capture element after navigation
+      });
+    </script> </body> </html>
