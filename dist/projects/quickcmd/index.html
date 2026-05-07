@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>QuickCmd // Sagheer Akram</title><meta name="description" content="An AI CLI that actually asks for permission. It converts my plain English notes into terminal commands, but with a verification loop so I dont accidentally delete my system."><link rel="canonical" href="https://sagheerprojects.fun/projects/quickcmd/"><!-- Open Graph / SEO --><meta property="og:type" content="website"><meta property="og:url" content="https://sagheerprojects.fun/projects/quickcmd/"><meta property="og:title" content="QuickCmd // Sagheer Akram"><meta property="og:description" content="An AI CLI that actually asks for permission. It converts my plain English notes into terminal commands, but with a verification loop so I dont accidentally delete my system."><meta property="og:image" content="https://sagheerprojects.fun/projects/quickcmd.png"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="QuickCmd // Sagheer Akram"><meta name="twitter:description" content="An AI CLI that actually asks for permission. It converts my plain English notes into terminal commands, but with a verification loop so I dont accidentally delete my system."><meta name="twitter:image" content="https://sagheerprojects.fun/projects/quickcmd.png"><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/about.CNK1q5nV.css">
+<style>.typing-text[data-astro-cid-ovxcmftc]{border-right:2px solid var(--accent-teal);white-space:nowrap;overflow:hidden;width:0;animation:typing 2.5s steps(30,end) forwards,blink .5s step-end infinite}@keyframes typing{0%{width:0}to{width:100%}}@keyframes blink{50%{border-color:transparent}}.animate-delay-1[data-astro-cid-ovxcmftc]{animation:fadeIn .5s ease 2.8s forwards}@keyframes fadeIn{0%{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.animate-spin-slow[data-astro-cid-ovxcmftc]{animation:spin 20s linear infinite}.animate-reverse-spin[data-astro-cid-ovxcmftc]{animation:spin-reverse 15s linear infinite}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes spin-reverse{0%{transform:rotate(360deg)}to{transform:rotate(0)}}.animate-shimmer[data-astro-cid-ovxcmftc]{animation:shimmer 2s cubic-bezier(.4,0,.6,1) infinite}@keyframes shimmer{0%,to{transform:translate(-100%)}50%{transform:translate(100%)}}
+</style><script type="module" src="/_astro/hoisted.cT7zbX7d.js"></script></head> <body class="antialiased relative overflow-x-hidden bg-[#070714]"> <!-- Dynamic Background Layers --> <div class="fixed inset-0 bg-gradient-to-br from-[#070714] via-[#0D0B1A] to-[#04040A] z-[-2]"></div> <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-[-1]"></canvas> <div class="bg-mesh" id="bg-mesh"></div> <div class="subgrid" id="subgrid"></div> <!-- Floating Neon Orbs --> <div class="glow-orb w-[600px] h-[600px] bg-accent-ice/10 top-[-10%] left-[-10%]" style="animation-delay: -2s; filter: blur(90px);"></div> <div class="glow-orb w-[800px] h-[800px] bg-accent-aurora/10 bottom-[-20%] right-[-10%]" style="animation-delay: -5s; filter: blur(120px);"></div> <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"> <nav class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between"> <!-- Brand --> <a href="/" class="group flex items-center gap-3"> <div class="w-6 h-6 transition-transform duration-500 group-hover:rotate-12"> <svg viewBox="0 0 32 32" class="w-full h-full shadow-[0_0_15px_rgba(0,240,255,0.4)]"> <defs> <linearGradient id="nav-g" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" stop-color="#00f0ff"></stop> <stop offset="100%" stop-color="#b026ff"></stop> </linearGradient> </defs> <path d="M26 16 A10 10 0 1 1 16 6" fill="none" stroke="url(#nav-g)" stroke-width="3" stroke-linecap="round"></path> <circle cx="16" cy="16" r="4" fill="url(#nav-g)"></circle> </svg> </div> <span class="text-sm font-black tracking-[0.3em] text-white uppercase transition-all duration-300 group-hover:tracking-[0.4em]">
+Sagheer Akram.
+</span> </a> <!-- Desktop nav --> <div class="hidden md:block relative px-1 py-1 rounded-full border border-white/[0.03] bg-white/[0.02]"> <!-- Sliding Indicator --> <div id="nav-indicator" class="absolute h-[calc(100%-8px)] top-1 bg-accent-ice/10 border border-accent-ice/20 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] z-0"></div> <ul class="relative flex items-center gap-1"> <li> <a href="/" data-nav-link class="relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 text-slate-500 hover:text-white">
+Home
+</a> </li> <li> <a href="/projects/" data-nav-link class="relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 text-accent-ice"> Archive </a> </li><li> <a href="/photography/" data-nav-link class="relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 text-slate-500 hover:text-white"> Visuals </a> </li><li> <a href="/about/" data-nav-link class="relative px-6 py-2 block text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 z-10 text-slate-500 hover:text-white"> About </a> </li> </ul> </div> <!-- Mobile hamburger --> <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu" aria-expanded="false"> <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span> <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300"></span> <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span> </button> </nav> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden fixed inset-0 bg-[#050505]/95 backdrop-blur-xl z-50"> <div class="flex flex-col h-full p-8"> <div class="flex justify-end p-2"> <button id="close-menu" class="text-slate-500 hover:text-white"> <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg> </button> </div> <ul class="flex flex-col gap-8 mt-12"> <li><a href="/" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter">Home</a></li> <li> <a href="/projects/" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter"> Archive </a> </li><li> <a href="/photography/" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter"> Visuals </a> </li><li> <a href="/about/" class="text-3xl font-black text-white hover:text-accent-ice transition-colors tracking-tighter"> About </a> </li> </ul> <div class="mt-auto pb-12"> <p class="text-[10px] uppercase tracking-widest text-slate-700">Digital Archive • v2.0</p> </div> </div> </div> </header>  <main class="relative z-10">   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> <script>
+    document.addEventListener('astro:page-load', () => {
+      mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'dark',
+        themeVariables: {
+          primaryColor: '#14b8a6',
+          primaryTextColor: '#fff',
+          lineColor: '#14b8a6',
+          secondaryColor: '#2d5a27',
+          tertiaryColor: '#050b0a'
+        }
+      });
+      mermaid.contentLoaded();
+    });
+  </script>  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://sagheerprojects.fun"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://sagheerprojects.fun/projects"},{"@type":"ListItem","position":3,"name":"QuickCmd","item":"https://sagheerprojects.fun/projects/quickcmd"}]}</script> <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"QuickCmd","description":"An AI CLI that actually asks for permission. It converts my plain English notes into terminal commands, but with a verification loop so I dont accidentally delete my system.","author":{"@type":"Person","name":"Sagheer Akram"},"image":"https://sagheerprojects.fun/projects/quickcmd.png","url":"https://sagheerprojects.fun/projects/quickcmd","genre":"AI","keywords":"Go, AI, CLI, Automation"}</script> <article class="relative z-10 pt-32 pb-24 px-6 max-w-5xl mx-auto" data-astro-cid-ovxcmftc> <!-- Project Header --> <header class="mb-16" data-astro-cid-ovxcmftc> <div class="flex items-center gap-4 mb-6 reveal" data-astro-cid-ovxcmftc> <span class="px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.1] text-xs font-mono text-accent-teal uppercase tracking-widest" data-astro-cid-ovxcmftc> AI </span> <span class="text-xs font-mono text-slate-500 uppercase tracking-widest" data-astro-cid-ovxcmftc>
+STATUS: LOGGED </span> </div> <h1 class="text-5xl md:text-8xl font-black text-white tracking-tighter mb-8 reveal" data-astro-cid-ovxcmftc> QuickCmd </h1> <div class="grid md:grid-cols-3 gap-12 border-t border-white/[0.05] pt-12" data-astro-cid-ovxcmftc> <div class="md:col-span-2 reveal" data-astro-cid-ovxcmftc> <p class="text-xl md:text-2xl text-slate-300 leading-relaxed font-light" data-astro-cid-ovxcmftc> QuickCmd is my response to my own forgetfulness. I can never remember complex ffmpeg or docker flags, so I built an assistant that does it for me. But unlike other &quot;AI Terminal&quot; tools, this one is built on the principle of &quot;Trust but Verify.&quot; </p> </div> <div class="space-y-8 reveal" data-astro-cid-ovxcmftc> <div data-astro-cid-ovxcmftc> <h3 class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-3" data-astro-cid-ovxcmftc>Core Stack</h3> <div class="flex flex-wrap gap-2" data-astro-cid-ovxcmftc> <span class="text-sm text-white/70 font-mono italic" data-astro-cid-ovxcmftc>#Go</span><span class="text-sm text-white/70 font-mono italic" data-astro-cid-ovxcmftc>#AI</span><span class="text-sm text-white/70 font-mono italic" data-astro-cid-ovxcmftc>#CLI</span><span class="text-sm text-white/70 font-mono italic" data-astro-cid-ovxcmftc>#Automation</span> </div> </div> <a href="https://github.com/SagheerAkram/QuickCmd" target="_blank" class="inline-flex items-center gap-2 text-accent-teal hover:gap-4 transition-all duration-300 group" data-astro-cid-ovxcmftc> <span class="font-bold tracking-tight" data-astro-cid-ovxcmftc>VIEW SOURCE</span> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-60 group-hover:opacity-100" data-astro-cid-ovxcmftc><path d="M7 7h10v10" data-astro-cid-ovxcmftc></path><path d="M7 17 17 7" data-astro-cid-ovxcmftc></path></svg> </a> </div> </div> </header> <!-- Visual Showcase / Interactive Block --> <section class="mb-24 rounded-3xl overflow-hidden bg-white/[0.02] border border-white/[0.05] aspect-video relative group reveal" data-astro-cid-ovxcmftc> <div class="absolute inset-0 transition-opacity duration-1000 opacity-60 group-hover:opacity-80 bg-cover bg-center bg-gradient-to-b from-[#0a1211] via-[#0d2b2d] to-black" style="background-image: url(/projects/quickcmd.png)" data-astro-cid-ovxcmftc></div> <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" data-astro-cid-ovxcmftc></div> <div class="absolute inset-0 flex items-center justify-center p-8 md:p-16" data-astro-cid-ovxcmftc> <!-- Terminal Animation for OmniShell -->  <!-- Graph Animation Placeholder for ATLAS -->  <!-- Default for others -->  </div> </section> <!-- Research Logs & Diagrams --> <div class="grid md:grid-cols-5 gap-16 mb-24" data-astro-cid-ovxcmftc> <!-- Content Sidebar --> <aside class="md:col-span-2 space-y-16" data-astro-cid-ovxcmftc> <div class="reveal" data-astro-cid-ovxcmftc> <h2 class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-8 border-b border-white/5 pb-4 italic" data-astro-cid-ovxcmftc>RESEARCH LOGS</h2> <div class="space-y-8" data-astro-cid-ovxcmftc> <div class="relative pl-8 border-l border-accent-teal/20 py-1" data-astro-cid-ovxcmftc> <span class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-accent-teal/40" data-astro-cid-ovxcmftc></span> <p class="text-sm text-slate-400 leading-relaxed italic" data-astro-cid-ovxcmftc>
+"Model Drift: Sometimes the LLM suggests &#39;rm -rf /&#39; when I ask it to clean temporary files. Added a strict regex filter."
+</p> </div><div class="relative pl-8 border-l border-accent-teal/20 py-1" data-astro-cid-ovxcmftc> <span class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-accent-teal/40" data-astro-cid-ovxcmftc></span> <p class="text-sm text-slate-400 leading-relaxed italic" data-astro-cid-ovxcmftc>
+"Speed: Using Go for the wrapper ensures the CLI starts instantly. Nobody wants to wait for an AI to load while they&#39;re in the middle of a terminal session."
+</p> </div><div class="relative pl-8 border-l border-accent-teal/20 py-1" data-astro-cid-ovxcmftc> <span class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-accent-teal/40" data-astro-cid-ovxcmftc></span> <p class="text-sm text-slate-400 leading-relaxed italic" data-astro-cid-ovxcmftc>
+"Safety: The Docker sandbox mode is great for testing commands I&#39;m unsure about."
+</p> </div> </div> </div> </aside> <!-- Main Case Study Content --> <div class="md:col-span-3 space-y-16" data-astro-cid-ovxcmftc> <section class="reveal" data-astro-cid-ovxcmftc> <h2 class="text-2xl font-bold text-white mb-6" data-astro-cid-ovxcmftc>The Intent</h2> <p class="text-slate-400 leading-relaxed text-lg" data-astro-cid-ovxcmftc> Copy-pasting AI commands from a browser into a terminal is dangerous. There needs to be a middle layer that vets the command before execution. </p> </section> <!-- Dynamic Mermaid Diagram --> <section class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.05] reveal" data-astro-cid-ovxcmftc> <h3 class="text-xs font-mono text-slate-500 mb-8 tracking-[0.3em] uppercase" data-astro-cid-ovxcmftc>System Schematic</h3> <div class="mermaid opacity-60 hover:opacity-100 transition-opacity duration-500" data-astro-cid-ovxcmftc>  
+                graph LR
+                    A[User Note] --&gt;|interpreted by| B(QuickCmd)
+                    B --&gt;|query| C[LLM API]
+                    C --&gt;|suggested cmd| D{Approval Prompt}
+                    D --&gt;|Verified| E[Execution]
+                    D --&gt;|Decline| F[Refine]
+                    E --&gt;|Optional| G[Docker Sandbox]
+                   </div> </section> <section class="reveal" data-astro-cid-ovxcmftc> <h2 class="text-2xl font-bold text-white mb-6" data-astro-cid-ovxcmftc>The Build</h2> <p class="text-slate-400 leading-relaxed text-lg" data-astro-cid-ovxcmftc> A Go binary that pipes your intent to an LLM, parses the response, and presents it in a clear &quot;Accept/Decline&quot; interface. Optionally runs in a container. </p> </section> <section class="reveal" data-astro-cid-ovxcmftc> <h2 class="text-2xl font-bold text-white mb-6" data-astro-cid-ovxcmftc>Reflections</h2> <p class="text-slate-400 leading-relaxed text-lg" data-astro-cid-ovxcmftc> I learned that parsing unstructured AI output is much harder than it looks. I had to build a robust state machine to handle weird formatting. </p> </section> </div> </div> <!-- Contact CTA --> <footer class="text-center py-24 border-t border-white/[0.05] reveal" data-astro-cid-ovxcmftc> <p class="text-slate-500 mb-8 font-mono text-sm tracking-[0.2em]" data-astro-cid-ovxcmftc>END OF LOG</p> <a href="/contact/" class="inline-block text-3xl font-black text-white hover:text-accent-teal transition-colors" data-astro-cid-ovxcmftc>
+Got thoughts? Let's talk.
+</a> </footer> </article>    </main> <footer class="mt-32 pb-16 relative overflow-hidden"> <!-- Subtle top border/gradient --> <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent"></div> <div class="max-w-6xl mx-auto px-6"> <!-- Contact CTA - The "Chill Contact Button" --> <div class="py-24 text-center"> <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter mb-8">
+Have an idea? <br class="md:hidden"> <span class="text-slate-500 italic font-medium">Let's explore it.</span> </h2> <a href="mailto:contact@sagheerprojects.fun" class="inline-block px-12 py-5 bg-white text-black font-bold text-sm tracking-[0.2em] uppercase rounded-full hover:bg-accent-ice hover:scale-105 transition-all duration-300 active:scale-95">
+Chill Contact
+</a> </div> <!-- Main Footer Content --> <div class="flex flex-col md:flex-row items-center justify-between gap-12 pt-16 border-t border-white/[0.05]"> <!-- Brand & Identity --> <div class="text-center md:text-left"> <a href="/" class="text-xl font-black text-white tracking-tighter hover:text-accent-ice transition-colors">
+Sagheer Akram.
+</a> <p class="text-[10px] uppercase tracking-[0.3em] text-slate-600 mt-3 font-bold">
+Researcher // Student // Observer
+</p> </div> <!-- Quick Links --> <nav class="flex items-center gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500"> <a href="/projects/" class="hover:text-white transition-colors">Projects</a> <a href="/about/" class="hover:text-white transition-colors">About</a> <a href="/photography/" class="hover:text-white transition-colors">Visuals</a> </nav> <!-- Social Discovery --> <div class="flex items-center gap-6"> <a href="https://github.com/SagheerAkram" target="_blank" class="text-slate-500 hover:text-white transition-colors"> <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"> <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"></path> </svg> </a> <a href="https://instagram.com/rizzsagheer" target="_blank" class="text-slate-500 hover:text-white transition-colors"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect> <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path> <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line> </svg> </a> </div> </div> <!-- Copyright --> <div class="mt-16 text-center"> <p class="text-[10px] uppercase tracking-widest text-slate-700">
+© 2026 // SAGHEER AKRAM. ALL MOMENTS ARCHIVED.
+</p> </div> </div> </footer> <!-- Custom Cursor --> <div id="custom-cursor" class="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[10000] mix-blend-difference"></div> <div id="cursor-follower" class="fixed top-0 left-0 w-10 h-10 border border-white/20 rounded-full pointer-events-none z-[9999] transition-[background,border-color,width,height] duration-300"></div> <script>
+      // Persistent global state
+      if (typeof window.mouseX === 'undefined') {
+        window.mouseX = -100;
+        window.mouseY = -100;
+        window.cursorX = -100;
+        window.cursorY = -100;
+        window.followerX = -100;
+        window.followerY = -100;
+      }
+
+      // Global Mouse Listener (Only add once)
+      if (!window.cursorListenerAdded) {
+        window.addEventListener('mousemove', (e) => {
+          window.mouseX = e.clientX;
+          window.mouseY = e.clientY;
+          document.documentElement.style.setProperty('--mouse-x', `${(window.mouseX / window.innerWidth) * 100}%`);
+          document.documentElement.style.setProperty('--mouse-y', `${(window.mouseY / window.innerHeight) * 100}%`);
+        });
+        window.cursorListenerAdded = true;
+      }
+
+      // Global Animation Loop (Only start once, fetch fresh elements dynamically)
+      if (!window.cursorAnimationRunning) {
+        function animate() {
+          window.cursorX += (window.mouseX - window.cursorX) * 0.3;
+          window.cursorY += (window.mouseY - window.cursorY) * 0.3;
+          window.followerX += (window.mouseX - window.followerX) * 0.15;
+          window.followerY += (window.mouseY - window.followerY) * 0.15;
+
+          // Always fetch fresh elements because Astro swaps the body!
+          const cursor = document.getElementById('custom-cursor');
+          const follower = document.getElementById('cursor-follower');
+          const mesh = document.getElementById('bg-mesh');
+
+          if (cursor) cursor.style.transform = `translate3d(${window.cursorX - 4}px, ${window.cursorY - 4}px, 0)`;
+          if (follower) follower.style.transform = `translate3d(${window.followerX - 20}px, ${window.followerY - 20}px, 0)`;
+
+          // Shifting Mesh
+          const time = Date.now() * 0.0008;
+          if (mesh) {
+            mesh.style.setProperty('--orb-1-x', `${20 + Math.sin(time * 0.7) * 15}%`);
+            mesh.style.setProperty('--orb-1-y', `${30 + Math.cos(time * 0.5) * 15}%`);
+            mesh.style.setProperty('--orb-2-x', `${80 + Math.cos(time * 0.6) * 15}%`);
+            mesh.style.setProperty('--orb-2-y', `${70 + Math.sin(time * 0.4) * 15}%`);
+          }
+
+          requestAnimationFrame(animate);
+        }
+        animate();
+        window.cursorAnimationRunning = true;
+      }
+
+      // Re-apply hover listeners on page load
+      function updateHoverListeners() {
+        const interactiveElements = document.querySelectorAll('a, button, .gallery-item, .tilt-card, .tech-card, li');
+        interactiveElements.forEach(el => {
+          el.onmouseenter = () => {
+            const follower = document.getElementById('cursor-follower');
+            if (follower) {
+              follower.style.width = '60px';
+              follower.style.height = '60px';
+              follower.style.background = 'rgba(255, 255, 255, 0.1)';
+              follower.style.borderColor = 'transparent';
+            }
+          };
+          el.onmouseleave = () => {
+            const follower = document.getElementById('cursor-follower');
+            if (follower) {
+              follower.style.width = '40px';
+              follower.style.height = '40px';
+              follower.style.background = 'transparent';
+              follower.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            }
+          };
+        });
+      }
+
+      // Background Neural Lifeforms
+      function initParticles() {
+        const canvas = document.getElementById('bg-canvas');
+        if (!canvas) return;
+        
+        if (window.particlesAnimationId) cancelAnimationFrame(window.particlesAnimationId);
+        
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const particleCount = 100;
+        const connectionDistance = 150;
+        
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        window.removeEventListener('resize', resize);
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+          constructor() {
+            this.init();
+          }
+          init() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.size = Math.random() * 2 + 1;
+            this.color = Math.random() > 0.5 ? '#00f0ff' : '#b026ff';
+            this.alpha = Math.random() * 0.3 + 0.1;
+          }
+          update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Mouse interaction (Avoidance)
+            const dx = window.mouseX - this.x;
+            const dy = window.mouseY - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+              this.x -= dx * 0.02;
+              this.y -= dy * 0.02;
+            }
+
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+          }
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.alpha;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          }
+        }
+
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+        function animateParticles() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+
+            // Connections
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+
+              if (dist < connectionDistance) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                const opacity = 1 - (dist / connectionDistance);
+                ctx.strokeStyle = `rgba(0, 240, 255, ${opacity * 0.1})`;
+                ctx.stroke();
+              }
+            }
+          }
+          window.particlesAnimationId = requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+      }
+
+      // Intersection Observer for reveals
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('revealed');
+        });
+      }, { threshold: 0.1 });
+
+      function initReveals() {
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      }
+
+      // 3D Tilt Effect
+      function initTilt() {
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+          // Remove old listeners to prevent duplicates on Astro page transitions
+          const clone = card.cloneNode(true);
+          if(card.parentNode) {
+              card.parentNode.replaceChild(clone, card);
+          }
+          
+          clone.addEventListener('mousemove', (e) => {
+            const rect = clone.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            clone.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          });
+          clone.addEventListener('mouseleave', () => {
+            clone.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          });
+        });
+      }
+
+      // Run on initial load
+      updateHoverListeners();
+      initParticles();
+      initReveals();
+      initTilt();
+
+      // Support for Astro View Transitions (Run on every page switch)
+      document.addEventListener('astro:page-load', () => {
+        updateHoverListeners();
+        initParticles();
+        initReveals();
+        initTilt();
+      });
+    </script> </body> </html>
