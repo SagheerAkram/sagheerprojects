@@ -2,4 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/sagheerp/public_html
-    - /bin/cp -R dist/* $DEPLOYPATH
+    - /bin/cp -RT dist/ $DEPLOYPATH
+    - /bin/cp dist/.htaccess $DEPLOYPATH || true
