@@ -1,277 +1,243 @@
 // src/data/photography.js
-export const categories = ["All", "Late Night", "Nature", "Abstract", "Urban", "Stillness"];
+export const categories = ["All", "Sketches", "Nature", "Atmospheric"];
 
 export const photos = [
     {
         "id": 1,
-        "title": "3 AM Light",
-        "category": "Late Night",
-        "status": "STABLE",
+        "title": "The Peeling Mask I",
+        "category": "Sketches",
         "src": "/photography/sagheer-akram-photography-late-night-3-am-light.jpg",
-        "description": "Caught the way the streetlights hit the fog at 3 AM. No one else was out."
+        "description": "A surreal pencil sketch exploring identity and the faces we hide behind. Detailed shading on a peeling mask."
     },
     {
         "id": 2,
-        "title": "Digital Bloom",
-        "category": "Nature",
-        "status": "STABLE",
+        "title": "The Peeling Mask II",
+        "category": "Sketches",
         "src": "/photography/sagheer-akram-photography-nature-digital-bloom.jpg",
-        "description": "Nature doesn't need tutorials. It just grows."
+        "description": "A second study of the peeling face archetype. Raw pencil lines on paper."
     },
     {
         "id": 3,
-        "title": "Sunday Silence",
-        "category": "Stillness",
-        "status": "STABLE",
+        "title": "Morning Ray",
+        "category": "Nature",
         "src": "/photography/sagheer-akram-photography-stillness-sunday-silence.jpg",
-        "description": "How beautiful the Sundays feel when the phone is off."
+        "description": "A powerful sunbeam cutting through the morning haze over a quiet rural field."
     },
     {
         "id": 4,
-        "title": "Vibrant Growth",
+        "title": "Mustard Bloom",
         "category": "Nature",
-        "status": "STABLE",
         "src": "/photography/sagheer-akram-photography-nature-vibrant-growth.jpg",
-        "description": "Slowing down to watch things exist."
+        "description": "The vibrant green and yellow of a field in full bloom under a soft sky."
     },
     {
         "id": 5,
-        "title": "Abstract Void",
-        "category": "Abstract",
-        "status": "STABLE",
+        "title": "Blurred Horizon",
+        "category": "Atmospheric",
         "src": "/photography/sagheer-akram-photography-abstract-abstract-void.jpg",
-        "description": "Finding shapes in the shadows."
+        "description": "An impressionistic, out-of-focus capture of a lone tree against a misty backdrop."
     },
     {
         "id": 6,
-        "title": "Quiet Horizon",
-        "category": "Urban",
-        "status": "STABLE",
+        "title": "Macro Verdance",
+        "category": "Nature",
         "src": "/photography/sagheer-akram-photography-urban-quiet-horizon.jpg",
-        "description": "Peace is all I crave when the city is loud."
+        "description": "Close-up of deep green leaves, showing the intricate veins and organic textures."
     },
     {
         "id": 7,
-        "title": "Texture",
-        "category": "Abstract",
-        "status": "STABLE",
+        "title": "Dew-Kissed",
+        "category": "Nature",
         "src": "/photography/sagheer-akram-photography-abstract-texture.jpg",
-        "description": "The details we usually walk past."
+        "description": "Macro photography of tall grass covered in delicate morning dew drops."
     },
     {
         "id": 8,
-        "title": "Filtered Sun",
-        "category": "Nature",
-        "status": "STABLE",
+        "title": "Mist-Veiled Field",
+        "category": "Atmospheric",
         "src": "/photography/sagheer-akram-photography-nature-filtered-sun.jpg",
-        "description": "The light was just right for ten seconds."
+        "description": "The world softened into a palette of blues and greens by heavy morning mist."
     },
     {
         "id": 9,
-        "title": "The Archive",
-        "category": "Urban",
-        "status": "STABLE",
+        "title": "Gradient Woods",
+        "category": "Atmospheric",
         "src": "/photography/sagheer-akram-photography-urban-the-archive.jpg",
-        "description": "Listening to the things that matter most."
+        "description": "Trees silhouetted against a dramatic purple and pink sunset gradient."
     },
     {
         "id": 10,
-        "title": "Forest Floor",
+        "title": "Autumnal Glow",
         "category": "Nature",
-        "status": "STABLE",
         "src": "/photography/sagheer-akram-photography-nature-forest-floor.jpg",
-        "description": "A quiet experiment in macro photography."
+        "description": "The warm, golden light of the afternoon sun illuminating a row of trees."
     },
     {
         "id": 11,
-        "title": "Cyber Sky",
-        "category": "Late Night",
-        "status": "STABLE",
+        "title": "Rural Dawn",
+        "category": "Nature",
         "src": "/photography/sagheer-akram-photography-late-night-cyber-sky.jpg",
-        "description": "Looking up when everyone else is looking down."
+        "description": "Tilled fields awaiting the season's planting, under a soft, waking sky."
     },
     {
         "id": 12,
-        "title": "Bloom",
+        "title": "Botanical Bloom",
         "category": "Nature",
-        "status": "STABLE",
         "src": "/photography/sagheer-akram-photography-nature-bloom.jpg",
-        "description": "I love capturing nature's quiet persistence."
+        "description": "A crisp, detailed look at nature's constant growth and renewal."
     },
     {
         "id": 13,
-        "title": "Mist",
-        "category": "Stillness",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-stillness-mist.jpg",
-        "description": "The world feels different when you can't see the end of the road."
+        "title": "The Red Kite",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-abstract-no-words.jpg",
+        "description": "A vibrant red kite caught in the branches of a tree against a deep blue sky."
     },
     {
         "id": 14,
-        "title": "Growth",
+        "title": "Frosty Fields",
         "category": "Nature",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-nature-growth.jpg",
-        "description": "Nature's own architecture."
+        "src": "/photography/sagheer-akram-photography-abstract-macro.jpg",
+        "description": "A wide landscape of a tilled field covered in a light layer of morning frost."
     },
     {
         "id": 15,
-        "title": "Midnight Run",
-        "category": "Late Night",
-        "status": "STABLE",
+        "title": "Midnight Haze",
+        "category": "Atmospheric",
         "src": "/photography/sagheer-akram-photography-late-night-midnight-run.jpg",
-        "description": "Welcomed the New Year with a long walk and a camera."
+        "description": "Long exposure capturing the shifting energy of the nocturnal world."
     },
     {
         "id": 16,
-        "title": "Macro",
-        "category": "Abstract",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-abstract-macro.jpg",
-        "description": "A closer look at the ordinary."
+        "title": "Ethereal Mist",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-stillness-mist.jpg",
+        "description": "The landscape disappearing into a thick, white morning fog."
     },
     {
         "id": 17,
-        "title": "Detail",
-        "category": "Stillness",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-stillness-detail.jpg",
-        "description": "Finding focus in the chaos."
+        "title": "Field Rhythms",
+        "category": "Nature",
+        "src": "/photography/sagheer-akram-photography-nature-growth.jpg",
+        "description": "The geometric patterns of agriculture as seen from the ground."
     },
     {
         "id": 18,
-        "title": "Shadows",
-        "category": "Abstract",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-abstract-shadows.jpg",
-        "description": "Sometimes the lack of light tells the story."
+        "title": "Soft Focus Nature",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-stillness-detail.jpg",
+        "description": "A dreamy, out-of-focus exploration of light and foliage."
     },
     {
         "id": 19,
-        "title": "Void",
-        "category": "Abstract",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-abstract-void.jpg",
-        "description": "A moment of stillness."
+        "title": "High Contrast Woods",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-abstract-shadows.jpg",
+        "description": "Trees standing tall against a bright, hazy sky, captured with high dynamic range."
     },
     {
         "id": 20,
-        "title": "Heartbeat",
+        "title": "Morning Texture",
         "category": "Nature",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-nature-heartbeat.jpg",
-        "description": "My heart can't handle how beautiful this was."
+        "src": "/photography/sagheer-akram-photography-abstract-void.jpg",
+        "description": "The rough, beautiful surface of the earth in the early morning light."
     },
     {
         "id": 21,
-        "title": "Urban Blur",
-        "category": "Urban",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-urban-urban-blur.jpg",
-        "description": "The city moving faster than I am."
+        "title": "Vivid Flora",
+        "category": "Nature",
+        "src": "/photography/sagheer-akram-photography-nature-heartbeat.jpg",
+        "description": "Intense green leaves showing the pulse of nature's life force."
     },
     {
         "id": 22,
-        "title": "Nature's Palette",
-        "category": "Nature",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-nature-nature-s-palette.jpg",
-        "description": "Colors I couldn't invent if I tried."
+        "title": "Urban Blur",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-urban-urban-blur.jpg",
+        "description": "The fast-paced motion of the city rendered as a blur of light."
     },
     {
         "id": 23,
-        "title": "Disconnected",
-        "category": "Stillness",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-stillness-disconnected.jpg",
-        "description": "I don't mind being lost for a while."
+        "title": "Nature's Palette",
+        "category": "Nature",
+        "src": "/photography/sagheer-akram-photography-nature-nature-s-palette.jpg",
+        "description": "A celebration of the diverse colors and shapes found in the wild."
     },
     {
         "id": 24,
-        "title": "Greenery",
-        "category": "Nature",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-nature-greenery.jpg",
-        "description": "Life finds a way, always."
+        "title": "Disconnected",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-stillness-disconnected.jpg",
+        "description": "A quiet place where the only sound is the wind in the trees."
     },
     {
         "id": 25,
-        "title": "Silence",
-        "category": "Stillness",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-stillness-silence.jpg",
-        "description": "The sounds you only hear when you stop talking."
+        "title": "Overgrowth",
+        "category": "Nature",
+        "src": "/photography/sagheer-akram-photography-nature-greenery.jpg",
+        "description": "Lush vegetation claiming its place in the world."
     },
     {
         "id": 26,
-        "title": "The Spot",
-        "category": "Stillness",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-stillness-the-spot.jpg",
-        "description": "Found a spot to disconnect from the noise."
+        "title": "Silence",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-stillness-silence.jpg",
+        "description": "Capturing the palpable atmosphere of absolute quiet."
     },
     {
         "id": 27,
-        "title": "City Lights",
-        "category": "Urban",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-urban-city-lights.jpg",
-        "description": "Artificial suns."
+        "title": "The Hidden Spot",
+        "category": "Nature",
+        "src": "/photography/sagheer-akram-photography-stillness-the-spot.jpg",
+        "description": "A secret corner of the forest where the light hits just right."
     },
     {
         "id": 28,
-        "title": "Macro Lens",
-        "category": "Abstract",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-abstract-macro-lens.jpg",
-        "description": "Small things made large."
+        "title": "Artificial Glow",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-urban-city-lights.jpg",
+        "description": "The neon hum of the city illuminating the night."
     },
     {
         "id": 29,
-        "title": "The Escape",
-        "category": "Stillness",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-stillness-the-escape.jpg",
-        "description": "I really want to go back there."
+        "title": "Macro Lens",
+        "category": "Nature",
+        "src": "/photography/sagheer-akram-photography-abstract-macro-lens.jpg",
+        "description": "Small details made large through the power of a macro lens."
     },
     {
         "id": 30,
-        "title": "Forest Walk",
+        "title": "The Escape",
         "category": "Nature",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-nature-forest-walk.jpg",
-        "description": "Walking until the city noise fades."
+        "src": "/photography/sagheer-akram-photography-stillness-the-escape.jpg",
+        "description": "The beginning of a journey into the great outdoors."
     },
     {
         "id": 31,
-        "title": "Night Sky",
-        "category": "Late Night",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-late-night-night-sky.jpg",
-        "description": "The stars are always there, we just forget to look."
+        "title": "Forest Walk",
+        "category": "Nature",
+        "src": "/photography/sagheer-akram-photography-nature-forest-walk.jpg",
+        "description": "A path leading deep into the heart of the woods."
     },
     {
         "id": 32,
-        "title": "No Words",
-        "category": "Abstract",
-        "status": "STABLE",
-        "src": "/photography/sagheer-akram-photography-abstract-no-words.jpg",
-        "description": "No explanation necessary."
+        "title": "Nocturnal Sky",
+        "category": "Atmospheric",
+        "src": "/photography/sagheer-akram-photography-late-night-night-sky.jpg",
+        "description": "The infinite depth of the sky after the sun has set."
     },
     {
         "id": 33,
         "title": "Urban Grid",
-        "category": "Urban",
-        "status": "STABLE",
+        "category": "Atmospheric",
         "src": "/photography/sagheer-akram-photography-urban-urban-grid.jpg",
-        "description": "The geometry of where we live."
+        "description": "The organized chaos of the city's architectural footprint."
     },
     {
         "id": 34,
         "title": "Final Frame",
-        "category": "Stillness",
-        "status": "STABLE",
+        "category": "Atmospheric",
         "src": "/photography/sagheer-akram-photography-stillness-final-frame.jpg",
-        "description": "Ending the roll with the best shot."
+        "description": "The concluding shot of a visual narrative."
     }
 ];

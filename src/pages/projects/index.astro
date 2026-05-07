@@ -14,7 +14,7 @@ const categories = ['All', ...new Set(projects.map((p) => p.category))];
   <section class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-24">
     <!-- Header -->
     <div class="mb-20">
-      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60">RESEARCH // ARTIFACTS</span>
+      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60">RESEARCH // PROJECTS</span>
       <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mt-6 mb-10">
         The Archive.
       </h1>
@@ -43,7 +43,7 @@ const categories = ['All', ...new Set(projects.map((p) => p.category))];
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
       {projects.map((project) => (
         <a
-          href={`/projects/${project.slug}`}
+          href={`/projects/${project.slug}/`}
           data-category={project.category}
           class="project-card group relative block p-8 rounded-2xl bg-white/[0.01] border border-white/[0.05] hover:border-accent-ice/30 transition-all duration-500"
         >
@@ -65,7 +65,7 @@ const categories = ['All', ...new Set(projects.map((p) => p.category))];
           </div>
 
           <div class="text-[10px] font-bold tracking-widest uppercase text-accent-ice group-hover:translate-x-1 transition-transform">
-            Examine Artifact →
+            View Project →
           </div>
         </a>
       ))}
@@ -73,7 +73,7 @@ const categories = ['All', ...new Set(projects.map((p) => p.category))];
 
     <!-- Empty state -->
     <div id="empty-state" class="hidden text-center py-20 text-slate-500 italic">
-      No artifacts found in this sector.
+      No projects found in this sector.
     </div>
   </section>
 </BaseLayout>

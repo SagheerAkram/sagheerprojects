@@ -10,6 +10,9 @@ module.exports = {
                 'neon-purple': '#a855f7',
                 'space-dark': '#03040a',
                 'card-bg': 'rgba(10, 12, 30, 0.7)',
+                'accent-ice': 'var(--accent-ice)',
+                'accent-aurora': 'var(--accent-aurora)',
+                'accent-teal': '#14b8a6',
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', 'sans-serif'],

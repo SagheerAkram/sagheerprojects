@@ -4,45 +4,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="About // Sagheer Akram"
-  description="Student explorer. Photography, Python, Chess, and the moments in between."
+  title="Identity Log // Sagheer Akram"
+  description="Student explorer. Photography, Logic, and the silence in between."
 >
-  <section class="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24">
+  <section class="relative z-10 max-w-5xl mx-auto px-6 pt-48 pb-32">
 
     <!-- Header -->
-    <div class="mb-20 reveal">
-      <span class="hero-eyebrow tracking-[0.3em] text-accent-ice opacity-60 italic block mb-6 split-text-mask">
-        <span class="split-text-inner">CREATOR // EXPLORER // CHESS PLAYER</span>
-      </span>
-      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10 overflow-hidden">
-        <span class="block split-text-mask"><span class="split-text-inner">I building tools and</span></span>
-        <span class="block split-text-mask"><span class="split-text-inner delay-100">capturing memories.</span></span>
+    <div class="mb-32 reveal">
+      <div class="flex items-center gap-3 mb-10">
+        <span class="w-12 h-px bg-accent-ice/30"></span>
+        <span class="text-[10px] font-black tracking-[0.5em] text-accent-ice uppercase italic">PROFILE // Sagheer Akram</span>
+      </div>
+      
+      <h1 class="text-6xl md:text-[8rem] font-black text-white tracking-tighter leading-[0.8] mb-16">
+        Building tools.<br/><span class="text-accent-ice italic text-glow">Capturing life.</span>
       </h1>
-      <p class="text-slate-400 max-w-2xl leading-relaxed text-lg md:text-xl reveal-stagger">
-        Hey, I'm Sagheer. I'm a student exploring software engineering, automation, and the art of photography. I enjoy building small tools, learning tech at my own pace, and making my digital space a little better every day.
-      </p>
-    </div>
-
-    <!-- What I Do -->
-    <div class="grid md:grid-cols-2 gap-12 mb-24 reveal-stagger">
-      <div class="reveal">
-        <h2 class="text-white font-bold text-xl mb-4 tracking-tight italic">Tech & Tools</h2>
-        <p class="text-slate-400 leading-relaxed">
-          I spend my time learning Python and building small utilities that make life easier. Whether it's automation scripts or diving into new frameworks, I love the feeling of watching a piece of logic come to life.
+      
+      <div class="grid md:grid-cols-2 gap-20">
+        <p class="text-slate-400 leading-relaxed text-2xl font-light">
+          Hey, I'm Sagheer. I'm a student researcher exploring the intersection of software engineering, automated intelligence, and visual storytelling.
         </p>
-      </div>
-      <div class="reveal">
-        <h2 class="text-white font-bold text-xl mb-4 tracking-tight italic">Beyond the Code</h2>
-        <p class="text-slate-400 leading-relaxed">
-          When I'm not at the screen, I'm likely holding a camera, solving a Rubik's cube, or lost in a game of chess. I believe a perfect day is a mix of aesthetic design, a bit of learning, and a good challenge.
-        </p>
+        <div class="space-y-8 text-slate-500 text-lg leading-relaxed font-light border-l border-white/5 pl-12">
+            <p>I build tools that bridge the gap between complex logic and human intuition. My mission is to make the digital world feel a little more natural, one line of code at a time.</p>
+            <p>When I'm not in the terminal, I'm likely deconstructing the world through a 70-200mm lens or solving geometric puzzles in chess.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Skills & Tools -->
-    <div class="mb-24 reveal">
-      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">The Toolkit</h2>
-      <div class="flex flex-wrap items-center justify-center gap-10 p-10 rounded-2xl bg-white/[0.02] border border-white/[0.05] reveal-stagger">
+    <!-- The Toolkit -->
+    <div class="mb-48 reveal">
+      <h2 class="text-xs font-black tracking-[0.5em] text-accent-ice uppercase mb-16 italic">• THE TOOLKIT</h2>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
         {[
           { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg', name: 'Python' },
           { icon: 'https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg', name: 'Git' },
@@ -50,112 +42,74 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           { icon: 'https://www.vectorlogo.zone/logos/linux/linux-icon.svg', name: 'Linux' },
           { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-line.svg', name: 'Photoshop' },
         ].map((skill) => (
-          <div class="group flex flex-col items-center gap-3 transition-transform duration-500 hover:scale-110">
-            <img src={skill.icon} alt={skill.name} class="w-12 h-12 grayscale group-hover:grayscale-0 transition-all duration-700 hover:drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]" />
-            <span class="text-[10px] font-mono text-slate-500 group-hover:text-accent-ice uppercase tracking-widest">{skill.name}</span>
+          <div class="tech-card group p-10 rounded-[32px] bg-white/[0.02] border border-white/5 flex flex-col items-center justify-center transition-all duration-700 hover:bg-white/[0.05] hover:border-accent-ice/30">
+            <img src={skill.icon} alt={skill.name} class="w-14 h-14 mb-8 grayscale group-hover:grayscale-0 transition-all duration-700 scale-90 group-hover:scale-100" />
+            <span class="text-[10px] font-black text-slate-500 group-hover:text-white uppercase tracking-widest transition-colors">{skill.name}</span>
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Quick Stats -->
-    <div class="mb-24 py-12 border-y border-white/[0.05] reveal">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal-stagger">
-        {[
-          { label: 'Learning', value: 'Software Eng' },
-          { label: 'Passions', value: 'Photography' },
-          { label: 'Hobbies', value: 'Chess & Cubing' },
-          { label: 'Energy', value: 'Aesthetic Design' },
-        ].map((stat) => (
-          <div class="glass-glow p-4 rounded-xl">
-            <p class="text-xs uppercase tracking-widest text-slate-500 mb-2">{stat.label}</p>
-            <p class="text-lg font-bold text-accent-ice tracking-tight">{stat.value}</p>
-          </div>
-        ))}
+    <!-- Metrics -->
+    <div class="mb-48 reveal">
+      <div class="flex justify-between items-end mb-16">
+        <h2 class="text-xs font-black tracking-[0.5em] text-accent-ice uppercase italic">• SKILLS & REACH</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-8">
+            <div class="tilt-card glass-card p-6 overflow-hidden">
+                <img src="https://github-readme-stats.vercel.app/api?username=SagheerAkram&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" alt="GitHub Stats" class="w-full opacity-90" />
+            </div>
+        </div>
+        <div class="lg:col-span-4">
+            <div class="tilt-card glass-card p-6 overflow-hidden h-full flex items-center">
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=SagheerAkram&theme=tokyonight&hide_border=true" alt="GH Streak" class="w-full opacity-90" />
+            </div>
+        </div>
       </div>
     </div>
 
-    <!-- GitHub & LeetCode Performance -->
-    <div class="mb-24 reveal">
-      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">Metrics & Progress</h2>
-      <div class="space-y-8 reveal-stagger">
-         <div class="grid md:grid-cols-2 gap-6">
-            <div class="tilt-card"><img src="https://github-readme-stats.vercel.app/api?username=SagheerAkram&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" alt="GitHub Stats" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" /></div>
-            <div class="tilt-card"><img src="https://github-readme-streak-stats.herokuapp.com/?user=SagheerAkram&theme=tokyonight&hide_border=true" alt="GH Streak" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" /></div>
-         </div>
-         <div class="tilt-card"><img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=SagheerAkram&theme=tokyonight" alt="GH Details" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" /></div>
-         <div class="pt-4 tilt-card">
-            <img src="https://leetcard.jacoblin.cool/SagheerAkram?theme=dark&font=Karma&ext=heatmap" alt="LeetCode Status" class="w-full rounded-xl bg-white/[0.02] border border-white/[0.05]" />
-         </div>
+    <!-- Passions -->
+    <div class="grid md:grid-cols-2 gap-32 mb-48 reveal">
+      <div>
+        <h3 class="text-3xl font-black text-white italic tracking-tighter mb-10">Algorithmic Chess.</h3>
+        <p class="text-slate-400 text-lg leading-relaxed font-light mb-12">
+            Chess is more than a game; it's a study in pattern recognition and strategic foresight. I find a profound connection between the branching logic of a chess opening and the recursive structures of clean code.
+        </p>
+        <div class="flex items-center gap-6">
+            <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-accent-ice font-bold">♟</div>
+            <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest">Mastering the middle-game.</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-3xl font-black text-white italic tracking-tighter mb-10">Visual Stillness.</h3>
+        <p class="text-slate-400 text-lg leading-relaxed font-light mb-12">
+            Photography allows me to stop the clock. It's the only time I'm not thinking about systems or efficiency—just light, shadow, and the narrative of a single frame.
+        </p>
+        <div class="flex items-center gap-6">
+            <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-accent-aurora font-bold">📸</div>
+            <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest">70-200mm perspective.</span>
+        </div>
       </div>
     </div>
 
-    <!-- Projects / Interests -->
-    <div class="reveal mb-24">
-      <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">The Focus</h2>
-      <div class="space-y-6 reveal-stagger">
-        {[
-          { title: 'Automation Scripts', desc: 'Simple utilities for workflows, file automation, and digital experiments. High efficiency, low friction.' },
-          { title: 'Photography Showcase', desc: 'Aesthetic projects and edits. Capturing the world through a lens that values light and silence.' },
-          { title: 'Data Explorations', desc: 'Analyzing datasets and exploring new ways to visualize information. Built to understand how systems work from the inside out.' },
-        ].map((item) => (
-          <div class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-accent-ice/20 transition-all duration-500 hover:translate-x-2">
-            <h3 class="text-white font-bold mb-2 group-hover:text-accent-ice transition-colors">{item.title}</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Fun Facts -->
+    <!-- Final Fact Loop -->
     <div class="reveal">
-        <h2 class="text-2xl font-bold text-white mb-8 tracking-tight italic">Fun Facts</h2>
-        <ul class="grid md:grid-cols-2 gap-4 reveal-stagger">
+        <div class="flex flex-wrap gap-4 justify-center">
             {[
-                'I have a thing for aesthetic designs',
-                'Learning a bit every day is my core loop',
-                'Tech, Chess, and Rubik’s Cubes are my trio',
-                'My contribution graph is turning greener daily'
+                'Design Addict',
+                'Continuous Learner',
+                'Logic Builder',
+                'Visual Storyteller',
+                'Chess Strategist'
             ].map(fact => (
-                <li class="flex items-center gap-4 text-slate-400 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] transition-colors">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent-ice"></span>
+                <div class="px-10 py-5 rounded-full border border-white/5 bg-white/[0.01] text-slate-500 font-bold text-[10px] uppercase tracking-[0.3em] hover:border-accent-ice hover:text-white transition-all duration-700">
                     {fact}
-                </li>
+                </div>
             ))}
-        </ul>
+        </div>
     </div>
 
   </section>
 </BaseLayout>
-
-<script>
-  // Tilt Card Logic
-  function initTilt() {
-    const cards = document.querySelectorAll('.tilt-card');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e: any) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-        
-        (card as HTMLElement).style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-        (card as HTMLElement).style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-      });
-    });
-  }
-
-  // Initial runs
-  initTilt();
-
-  // Support for client-side navigation
-  document.addEventListener('astro:page-load', initTilt);
-</script>

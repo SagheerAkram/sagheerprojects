@@ -1,6 +1,0 @@
-/*
-  Cloudflare Pages _redirects file.
-  Astro static output handles its own routing — this is a catch-all
-  to redirect unknown paths to the 404 page.
-*/
-/* 200 */
